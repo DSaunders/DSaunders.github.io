@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Display the cost of an IShippingMethodService in Umbraco or Sitecore</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+    <meta name="description" content="Displaying the cost of a custom uCommerce shipping method without applying it to the basket">
+    <meta name="author" content="Dave Saunders">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+  </head>
+  <body class="blog-post">
+
+    <article id="header">
+
+      <span id="header-content">
+
+        <h1>Dave Saunders</h1>
+        <h2>--- Blog ---</h2>
+
+        <div class="menu">
+          <ul>
+            
+              <li><a href="/">Home Page</a></li>
+              <li><a href="/blog.html">More Posts</a></li>
+            
+          </ul>
+        </div>
+
+      </span>
+    </article>
+
+    <div class="post">
+
+  <h2>Displaying the cost of a uCommerce custom IShippingMethodService</h2>
+  <p class="meta">Originally posted on 20 Oct 2014</p>
+
+  <span class="post-content">
+    <p>So you’ve built a custom shipping method service in uCommerce, using <em>IShippingMethodService</em>, as in this article:</p>
+
+<p><a href="http://docs.ucommerce.net/ucommerce/v6/extending-ucommerce/shipping-method-service.html" target="_blank">Building a Custom Shipping Method Service</a></p>
+
+<p>Often, you want to display the cost of each shipping method to the user during the checkout process, before they actually select them.</p>
+
+<p>Wiggle does this well:</p>
+
+<p><img src="/img/checkout/wiggledelivery.png" class="full-width-image" alt="" /></p>
+
+<p>But how do you do this when you’re using a custom uCommerce <em>IShippingMethodService</em>, and you have your own logic for calculating the shipping costs of an order?</p>
+
+<h1 id="why-you-cant-use-shippingmethodgetpriceforcurrency">Why you can’t use ShippingMethod.GetPriceForCurrency()</h1>
+
+<p>Once you’ve told uCommerce to use your new <em>IShippingMethodService</em> for a shipping method..</p>
+
+<p><img src="/img/checkout/ucommerceshippingcommontab.png" class="full-width-image" alt="" /></p>
+
+<p>.. you might assume that you can use <em>ShippingMethod.GetPriceForCurrency()</em> to get the cost to ship your order, like this:</p>
+
+<div class="highlight"><pre><code class="csharp"><span class="kt">var</span> <span class="n">allShippingMethods</span> <span class="p">=</span> <span class="n">TransactionLibrary</span><span class="p">.</span><span class="n">GetShippingMethods</span><span class="p">(</span><span class="n">country</span><span class="p">);</span>
+<span class="kt">var</span> <span class="n">currency</span> <span class="p">=</span> <span class="n">purchaseOrder</span><span class="p">.</span><span class="n">BillingCurrency</span><span class="p">;</span>
+
+<span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">shippingMethod</span> <span class="k">in</span> <span class="n">allShippingMethods</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">var</span> <span class="n">cost</span> <span class="p">=</span> <span class="n">shippingMethod</span><span class="p">.</span><span class="n">GetPriceForCurrency</span><span class="p">(</span><span class="n">currency</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Unfortunately, this uCommerce method only returns the first price from the shipping method’s <em>Pricing</em> tab that matches the given currency:</p>
+
+<p><img src="/img/checkout/ucommerceshippingprices.png" class="full-width-image" alt="" /></p>
+
+<p>It does not account for the calculations in your <em>IShippingMethodService</em>.</p>
+
+<h1 id="correctly-get-the-cost-for-each-shipping-method">Correctly get the cost for each shipping method</h1>
+
+<p>The correct way to do it is to manually call the <em>IShippingMethodService</em>, passing your current shipment.</p>
+
+<p>At run-time we do not know which implementation of <em>IShippingMethodService</em> is set against a shipping method in uCommerce. Helpfully, uCommerce exposes this for us through the method <em>GetShippingMethodService()</em>.</p>
+
+<p>Using this, we can simply get the relevant <em>IShippingMethodService</em> for
+a given shipping method, construct a fake <em>Shipment</em> object (using our real basket of course) and pass it to the service to find out how much it
+would cost to ship our basket with that shipping method.</p>
+
+<div class="highlight"><pre><code class="csharp"><span class="kt">var</span> <span class="n">purchaseOrder</span> <span class="p">=</span> <span class="n">TransactionLibrary</span><span class="p">.</span><span class="n">GetBasket</span><span class="p">().</span><span class="n">PurchaseOrder</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">allShippingMethods</span> <span class="p">=</span> <span class="n">TransactionLibrary</span><span class="p">.</span><span class="n">GetShippingMethods</span><span class="p">(</span><span class="n">country</span><span class="p">);</span>
+
+<span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">shippingMethod</span> <span class="k">in</span> <span class="n">allShippingMethods</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="c1">// Get the IShippingMethodService for this ShippingMethod</span>
+  <span class="kt">var</span> <span class="n">shippingService</span> <span class="p">=</span> <span class="n">shippingMethod</span><span class="p">.</span><span class="n">GetShippingMethodService</span><span class="p">();</span>
+
+  <span class="c1">// Construct a fake shipping method to call the service with</span>
+  <span class="kt">var</span> <span class="n">shipment</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Shipment</span>
+  <span class="p">{</span>
+	  <span class="n">ShippingMethod</span> <span class="p">=</span> <span class="n">shippingMethod</span><span class="p">,</span>
+	  <span class="n">PurchaseOrder</span> <span class="p">=</span> <span class="n">purchaseOrder</span><span class="p">,</span>
+	  <span class="n">ShipmentAddress</span> <span class="p">=</span> <span class="n">purchaseOrder</span><span class="p">.</span><span class="n">BillingAddress</span>
+  <span class="p">};</span>
+
+  <span class="kt">var</span> <span class="n">shippingMethodPrice</span>
+ 	 <span class="p">=</span> <span class="n">shippingService</span><span class="p">.</span><span class="n">CalculateShippingPrice</span><span class="p">(</span><span class="n">shipment</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Of course, you might want some null checks and you will need to actually do something with the resulting price to display it, but you get the idea.</p>
+
+<p>The default implementation of <em>IShippingMethodService</em> requires that you populate the <em>Country</em> in the <em>ShipmentAddress</em>, and the <em>PurchaseOrder</em> (as above), so make sure you
+set those in addition to whatever your custom service needs, just in case a given shipping method is using the default service.</p>
+
+<p>And that’s it! Once you know how, it’s fairly simple to display the costs of custom <em>IShippingMethodService</em>s to the user.</p>
+
+  </span>
+
+  <div class="post-footer">
+    <span class="related-links">
+      <h3>You might also like:</h3>
+      <ul>
+        
+          <li><a href="/2014/10/27/why-alt-tags-matter.html">Why 'alt' attributes on images matter</a></li>
+        
+          <li><a href="/2014/07/24/responsive-design-isnt-just-for-hipsters.html">Responsive design isn't just for hipsters</a></li>
+        
+          <li><a href="/2014/06/16/the-problem-with-agile-is-the-capital-A.html">The problem with Agile is the capital A</a></li>
+        
+      </ul>
+    </span>
+    <span class="social-links">
+      <h3>Share this article:</h3>
+      <a
+        href="https://twitter.com/intent/tweet?text='Displaying the cost of a uCommerce custom IShippingMethodService', via @DaveJSaunders&url=http://www.davejsaunders.com/2014/10/20/display-the-cost-of-your-ucommerce-custom-shipping-service.html"
+        class="twitter-no-hover tweet-link"
+        onClick="_gaq.push(['_trackEvent', 'Links', 'Tweet', 'Post - Bottom']);"
+        title="Tweet this" target="_blank"></a>
+    </span>
+  </div>
+
+</div>
+
+
+    <script type="text/javascript" src="//use.typekit.net/lmg7vwv.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+    <script>
+    	var _gaq = _gaq || [];
+    	var _gaq = [['_setAccount', 'UA-40239142-1']];
+
+    	// Track page view
+    	_gaq.push(
+    		['_trackPageview']
+    	);
+
+    	(function () {
+    		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    	})();
+    </script>
+    </body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Why alt attributes on images matter</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+    <meta name="description" content="Why alt tags matter, and why every image on your site should have one.">
+    <meta name="author" content="Dave Saunders">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+  </head>
+  <body class="blog-post">
+
+    <article id="header">
+
+      <span id="header-content">
+
+        <h1>Dave Saunders</h1>
+        <h2>--- Blog ---</h2>
+
+        <div class="menu">
+          <ul>
+            
+              <li><a href="/">Home Page</a></li>
+              <li><a href="/blog.html">More Posts</a></li>
+            
+          </ul>
+        </div>
+
+      </span>
+    </article>
+
+    <div class="post">
+
+  <h2>Why 'alt' attributes on images matter</h2>
+  <p class="meta">Originally posted on 27 Oct 2014</p>
+
+  <span class="post-content">
+    <p>When a person who is visually impaired visits your site, your use of ‘alt’
+attributes on images can have a huge impact on their experience.</p>
+
+<p>I tested a simple page using the screen reader included with OSX called <em>VoiceOver</em>. I tried images <em>with</em> alt attributes, <em>without</em> alt attributes and with
+<em>empty</em> alt attributes. Let’s take a look at what happens:</p>
+
+<h1 id="with-an-alt-attribute">With an ‘alt’ attribute</h1>
+
+<div class="highlight"><pre><code class="csharp"><span class="p">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="p">=</span><span class="s">&quot;hero.jpg&quot;</span> <span class="n">alt</span><span class="p">=</span><span class="s">&quot;A person using the product&quot;</span><span class="p">/&gt;</span>
+</code></pre></div>
+
+<p>Here, VoiceOver reads out:</p>
+
+<blockquote>
+  <p>“A person using the product, Image”</p>
+</blockquote>
+
+<p>Great! The screen reader tells us that it’s an image, and describes
+it  as we expected. But what if the image is just for decoration,
+and could distract from the content?</p>
+
+<p>Let’s try <em>not</em> providing an ‘alt’ attribute.</p>
+
+<h1 id="without-an-alt-attribute">Without an ‘alt’ attribute</h1>
+
+<div class="highlight"><pre><code class="csharp"><span class="p">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="p">=</span><span class="s">&quot;hero.jpg&quot;</span> <span class="p">/&gt;</span>
+</code></pre></div>
+
+<p>Here, VoiceOver reads out:</p>
+
+<blockquote>
+  <p>“Hero.jpg, Image”</p>
+</blockquote>
+
+<p>Well that’s not what we wanted. <strong>When you don’t provide an alt attribute,
+the screen reader will read the file name of the image.</strong> A better practice  is to provide an <em>empty</em> alt attribute.</p>
+
+<h1 id="with-an-empty-alt-attribute">With an empty alt attribute</h1>
+
+<div class="highlight"><pre><code class="csharp"><span class="p">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="p">=</span><span class="s">&quot;hero.jpg&quot;</span> <span class="n">alt</span><span class="p">=</span><span class="s">&quot;&quot;</span> <span class="p">/&gt;</span>
+</code></pre></div>
+
+<p>Here the screen reader skips the image altogether, as if it wasn’t there. That’s a much better experience for a visually impaired user than the
+content being interrupted with file names.</p>
+
+<h1 id="hang-on-were-doing-the-responsive-thing">‘Hang on, we’re doing the responsive thing’</h1>
+
+<p>If you’re building a responsive site, you’re probably using
+<em>backround-image</em> in CSS to swap out the images using media queries.</p>
+
+<div class="highlight"><pre><code class="csharp"><span class="n">background</span><span class="p">-</span><span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="err">&#39;</span><span class="n">hero</span><span class="p">.</span><span class="n">jpg</span><span class="err">&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<p>That’s all well and good, but just be aware that screen readers will normally ignore
+background images in CSS.</p>
+
+<p>You can make up for this using a couple of extra attributes on the element that
+contains the background image:</p>
+
+<div class="highlight"><pre><code class="csharp"><span class="p">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="p">=</span><span class="s">&quot;hero-image&quot;</span> <span class="n">role</span><span class="p">=</span><span class="s">&quot;img&quot;</span> <span class="n">aria</span><span class="p">-</span><span class="n">label</span><span class="p">=</span><span class="s">&quot;A person using the product&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="n">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p>Here, the ‘role’ attribute tells the screen reader that this div is for holding an
+image, the ‘aria-label’ attribute allows us to
+describe the image in the same way as an ‘alt’ attribute would.</p>
+
+<p>Here, the screen reader reads:</p>
+
+<blockquote>
+  <p>“A person using the product, Image.”</p>
+</blockquote>
+
+<p>That’s much better.</p>
+
+<h1 id="the-moral-of-the-story">The moral of the story</h1>
+
+<p>If the image is <strong>important to the content</strong>, describe it in the alt attribute.</p>
+
+<p>If the image is <strong>for decoration only</strong>, provide an empty alt attribute.</p>
+
+<p>Finally, if you’re building a <strong>responsive</strong> site, use the <strong>‘role’
+and ‘aria-label’ attributes</strong> instead.
+<br />
+<br />
+<br />
+If you want to try this yourself, OSX has a built in screen reader that works for the web, called <em>VoiceOver</em>. Instructions for using VoiceOver are
+<a href="https://www.apple.com/uk/accessibility/osx/voiceover/" target="_blank">here</a>.</p>
+
+<p>Windows also has a built in screen reader, <em>Narrator</em>. More information
+<a href="http://support.microsoft.com/kb/252435" target="_blank">here</a>.</p>
+
+  </span>
+
+  <div class="post-footer">
+    <span class="related-links">
+      <h3>You might also like:</h3>
+      <ul>
+        
+          <li><a href="/2014/10/20/display-the-cost-of-your-ucommerce-custom-shipping-service.html">Displaying the cost of a uCommerce custom IShippingMethodService</a></li>
+        
+          <li><a href="/2014/07/24/responsive-design-isnt-just-for-hipsters.html">Responsive design isn't just for hipsters</a></li>
+        
+          <li><a href="/2014/06/16/the-problem-with-agile-is-the-capital-A.html">The problem with Agile is the capital A</a></li>
+        
+      </ul>
+    </span>
+    <span class="social-links">
+      <h3>Share this article:</h3>
+      <a
+        href="https://twitter.com/intent/tweet?text='Why 'alt' attributes on images matter', via @DaveJSaunders&url=http://www.davejsaunders.com/2014/10/27/why-alt-tags-matter.html"
+        class="twitter-no-hover tweet-link"
+        onClick="_gaq.push(['_trackEvent', 'Links', 'Tweet', 'Post - Bottom']);"
+        title="Tweet this" target="_blank"></a>
+    </span>
+  </div>
+
+</div>
+
+
+    <script type="text/javascript" src="//use.typekit.net/lmg7vwv.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+    <script>
+    	var _gaq = _gaq || [];
+    	var _gaq = [['_setAccount', 'UA-40239142-1']];
+
+    	// Track page view
+    	_gaq.push(
+    		['_trackPageview']
+    	);
+
+    	(function () {
+    		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    	})();
+    </script>
+    </body>
+</html>

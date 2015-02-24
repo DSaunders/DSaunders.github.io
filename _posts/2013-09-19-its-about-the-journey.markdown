@@ -1,0 +1,65 @@
+---
+layout: post
+title:  "It's about the journey"
+meta-title:  "It's about the journey"
+subtitle: "Why it doesn't matter if you finish your side-projects"
+date:   2013-09-19 17:00:00
+tags: test
+---
+
+
+My hard disk and GitHub account are both full of unfinished side projects. I
+think if pressed, I could dig up 10-15 things I started and didn’t finish.
+Until recently this bothered me, why couldn’t I finish anything I start?  I’ve now come to realise that the old cliché is true; it’s not the destination that matters, it’s the journey.
+
+Here’s why I will keep starting side projects even if I don’t think I could
+finish them, and why I think you should too.
+
+
+
+#You get to do the cool stuff
+
+Nobody likes changing reams of copy on a website or working in a technology that should have been retired years ago.  We’ve all had to do it and we’ve all wished we didn’t have to.  Here’s the good news.. at home you can do whatever you want.
+
+Come up with an idea, do the cool stuff and then dump it.  The chances are, the cool stuff is the bit that’s challenging and by the time you’re bored you’ve
+learnt a lot already.  If you get excited about it again in a months time you
+can come back to it with renewed enthusiasm.
+
+Some might argue that it’s important to finish things, but I find I learn a lot more when I’m working on something I’m passionate about.  I don’t think it matters if that’s something different every week.  I don’t learn a lot from writing copy on a web site I’m making at home, so I write the back end code, get bored and stop working on it… and I’m OK with that.
+
+
+
+#There’s no pressure
+
+Sorry, but unless you accidentally create the next Jquery or Ruby on Rails,
+nobody is ever likely to know your project exists.  That’s a good thing; you can use side projects as an opportunity to learn new things and brush up on old skills without the pressure of a deadline or a budget.
+
+Your code does not need to be perfect.  It does not have to scale to the size of Facebook, it doesn’t need to be hugely efficient, and nobody cares whether you indent with spaces or tabs.  There is no pressure to deliver it on a certain date and nobody is going to loose money if you don’t stay up until 10pm to meet
+a deadline.
+
+Rather watch the football in the bar than write code tonight?  Fine, just drop it and come back to it later!
+
+
+
+#You become a more rounded developer
+
+It’s highly unlikely that my employer will allow me to use C++ for our next
+project just because I haven’t used it for a while and need some practice.
+Likewise, I’m not sure they would take kindly to me using the next two weeks to learn Ruby instead of producing something of value for a client.  Your side projects are your chance to try new things and keep in touch with things you haven’t used for a while.  If you want to try Scala just because it looks cool and interesting, go for it!  Whether you finish it or not, you have a new language to put on your CV and a broader knowledge of what’s going on outside of the bubble at work.
+
+Learning new languages or solving new problems will help you look at work
+differently too.  If you usually write in C#, try a functional language like F#. If you’re used to a strongly typed language, see what you can do with the
+freedom of something dynamic like Ruby.  I would be surprised if that experience didn’t give you a fresh perspective on the things you do day-to-day.
+
+
+
+#It might prove useful in the future
+
+By creating things in your own time, you are building up a library of code that you can dig into in the future.  Perhaps the code you wrote at home last month will be useful on your next project at work.  Or when a recruiter for that dream job calls you, the Twitter client you’re writing in your own time would be a great example of code to take to the interview.  Having a broad portfolio of varied work can only be a good thing.
+
+
+
+So that’s why I don’t beat myself up any more about not finishing things that I start in my own time.  Whilst there is a lot to be said for seeing things through once their started, I think that the advantage of working on something you're passionate about out-weighs that.
+
+Do you find the motivation to finish your side projects or do you have a hard
+disk full of unfinished work like me? Does it even matter?

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>{{ page.meta-title }}</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+    <meta name="description" content="{{page.meta-description}}">
+    <meta name="author" content="Dave Saunders">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+  </head>
+  <body class="{{ page.page-id }}">
+
+    <article id="header">
+
+      <span id="header-content">
+
+        <h1>Dave Saunders</h1>
+        <h2>{{ page.subtitle }}</h2>
+
+        <div class="menu">
+          <ul>
+            {% if page.page-id == "home" %}
+              <li><a href="/contact.html">Get In Touch</a></li>
+              <li><a href="/blog.html">Read My Blog</a></li>
+            {% elsif page.page-id == "contact" %}
+              <li><a href="/">Home Page</a></li>
+              <li><a href="/blog.html">Read My Blog</a></li>
+            {% elsif page.page-id == "blog" %}
+              <li><a href="/">Home Page</a></li>
+              <li><a href="/contact.html">Get In Touch</a></li>
+            {% elsif page.page-id == "blog-post" %}
+              <li><a href="/">Home Page</a></li>
+              <li><a href="/blog.html">More Posts</a></li>
+            {% endif %}
+          </ul>
+        </div>
+
+      </span>
+    </article>
+
+    {{ content }}
+
+    <script type="text/javascript" src="//use.typekit.net/lmg7vwv.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+    <script>
+    	var _gaq = _gaq || [];
+    	var _gaq = [['_setAccount', 'UA-40239142-1']];
+
+    	// Track page view
+    	_gaq.push(
+    		['_trackPageview']
+    	);
+
+    	(function () {
+    		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    	})();
+    </script>
+    </body>
+</html>

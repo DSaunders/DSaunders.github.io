@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>What's new in C#</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+    <meta name="description" content="">
+    <meta name="author" content="Dave Saunders">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+  </head>
+  <body class="blog-post">
+
+    <article id="header">
+
+      <span id="header-content">
+
+        <h1>Dave Saunders</h1>
+        <h2>--- Blog ---</h2>
+
+        <div class="menu">
+          <ul>
+            
+              <li><a href="/">Home Page</a></li>
+              <li><a href="/blog.html">More Posts</a></li>
+            
+          </ul>
+        </div>
+
+      </span>
+    </article>
+
+    <div class="post">
+
+  <h2>What's new in C#</h2>
+  <p class="meta">Originally posted on 05 Apr 2014</p>
+
+  <span class="post-content">
+    <p>At Build 2014, Microsoft unveiled a few new features of C#.
+Some of these are simply ‘syntactic sugar’, while others are
+going to be really useful.</p>
+
+<p>Here’s a few of my favourites.</p>
+
+<h1 id="statics-in-using-statements">Statics in Using Statements</h1>
+
+<p>Visual Basic had this already, but statics in using statements are now in C#.</p>
+
+<p>This means that you can add static classes as using statements, bringing all
+of that class’ static members into scope.</p>
+
+<p>Essentially it means you can now replace this:</p>
+
+<div class="highlight"><pre><code class="csharp"><span class="k">class</span> <span class="nc">Program</span>
+<span class="p">{</span>
+  <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello world&quot;</span><span class="p">);</span>
+    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Another Message&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>with this:</p>
+
+<div class="highlight"><pre><code class="csharp"><span class="k">using</span> <span class="nn">Console</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Program</span>
+<span class="p">{</span>
+  <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello world&quot;</span><span class="p">);</span>
+    <span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Another Message&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This is a small change, but could help to make code more readable.</p>
+
+<h1 id="primary-constructors">Primary Constructors</h1>
+
+<p>We write code like this all the time:</p>
+
+<div class="highlight"><pre><code class="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">Shape</span>
+<span class="p">{</span>
+  <span class="k">private</span> <span class="k">readonly</span> <span class="kt">int</span> <span class="n">_sides</span><span class="p">;</span>
+
+  <span class="k">public</span> <span class="nf">Shape</span><span class="p">(</span><span class="kt">int</span> <span class="n">sides</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">_sides</span> <span class="p">=</span> <span class="n">sides</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This is a constructor that takes an argument, that is then stored in a private member.
+This is especially common when using an IoC container; where we pass in
+our dependencies, store them in private members and use them later.</p>
+
+<p>C# can now generate this boilerplate constructor code for us, and it looks a lot nicer:</p>
+
+<div class="highlight"><pre><code class="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nf">Shape</span> <span class="p">(</span><span class="kt">int</span> <span class="n">sides</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">private</span> <span class="k">readonly</span> <span class="kt">int</span> <span class="n">_sides</span> <span class="p">=</span> <span class="n">sides</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>In fact, you don’t even need to define the <em>private readonly</em> backing
+variable; you can declare access modifiers for the members like this:</p>
+
+<div class="highlight"><pre><code class="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nf">Shape</span> <span class="p">(</span><span class="k">private</span> <span class="k">readonly</span> <span class="kt">int</span> <span class="n">sides</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This means that a constructor will be auto-generated, taking <em>sides</em> as an
+argument. It will then be mapped to a <em>private readonly</em> member variable.</p>
+
+<h1 id="binary-literals">Binary literals</h1>
+
+<p>You can now declare binary literals, and use ‘spacers’ in them to make them
+more readable. Like this:</p>
+
+<div class="highlight"><pre><code class="csharp"><span class="kt">var</span> <span class="n">binaryValue</span> <span class="p">=</span> <span class="p">&amp;</span><span class="m">0010</span><span class="n">_0100</span>
+</code></pre></div>
+
+<h1 id="dictionary-initialisers">Dictionary Initialisers</h1>
+
+<p>In the latest C#, you can populate indexers when initialising objects.</p>
+
+<p>Replacing:</p>
+
+<div class="highlight"><pre><code class="csharp"><span class="kt">var</span> <span class="n">someClass</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyClass</span><span class="p">();</span>
+<span class="n">someClass</span><span class="p">[</span><span class="s">&quot;value1&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="m">1</span>
+<span class="n">someClass</span><span class="p">[</span><span class="s">&quot;value2&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="s">&quot;Hello World&quot;</span><span class="p">;</span>
+</code></pre></div>
+
+<p>with:</p>
+
+<div class="highlight"><pre><code class="csharp"><span class="kt">var</span> <span class="n">someClass</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyClass</span><span class="p">()</span> <span class="p">{</span> <span class="p">[</span><span class="s">&quot;value1&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;value2&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="s">&quot;Hello World&quot;</span> <span class="p">};</span>
+</code></pre></div>
+
+<h1 id="indexed-members">Indexed Members</h1>
+
+<p>There is a new addition that means you can make indexers
+look a little more like ‘normal’ members, so that:</p>
+
+<div class="highlight"><pre><code class="csharp"><span class="n">myClass</span><span class="p">[</span><span class="s">&quot;Value1&quot;</span><span class="p">]</span>
+</code></pre></div>
+
+<p>can now be written as:</p>
+
+<div class="highlight"><pre><code class="csharp"><span class="n">myClass</span><span class="p">.</span><span class="err">$</span><span class="n">Value1</span>
+</code></pre></div>
+
+<p>This isn’t much, but it certainly looks a lot neater.</p>
+
+<h1 id="declaration-expressions">Declaration Expressions</h1>
+
+<p>This is my <em>favourite</em> new feature. It’s only small, but it’s something i’ve been
+wanting for a long time.</p>
+
+<p>You can now declare variables anywhere, which means you can finally
+declare your out parameters as you use them, rather than on the line
+before.</p>
+
+<p>No more of this:</p>
+
+<div class="highlight"><pre><code class="csharp"><span class="kt">var</span> <span class="n">outValue</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="kt">int</span><span class="p">.</span><span class="n">TryParse</span><span class="p">(</span><span class="n">someValue</span><span class="p">,</span> <span class="k">out</span> <span class="n">outValue</span><span class="p">);</span>
+</code></pre></div>
+
+<p>Now we can do this:</p>
+
+<div class="highlight"><pre><code class="csharp"><span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="kt">int</span><span class="p">.</span><span class="n">TryParse</span><span class="p">(</span><span class="n">someValue</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">outValue</span><span class="p">);</span>
+</code></pre></div>
+
+<p>The compiler can infer the type of the out parameter; so we
+are even allowed to use <em>var</em> here.</p>
+
+<h1 id="exception-filters">Exception Filters</h1>
+
+<p>This is another Visual Basic feature that is coming to C#. It wasn’t shown in
+the demo at Build, but it allows us to add filters to our catch blocks.</p>
+
+<p>It will probably look something like this:</p>
+
+<div class="highlight"><pre><code class="csharp"><span class="k">try</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+<span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">myVariable</span> <span class="p">==</span> <span class="n">someValue</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="c1">// Some exception code that happens when the catch fires</span>
+  <span class="c1">//  and myVariable ==  someValue</span>
+<span class="p">}</span>
+<span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="c1">// Catch everything else..</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h1 id="so-when-can-i-use-it">So when can I use it?</h1>
+
+<p>These features are currently in preview as part of the latest Roslyn release.
+It’s probably best not to use this stuff in production yet, but we can already
+download it and play around with it until it’s officially released.</p>
+
+<p>You can find it
+<a href="http://msdn.microsoft.com/en-gb/vstudio/roslyn.aspx" target="_blank">here</a></p>
+
+  </span>
+
+  <div class="post-footer">
+    <span class="related-links">
+      <h3>You might also like:</h3>
+      <ul>
+        
+          <li><a href="/2014/10/27/why-alt-tags-matter.html">Why 'alt' attributes on images matter</a></li>
+        
+          <li><a href="/2014/10/20/display-the-cost-of-your-ucommerce-custom-shipping-service.html">Displaying the cost of a uCommerce custom IShippingMethodService</a></li>
+        
+          <li><a href="/2014/07/24/responsive-design-isnt-just-for-hipsters.html">Responsive design isn't just for hipsters</a></li>
+        
+      </ul>
+    </span>
+    <span class="social-links">
+      <h3>Share this article:</h3>
+      <a
+        href="https://twitter.com/intent/tweet?text='What's new in C#', via @DaveJSaunders&url=http://www.davejsaunders.com/2014/04/05/roslyn-csharp-features.html"
+        class="twitter-no-hover tweet-link"
+        onClick="_gaq.push(['_trackEvent', 'Links', 'Tweet', 'Post - Bottom']);"
+        title="Tweet this" target="_blank"></a>
+    </span>
+  </div>
+
+</div>
+
+
+    <script type="text/javascript" src="//use.typekit.net/lmg7vwv.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+    <script>
+    	var _gaq = _gaq || [];
+    	var _gaq = [['_setAccount', 'UA-40239142-1']];
+
+    	// Track page view
+    	_gaq.push(
+    		['_trackPageview']
+    	);
+
+    	(function () {
+    		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    	})();
+    </script>
+    </body>
+</html>
