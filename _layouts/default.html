@@ -19,26 +19,10 @@
 
       <span id="header-content">
 
-        <h1>Dave Saunders</h1>
-        <h2>{{ page.subtitle }}</h2>
-
-        <div class="menu">
-          <ul>
-            {% if page.page-id == "home" %}
-              <li><a href="/contact.html">Get In Touch</a></li>
-              <li><a href="/blog.html">Read My Blog</a></li>
-            {% elsif page.page-id == "contact" %}
-              <li><a href="/">Home Page</a></li>
-              <li><a href="/blog.html">Read My Blog</a></li>
-            {% elsif page.page-id == "blog" %}
-              <li><a href="/">Home Page</a></li>
-              <li><a href="/contact.html">Get In Touch</a></li>
-            {% elsif page.page-id == "blog-post" %}
-              <li><a href="/">Home Page</a></li>
-              <li><a href="/blog.html">More Posts</a></li>
-            {% endif %}
-          </ul>
-        </div>
+        <h1>
+        <a href="/blog.html">Dave Saunders</a>
+        </h1>
+        <!-- <h2>{{ page.subtitle }}</h2> -->
 
       </span>
     </article>

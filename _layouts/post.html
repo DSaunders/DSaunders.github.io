@@ -9,7 +9,7 @@ subtitle: --- Blog ---
 <div class="post">
 
   <h2>{{ page.title }}</h2>
-  <p class="meta">Originally posted on {{ page.date | date_to_string }}</p>
+  <p class="meta">Originally posted on {{ page.date | date: "%B %Y" }}</p>
 
   <span class="post-content">
     {{ content }}
@@ -28,7 +28,7 @@ subtitle: --- Blog ---
       <h3>Share this article:</h3>
       <a
         href="https://twitter.com/intent/tweet?text='{{ page.title }}', via @DaveJSaunders&url=http://www.davejsaunders.com{{ page.url }}"
-        class="twitter-no-hover tweet-link"
+        class="tweet-link"
         onClick="_gaq.push(['_trackEvent', 'Links', 'Tweet', 'Post - Bottom']);"
         title="Tweet this" target="_blank"></a>
     </span>

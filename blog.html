@@ -8,9 +8,9 @@ subtitle: --- Blog ---
 
 <ul class='post-list'>
   {% for post in site.posts %}
-  <li>
+  <li class="clearfix">
     <a href="{{ post.url }}">{{ post.title }}</a>
-    <p>{{ post.subtitle }}</p>
+    <p>{{ post.date | date: "%Y" }}</p>
   </li>
   {% endfor %}
 </ul>
