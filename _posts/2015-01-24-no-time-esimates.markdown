@@ -44,3 +44,13 @@ To use story-points to plan projects, we need to measure our *velocity*. This is
 After the first couple of sprints, we should have a rough idea how many story-points we remove from the backlog in each sprint. That should allow us to forecast approximately how long the rest of the project should take.
 
 If we know the team’s approximate velocity, we can also give the customer an estimate up front of how long the project will take.  We can still give them the time estimate they expect, but it removes the pressure to complete individual tasks in a given time period.
+
+
+
+-----------
+
+- esimates help us ask questions about the story
+- story points predict how long something will take
+- story points != time, but we can get an approximate time from story points (the customer has a right to expect an approximate timscale)
+- inherent expectation in time estimates
+
