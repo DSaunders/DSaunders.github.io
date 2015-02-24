@@ -147,11 +147,7 @@ html[xmlns] .clearfix {
         width: 750px;
         margin: 0 auto;
         @media screen and (max-width: 850px) {
-            width: 400px;
-        }
-        @media screen and (max-width: 530px) {
-            width: 300px;
-            font-size: 1.2em;
+            width: 90%;
         }
         li {
             text-align: left;
@@ -169,7 +165,7 @@ html[xmlns] .clearfix {
                 color: $subtitle-color;
             }
 
-            @media screen and (max-width: 850px) {
+            @media screen and (max-width: 700px) {
 
               text-align: center;
               
