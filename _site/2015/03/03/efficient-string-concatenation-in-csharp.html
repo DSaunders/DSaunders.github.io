@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Concatenating string in C#</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+    <meta name="description" content="Efficiently concatenating strings in C#">
+    <meta name="author" content="Dave Saunders">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+  </head>
+  <body class="blog-post">
+
+    <article id="header">
+
+      <span id="header-content">
+
+        <h1>
+        <a href="/blog.html">Dave Saunders</a>
+        </h1>
+        <!-- <h2>--- Blog ---</h2> -->
+
+      </span>
+    </article>
+
+    <div class="post">
+
+  <h2>Efficient string concatenation in C#</h2>
+  <p class="meta">Originally posted in March 2015</p>
+
+  <span class="post-content">
+    <p>Strings are immutable in C#. That means that string concatenation can, if done carelessly, make exta work for the garbage collector by creating loads of redundant strings.</p>
+
+<p>Let’s take a look at the various ways that we can concatenate strings and see what’s actually happening behind the scenes.</p>
+
+<h1 id="result-is-known-at-compile-time">Result is known at compile time</h1>
+
+<p>This is the simplest case. If the compiler can work out what the resulting string will be, it may decide to concatenate the string for you at compile time.</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">private</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">Country</span> <span class="p">=</span> <span class="s">&quot;England&quot;</span><span class="p">;</span>
+
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="s">&quot;I am from &quot;</span> <span class="p">+</span> <span class="n">Country</span><span class="p">;</span></code></pre></div>
+
+<p>This compiler might well turn this into:</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="s">&quot;I am from England&quot;</span><span class="p">;</span></code></pre></div>
+
+<p>This is obviously very efficient!</p>
+
+<h1 id="concatenating-strings-on-one-line">Concatenating strings on one line</h1>
+
+<p>I’ve seen answers on stackoverflow, and heard people talk anecdotally, about how concatenating multiple strings using the <code>+</code> operator is bad practice.</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">string1</span> <span class="p">+</span> <span class="n">string2</span> <span class="p">+</span> <span class="n">string3</span> <span class="p">+</span> <span class="n">string4</span><span class="p">;</span></code></pre></div>
+
+<p>A common misunderstanding is that this operation always makes multiple string allocations on the way to the result, and is therefore inefficient. This is not actually the case.</p>
+
+<p>This is what happens when you concatenate strings in this way:</p>
+
+<ol>
+	<li>The total length of the result is calculated by adding the length of the strings together</li>
+	<li>A new string of this total length is created</li>
+	<li>Each string is copied into it's place in the new string, using the very quick <code>Buffer.Memcpy</code></li>
+</ol>
+
+<p>This is actually a very efficient way of concatenating strings. If you are concatenating strings in a loop, however, this is not the best option…</p>
+
+<h1 id="concatenating-strings-in-loop">Concatenating strings in loop</h1>
+
+<p>If you were to concatenate strings in a loop using the <code>+</code> operator, you could potentially end up with multiple redundant string allocations:</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">person</span> <span class="k">in</span> <span class="n">users</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">allPeople</span> <span class="p">+=</span> <span class="n">person</span><span class="p">.</span><span class="n">Name</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>This is because each iteration of the loop will likely perform an independent concatenation operation, leaving behind the previous string for the garbage collector to deal with.</p>
+
+<p>This is when it is better to use <code>StringBuilder</code>:</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">sb</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="p">();</span>
+
+<span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">person</span> <span class="k">in</span> <span class="n">users</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">sb</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">sb</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span></code></pre></div>
+
+<p>So what’s happening here?</p>
+<ol>
+	<li>A new <code>StringBuilder</code> is created. This contains a buffer to hold the string it will produce</li>
+	<li>For each <code>.Append(someString)</code> operation, <code>someString</code> is added to the <code>StringBuilder</code>'s internal buffer</li>
+	<li>If the buffer is too small to hold the string, the buffer is expanded (see 'Large Strings' to find out how this happens)</li>
+	<li>When <code>.ToString()</code> is called on the <code>StringBuilder</code>, a <i>real</i> string is generated from the <code>StringBuilder</code>'s internal buffer</li>
+</ol>
+
+<p>Using <code>StringBuilder</code>, there are no additional string allocations until <code>.ToString()</code> is called. This is much more efficient when concatenating multiple strings in a loop.</p>
+
+<h1 id="stringformat">String.Format</h1>
+
+<p>Which is more efficient?</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, &quot;</span> <span class="p">+</span> <span class="s">&quot;world&quot;</span><span class="p">);</span></code></pre></div>
+
+<p>or</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">place</span> <span class="p">=</span> <span class="s">&quot;world&quot;</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, {0}&quot;</span><span class="p">,</span> <span class="n">place</span><span class="p">);</span></code></pre></div>
+
+<p>You can probably guess that the second option is likely to be slower, but you might not know why.</p>
+
+<p>The only class that can perform string formatting is <code>StringBuilder</code>. </p>
+
+<p>This means that every time a string requires formatting (<code>Console.WriteLine</code>, <code>String.Format</code> etc.), a <code>StringBuilder</code> must be used. This is what happens when you format a string:</p>
+
+<ol>
+	<li>A <code>StringBuilder</code> is created, or retrieved from the cache</li>
+	<li><code>.AppendFormat()</code> is called on this <code>StringBuilder</code>, passing the string to format and the arguments</li>
+	<li>The string is parsed to find the sections to replace, progressively writing the formatted content to the <code>StringBuilder</code>'s internal buffer</li>
+	<li>The <code>.ToString()</code> method is called on the <code>StringBuilder</code>, creating the resulting string.</li>
+</ol>
+
+<p>You can see that any string formatting is (relatively) expensive compared to a simple concatenation. If all you are doing is joining a couple of strings together, you should <em>consider</em> another method. However it is important to remember that <strong>in most cases, readability is more important than micro-optimisations like this</strong>. </p>
+
+<p>If formatting the string makes more sense, don’t be afraid to use it, just know what is happening underneath.</p>
+
+<h1 id="large-strings">Large strings</h1>
+
+<p>In some extreme cases, you could be working with very large strings that might be large enough to end up on the <em>Large Object Heap</em> (for example, large JSON strings). If the string isn’t intended to be around for long, you generally <em>don’t</em> want it to end up on there.</p>
+
+<p>The <code>StringBuilder</code> class is cleverly designed to avoid the <em>Large Object Heap</em>.</p>
+
+<p>The internal buffer size of the <code>StringBuilder</code> is set, by default, so that the <code>StringBuilder</code> object will not grow large enough to end up on the <em>Large Object Heap</em>.</p>
+
+<p><code>StringBuilder</code> objects are actually stored as a linked list, so when a <code>StringBuilder</code>’s buffer needs to grow, this happens:</p>
+
+<ol>
+	<li>A new <code>StringBuilder</code> is created</li>
+	<li>The content of the <i>current</i> <code>StringBuilder</code> is copied in to the <i>new</i> <code>StringBuilder</code></li>
+	<li>A reference to the <i>new</i> <code>StringBuilder</code> is stored in the <i>current</i> <code>StringBuilder</code>'s 'm_ChunkPrevious' property</li>
+	<li>The current <code>StringBuilder</code>'s buffer is cleared, ready to accept more strings</li>
+	<li>Repeat every time the <i>current</i> <code>StringBuilder</code>'s buffer is full</li>
+</ol>
+
+<p>When <code>.ToString()</code> is called, and it is time to get the resulting string out of the <code>StringBuilder</code>, it can just follow it’s chain of linked <code>StringBuilder</code> objects until it has recreated the entire string.</p>
+
+<p>This internal chaining of lots of smaller <code>StringBuilders</code>, rather than one large object, cunningly avoids the <em>Large Object Heap</em>.</p>
+
+<p><i>It is worth noting that if you are working with strings of this size, you might consider whether you can use a <a href="https://msdn.microsoft.com/en-us/library/system.io.stream(v=vs.110).aspx">stream</a> instead.</i></p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>As mentioned above, <strong>readability is more important than small optimisations</strong>. That said, when two options are equally clear, it is worth knowing which is more efficient and how they work behind the scenes.</p>
+
+  </span>
+
+  <div class="post-footer">
+    <span class="related-links">
+      <h3>You might also like:</h3>
+      <ul>
+        
+          <li><a href="/2014/03/22/the-public-face-of-your-api.html">The 6 habits of poor API design</a></li>
+        
+          <li><a href="/2014/04/05/roslyn-csharp-features.html">What's new in C#</a></li>
+        
+          <li><a href="/2014/02/28/slow-down-go-faster.html">Slow down, go faster</a></li>
+        
+      </ul>
+    </span>
+    <span class="social-links">
+      <h3>Share this article:</h3>
+      <a
+        href="https://twitter.com/intent/tweet?text='Efficient string concatenation in C#', via @DaveJSaunders&url=http://www.davejsaunders.com/2015/03/03/efficient-string-concatenation-in-csharp.html"
+        class="tweet-link"
+        onClick="_gaq.push(['_trackEvent', 'Links', 'Tweet', 'Post - Bottom']);"
+        title="Tweet this" target="_blank"></a>
+    </span>
+  </div>
+
+</div>
+
+
+    <script type="text/javascript" src="//use.typekit.net/lmg7vwv.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+    <script>
+    	var _gaq = _gaq || [];
+    	var _gaq = [['_setAccount', 'UA-40239142-1']];
+
+    	// Track page view
+    	_gaq.push(
+    		['_trackPageview']
+    	);
+
+    	(function () {
+    		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    	})();
+    </script>
+    </body>
+</html>
