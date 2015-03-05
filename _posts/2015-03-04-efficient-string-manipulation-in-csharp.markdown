@@ -7,7 +7,7 @@ date:   2015-03-03 09:00:00
 meta-description: Efficiently concatinating strings in C#
 ---
 
-Strings are immutable in C#. That means that string concatination done wrong can create loads of redundant strings, meaning more work for the garbage collector to do.
+Strings are immutable in C#. That means that string concatination can, if done carelessly, make exta work for the garbage collector by creating loads of redundant strings.
 
 Let's take a look at the various ways that we can concatinate strings and see what's actually happening behind the scenes.
 
@@ -62,7 +62,7 @@ foreach (var person in users) {
 }
 {% endhighlight %}
 
-This is because each iteration of the loop will perform an independant concatination operation, leaving behind the previous string for the garbage collector to deal with.
+This is because each iteration of the loop will likely perform an independant concatination operation, leaving behind the previous string for the garbage collector to deal with.
 
 This is when it is better to use ``StringBuilder``:
 
@@ -80,13 +80,11 @@ So what's happening here?
 <ol>
 	<li>A new <code>StringBuilder</code> is created. This contains a buffer to hold the string it will produce</li>
 	<li>For each <code>.Append(someString)</code> operation, <code>someString</code> is added to the <code>StringBuilder</code>'s internal buffer</li>
-	<li>If the buffer is too small to hold the string, it is expanded (or another <code>StringBuilder</code> is created, see later)</li>
+	<li>If the buffer is too small to hold the string, the buffer is expanded (see 'Large Strings' to find out how this happens)</li>
 	<li>When <code>.ToString()</code> is called on the <code>StringBuilder</code>, a <i>real</i> string is generated from the <code>StringBuilder</code>'s internal buffer</li>
 </ol>
 
-Using ``StringBuilder``, there are no additional string allocations. In fact, there are no new memory allocations at all unless the internal buffer isn't big enough and needs to grow.
-
-This is much more efficient when concatinating multiple strings in a loop.
+Using ``StringBuilder``, there are no additional string allocations until ``.ToString()`` is called. This is much more efficient when concatinating multiple strings in a loop.
 
 
 #String.Format
@@ -106,16 +104,18 @@ Console.WriteLine("Hello, {0}", place);
 
 You can probably guess that the second option is likely to be slower, but you might not know why.
 
-The only class that can perform string formatting is ``StringBuilder``. This means that every time a string requires formating (``Console.WriteLine``, ``String.Format`` etc), this has to happen:
+The only class that can perform string formatting is ``StringBuilder``. 
+
+This means that every time a string requires formating (``Console.WriteLine``, ``String.Format`` etc), a ``StringBuilder`` must be used. This is what happens when you format a string:
 
 <ol>
 	<li>A <code>StringBuilder</code> is created, or retrieved from the cache</li>
 	<li><code>.AppendFormat()</code> is called on this <code>StringBuilder</code>, passing the string to format and the arguments</li>
-	<li>The string is parsed to find the sections to replace, progressively writing the result to the <code>StringBuilder</code>'s internal buffer</li>
+	<li>The string is parsed to find the sections to replace, progressively writing the formatted content to the <code>StringBuilder</code>'s internal buffer</li>
 	<li>The <code>.ToString()</code> method is called on the <code>StringBuilder</code>, creating the resulting string.</li>
 </ol>
 
-You can see that any string formatting is (relatively) expensive. If all you are doing is a basic string concatination, you should *consider* another method, however it is important to remember that **in most cases, readability is more important than micro-optimisations like this**. 
+You can see that any string formatting is (relatively) expensive compared to a simple concatination. If all you are doing is joining a couple of strings together, you should *consider* another method. However it is important to remember that **in most cases, readability is more important than micro-optimisations like this**. 
 
 If formatting the string makes more sense, don't be afraid to use it, just know what is happening underneath.
 
@@ -126,9 +126,9 @@ In some extreme cases, you might be working with very large strings that might b
 
 The ``StringBuilder`` class is cleverly designed to avoid the *Large Object Heap*.
 
-The internal buffer size of the ``StringBuilder`` is set, by default, so that the ``StringBuilder`` will not grow large enough to end up on the *Large Object Heap*.
+The internal buffer size of the ``StringBuilder`` is set, by default, so that the ``StringBuilder`` object will not grow large enough to end up on the *Large Object Heap*.
 
-``StringBuilder`` objects are actually stored as a linked list, so when the internal buffer is not big enough to hold the string passed from the next ``.Append()`` call, the following happens:
+``StringBuilder`` objects are actually stored as a linked list, so when the ``StringBuilder``'s buffer is full, this happens:
 
 <ol>
 	<li>A new <code>StringBuilder</code> is created</li>
@@ -137,9 +137,10 @@ The internal buffer size of the ``StringBuilder`` is set, by default, so that th
 	<li>The current <code>StringBuilder</code>'s buffer is cleared, ready to accept more strings</li>
 </ol>
 
+
 When ``.ToString()`` is called, and it is time to get the resulting string out of the ``StringBuilder``, it can just follow it's chain of linked ``StringBuilder`` objects until it has recreated the entire string.
 
-This means that one large ``StringBuilder`` is reduced to a linked list of smaller ``StringBuilder`` objects, cunningly avoiding one big object ending up on the *Large Object Heap*.
+This internal chaining of lots of smaller ``StringBuilder``s, rather than one large object, cunningly avoids the *Large Object Heap*.
 
 It is worth noting that if you are working with strings of this size, you might consider whether you can use a <a href="https://msdn.microsoft.com/en-us/library/system.io.stream(v=vs.110).aspx">stream</a> instead.
 
