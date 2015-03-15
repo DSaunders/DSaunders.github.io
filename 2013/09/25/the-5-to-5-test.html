@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>The 5-to-5 test</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+    <meta name="description" content="">
+    <meta name="author" content="Dave Saunders">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+  </head>
+  <body class="blog-post">
+
+    <article id="header">
+
+      <span id="header-content">
+
+        <h1>
+        <a href="/blog.html">Dave Saunders</a>
+        </h1>
+        <!-- <h2>--- Blog ---</h2> -->
+
+      </span>
+    </article>
+
+    <div class="post">
+
+  <h2>The 5-to-5 test</h2>
+  <p class="meta">Originally posted in September 2013</p>
+
+  <span class="post-content">
+    <p>Everybody has their threshold, the point where the nice shiny new DevOps process goes out of the window  and it’s just easier to do it the old way.</p>
+
+<p>I reached mine at 7:15pm.  After hours of struggling with deployments, it was just easier to change the code on the live site and commit it to source control later.  That brilliant new Continuous Integration pipeline went out of the window and was replaced by a copy of Notepad.  I knew it was wrong, and I felt bad afterwards, but I did it anyway.</p>
+
+<p>When we cross this threshold we try to justify it to ourselves; ‘it was too urgent to do it the proper way’, ‘it’s OK just this once’ etc.  But the truth is, it’s not our fault…</p>
+
+<h1 id="humans-are-lazy-developers-are-efficient-we-are-both">Humans are lazy, developers are efficient.. we are both.</h1>
+
+<p>Humans are programmed to be lazy.  Why expend needless effort doing it the long way when we can do it quicker and move on to something else?  We will always tend towards the path of least resistance.</p>
+
+<p>As developers, we spend all day looking for the most efficient way to do something.  That usually means the easiest and fastest solution to the problem at hand.</p>
+
+<p>We can resist these instincts for a while if we know the harder way is the right way, but that will only last for so long.   When our back is against the wall and the pressure is on, we will always cheat.</p>
+
+<h1 id="the-5to5-test">The 5to5 test</h1>
+
+<p>With that in mind, I would like to propose a new metric to measure the maturity of a DevOps process.  The ’5to5 test’.</p>
+
+<p>The test is simple:</p>
+
+<p>When it’s 5 minutes to 5 o’clock on a Friday afternoon and you need to get home for the weekend, is it easier to use your new process or just do it ‘the old way’?</p>
+
+<p>Hopefully, your threshold won’t be 5 to 5, it might be 7:15pm like me.  If you’re really keen you might hold out until 3am, but eventually you will break and choose the easy path to get the job done.</p>
+
+<h1 id="passing-the-5-to-5-test">Passing the 5 to 5 test.</h1>
+
+<p>There are two ways to make sure your process passes the test; make the new process easier or make the old process harder.</p>
+
+<p>By making the old process harder, you force developers to abide by the rules.If developers cannot access the server, they can’t change code on the live site. If you don’t physically let developers out of the door until they have committed their code then it won’t remain on their local machine rather than in the repository.</p>
+
+<p>I would argue, however, that this is neither sustainable or sensible.  If you have to enforce artificial barriers on developers to coerce them into using your new system, then it is not mature enough to completely replace the old one.  It doesn’t mean that the new way is wrong, just that it needs more work to make it the default behaviour.</p>
+
+<p>The more sensible solution is to make it so easy to follow the correct way, that it becomes natural.  For example, I failed to follow the correct process because it would take 10 minutes to go through the Continuous Integration pipeline and get my code on to the live site.  It doesn’t mean that our CI solution is wrong, far from it, it just means that it is not mature enough yet to be the default action by a desperate developer under pressure.</p>
+
+<p>I don’t know if it’s possible to every make any DevOps process easier than ‘cheating’, but that’s the goal we should be striving for.  Perhaps, if it was possible to deploy my code through the CI solution in only 5 minutes, I would have held out another hour before reverting to Notepad.  That’s not perfect, but it’s an improvement.</p>
+
+<p>How many of your DevOps processes would pass the 5 to 5 test?</p>
+
+  </span>
+
+  <div class="post-footer">
+    <span class="related-links">
+      <h3>You might also like:</h3>
+      <ul>
+        
+          <li><a href="/2014/02/28/slow-down-go-faster.html">Slow down, go faster</a></li>
+        
+          <li><a href="/2014/06/10/its-not-agiles-fault.html">It's not Agile's fault</a></li>
+        
+          <li><a href="/2013/10/17/are-you-solving-the-wrong-problem.html">Are you solving the wrong problem?</a></li>
+        
+      </ul>
+    </span>
+    <span class="social-links">
+      <h3>Share this article:</h3>
+      <a
+        href="https://twitter.com/intent/tweet?text='The 5-to-5 test', via @DaveJSaunders&url=http://www.davejsaunders.com/2013/09/25/the-5-to-5-test.html"
+        class="tweet-link"
+        onClick="_gaq.push(['_trackEvent', 'Links', 'Tweet', 'Post - Bottom']);"
+        title="Tweet this" target="_blank"></a>
+    </span>
+  </div>
+
+</div>
+
+
+    <script type="text/javascript" src="//use.typekit.net/lmg7vwv.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+    <script>
+    	var _gaq = _gaq || [];
+    	var _gaq = [['_setAccount', 'UA-40239142-1']];
+
+    	// Track page view
+    	_gaq.push(
+    		['_trackPageview']
+    	);
+
+    	(function () {
+    		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    	})();
+    </script>
+    </body>
+</html>
