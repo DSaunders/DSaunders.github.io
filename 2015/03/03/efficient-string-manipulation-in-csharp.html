@@ -41,15 +41,13 @@
 
 <p>This is the simplest case. If the compiler can work out what the resulting string will be, it may decide to concatinate the string for you at compile time.</p>
 
-<div class="highlight"><pre><code class="csharp"><span class="k">private</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">Country</span> <span class="p">=</span> <span class="s">&quot;England&quot;</span><span class="p">;</span>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">private</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">Country</span> <span class="p">=</span> <span class="s">&quot;England&quot;</span><span class="p">;</span>
 
-<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="s">&quot;I am from &quot;</span> <span class="p">+</span> <span class="n">Country</span><span class="p">;</span>
-</code></pre></div>
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="s">&quot;I am from &quot;</span> <span class="p">+</span> <span class="n">Country</span><span class="p">;</span></code></pre></div>
 
 <p>This compiler might well turn this into:</p>
 
-<div class="highlight"><pre><code class="csharp"><span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="s">&quot;I am from England&quot;</span><span class="p">;</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="s">&quot;I am from England&quot;</span><span class="p">;</span></code></pre></div>
 
 <p>This is obviously very efficient!</p>
 
@@ -57,8 +55,7 @@
 
 <p>I’ve seen answers on stackoverflow, and heard people talk anecdotally, about how concatinating multiple strings using the <code>+</code> opertator is bad practice.</p>
 
-<div class="highlight"><pre><code class="csharp"><span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">string1</span> <span class="p">+</span> <span class="n">string2</span> <span class="p">+</span> <span class="n">string3</span> <span class="p">+</span> <span class="n">string4</span><span class="p">;</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">string1</span> <span class="p">+</span> <span class="n">string2</span> <span class="p">+</span> <span class="n">string3</span> <span class="p">+</span> <span class="n">string4</span><span class="p">;</span></code></pre></div>
 
 <p>A common misunderstaning is that this operation always makes multiple string allocations on the way to the result, and is therefore inefficient. This is not actually the case.</p>
 
@@ -76,23 +73,21 @@
 
 <p>If you were to concatinate strings in a loop using the <code>+</code> operator, you could potentially end up with multiple redundant string allocations:</p>
 
-<div class="highlight"><pre><code class="csharp"><span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">person</span> <span class="k">in</span> <span class="n">users</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">person</span> <span class="k">in</span> <span class="n">users</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">allPeople</span> <span class="p">+=</span> <span class="n">person</span><span class="p">.</span><span class="n">Name</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
 <p>This is because each iteration of the loop will perform an independant concatination operation, leaving behind the previous string for the garbage collector to deal with.</p>
 
 <p>This is when it is better to use <code>StringBuilder</code>:</p>
 
-<div class="highlight"><pre><code class="csharp"><span class="kt">var</span> <span class="n">sb</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="p">();</span>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">sb</span> <span class="p">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="p">();</span>
 
 <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">person</span> <span class="k">in</span> <span class="n">users</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">sb</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">Name</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">sb</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span>
-</code></pre></div>
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">sb</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span></code></pre></div>
 
 <p>So what’s happening here?</p>
 <ol>
@@ -110,14 +105,12 @@
 
 <p>Which is more efficient?</p>
 
-<div class="highlight"><pre><code class="csharp"><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, &quot;</span> <span class="p">+</span> <span class="s">&quot;world&quot;</span><span class="p">);</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, &quot;</span> <span class="p">+</span> <span class="s">&quot;world&quot;</span><span class="p">);</span></code></pre></div>
 
 <p>or</p>
 
-<div class="highlight"><pre><code class="csharp"><span class="kt">var</span> <span class="n">place</span> <span class="p">=</span> <span class="s">&quot;world&quot;</span><span class="p">;</span>
-<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, {0}&quot;</span><span class="p">,</span> <span class="n">place</span><span class="p">);</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">place</span> <span class="p">=</span> <span class="s">&quot;world&quot;</span><span class="p">;</span>
+<span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello, {0}&quot;</span><span class="p">,</span> <span class="n">place</span><span class="p">);</span></code></pre></div>
 
 <p>You can probably guess that the second option is likely to be slower, but you might not know why.</p>
 
@@ -172,12 +165,12 @@
         
           <li><a href="/2014/04/05/roslyn-csharp-features.html">What's new in C#</a></li>
         
-          <li><a href="/2014/02/28/slow-down-go-faster.html">Slow down, go faster</a></li>
+          <li><a href="/2015/04/26/paging-in-restful-web-services.html">Query string paging in RESTful web services</a></li>
         
       </ul>
     </span>
     <span class="social-links">
-      <h3>Share this article:</h3>
+      <h3>Share this now on Twitter!</h3>
       <a
         href="https://twitter.com/intent/tweet?text='Efficient string concatination in C#', via @DaveJSaunders&url=http://www.davejsaunders.com/2015/03/03/efficient-string-manipulation-in-csharp.html"
         class="tweet-link"

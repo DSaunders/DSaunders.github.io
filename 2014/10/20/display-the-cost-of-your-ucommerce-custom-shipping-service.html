@@ -53,14 +53,13 @@
 
 <p>.. you might assume that you can use <em>ShippingMethod.GetPriceForCurrency()</em> to get the cost to ship your order, like this:</p>
 
-<div class="highlight"><pre><code class="csharp"><span class="kt">var</span> <span class="n">allShippingMethods</span> <span class="p">=</span> <span class="n">TransactionLibrary</span><span class="p">.</span><span class="n">GetShippingMethods</span><span class="p">(</span><span class="n">country</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">allShippingMethods</span> <span class="p">=</span> <span class="n">TransactionLibrary</span><span class="p">.</span><span class="n">GetShippingMethods</span><span class="p">(</span><span class="n">country</span><span class="p">);</span>
 <span class="kt">var</span> <span class="n">currency</span> <span class="p">=</span> <span class="n">purchaseOrder</span><span class="p">.</span><span class="n">BillingCurrency</span><span class="p">;</span>
 
 <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">shippingMethod</span> <span class="k">in</span> <span class="n">allShippingMethods</span><span class="p">)</span>
 <span class="p">{</span>
 	<span class="kt">var</span> <span class="n">cost</span> <span class="p">=</span> <span class="n">shippingMethod</span><span class="p">.</span><span class="n">GetPriceForCurrency</span><span class="p">(</span><span class="n">currency</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
 <p>Unfortunately, this uCommerce method only returns the first price from the shipping method’s <em>Pricing</em> tab that matches the given currency:</p>
 
@@ -78,7 +77,7 @@
 a given shipping method, construct a fake <em>Shipment</em> object (using our real basket of course) and pass it to the service to find out how much it
 would cost to ship our basket with that shipping method.</p>
 
-<div class="highlight"><pre><code class="csharp"><span class="kt">var</span> <span class="n">purchaseOrder</span> <span class="p">=</span> <span class="n">TransactionLibrary</span><span class="p">.</span><span class="n">GetBasket</span><span class="p">().</span><span class="n">PurchaseOrder</span><span class="p">;</span>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">purchaseOrder</span> <span class="p">=</span> <span class="n">TransactionLibrary</span><span class="p">.</span><span class="n">GetBasket</span><span class="p">().</span><span class="n">PurchaseOrder</span><span class="p">;</span>
 <span class="kt">var</span> <span class="n">allShippingMethods</span> <span class="p">=</span> <span class="n">TransactionLibrary</span><span class="p">.</span><span class="n">GetShippingMethods</span><span class="p">(</span><span class="n">country</span><span class="p">);</span>
 
 <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">shippingMethod</span> <span class="k">in</span> <span class="n">allShippingMethods</span><span class="p">)</span>
@@ -96,8 +95,7 @@ would cost to ship our basket with that shipping method.</p>
 
   <span class="kt">var</span> <span class="n">shippingMethodPrice</span>
  	 <span class="p">=</span> <span class="n">shippingService</span><span class="p">.</span><span class="n">CalculateShippingPrice</span><span class="p">(</span><span class="n">shipment</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
 <p>Of course, you might want some null checks and you will need to actually do something with the resulting price to display it, but you get the idea.</p>
 
@@ -117,12 +115,12 @@ set those in addition to whatever your custom service needs, just in case a give
         
           <li><a href="/2015/03/03/efficient-string-manipulation-in-csharp.html">Efficient string concatination in C#</a></li>
         
-          <li><a href="/2014/10/27/why-alt-tags-matter.html">Why 'alt' attributes on images matter</a></li>
+          <li><a href="/2013/09/19/its-about-the-journey.html">It's about the journey</a></li>
         
       </ul>
     </span>
     <span class="social-links">
-      <h3>Share this article:</h3>
+      <h3>Share this now on Twitter!</h3>
       <a
         href="https://twitter.com/intent/tweet?text='Displaying the cost of a uCommerce custom IShippingMethodService', via @DaveJSaunders&url=http://www.davejsaunders.com/2014/10/20/display-the-cost-of-your-ucommerce-custom-shipping-service.html"
         class="tweet-link"

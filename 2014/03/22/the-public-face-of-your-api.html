@@ -36,8 +36,7 @@
     <p>We generally talk about APIs as something we call over HTTP to interact with
 a third party service, but of course any time you do this:</p>
 
-<div class="highlight"><pre><code class="csharp"><span class="k">public</span> <span class="k">void</span> <span class="nf">HelloWorld</span><span class="p">()</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">void</span> <span class="nf">HelloWorld</span><span class="p">()</span></code></pre></div>
 
 <p>you are writing an API.</p>
 
@@ -65,13 +64,12 @@ need to have access to the method that generates the connection string.</p>
 
 <p>Consider this simplified example:</p>
 
-<div class="highlight"><pre><code class="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">UsersDatabase</span>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">UsersDatabase</span>
 <span class="p">{</span>
    <span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">QuerySqlServerForUser</span><span class="p">(</span><span class="kt">string</span> <span class="n">userName</span><span class="p">)</span>
    <span class="p">{</span>
    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
 <p>This method exposes too much detail about how it works internally. If we were
 to switch to a no-sql database for instance, the method name would make no
@@ -84,13 +82,12 @@ We could return IEnumerable here instead.</p>
 
 <p>This might be better:</p>
 
-<div class="highlight"><pre><code class="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">UsersDatabase</span>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">UsersDatabase</span>
 <span class="p">{</span>
    <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">GetUserByName</span><span class="p">(</span><span class="kt">string</span> <span class="n">userName</span><span class="p">)</span>
    <span class="p">{</span>
    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span></code></pre></div>
 
 <p>We should also be using an interface and an IoC container so that the caller
 does not need to rely on our concrete class, but this is an over-simplified
@@ -112,10 +109,9 @@ any old method name and expect people to figure out what it does.</p>
 
 <p>I bet you see things like this all the time:</p>
 
-<div class="highlight"><pre><code class="csharp"> <span class="k">public</span> <span class="kt">int</span><span class="p">[]</span> <span class="nf">GetUsers</span><span class="p">(</span><span class="kt">string</span> <span class="n">filter</span><span class="p">)</span>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="kt">int</span><span class="p">[]</span> <span class="nf">GetUsers</span><span class="p">(</span><span class="kt">string</span> <span class="n">filter</span><span class="p">)</span>
  <span class="p">{</span>
- <span class="p">}</span>
-</code></pre></div>
+ <span class="p">}</span></code></pre></div>
 
 <p>Pardon? Get which users? What is the filter? Why does it return an array of
 integers?</p>
@@ -127,10 +123,9 @@ method to see whether it’s what they need.</p>
 
 <p>This would be an improvement:</p>
 
-<div class="highlight"><pre><code class="csharp"> <span class="k">public</span> <span class="kt">int</span><span class="p">[]</span> <span class="nf">GetIdsOfUsersWithSurname</span><span class="p">(</span><span class="kt">string</span> <span class="n">surname</span><span class="p">)</span>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="kt">int</span><span class="p">[]</span> <span class="nf">GetIdsOfUsersWithSurname</span><span class="p">(</span><span class="kt">string</span> <span class="n">surname</span><span class="p">)</span>
  <span class="p">{</span>
- <span class="p">}</span>
-</code></pre></div>
+ <span class="p">}</span></code></pre></div>
 
 <p>Yes, it’s a long method name, but how many times recently have you ever typed
 the full name of a method? Auto-complete is pretty good; long method names are
@@ -140,11 +135,10 @@ not an issue (until they get the point where they compromise readability).</p>
 
 <p>To the consumer of an API, this will seriously ruin your day:</p>
 
-<div class="highlight"><pre><code class="csharp"> <span class="k">public</span> <span class="kt">int</span><span class="p">[]</span> <span class="nf">GetIdsOfUsersWithSurname</span><span class="p">(</span><span class="kt">string</span> <span class="n">surname</span><span class="p">)</span>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="kt">int</span><span class="p">[]</span> <span class="nf">GetIdsOfUsersWithSurname</span><span class="p">(</span><span class="kt">string</span> <span class="n">surname</span><span class="p">)</span>
  <span class="p">{</span>
    <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
- <span class="p">}</span>
-</code></pre></div>
+ <span class="p">}</span></code></pre></div>
 
 <p>If it’s not finished, don’t make it public. If you are implementing an interface
 and you don’t need all of the public methods, it’s probably a sign that the
@@ -156,8 +150,7 @@ application actually throws your exception.</p>
 
 <h1 id="section">6.</h1>
 
-<div class="highlight"><pre><code class="csharp"><span class="n">This</span> <span class="n">part</span> <span class="n">of</span> <span class="n">the</span> <span class="n">post</span> <span class="k">is</span> <span class="n">not</span> <span class="n">implemented</span> <span class="n">yet</span><span class="p">.</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="n">This</span> <span class="n">part</span> <span class="n">of</span> <span class="n">the</span> <span class="n">post</span> <span class="k">is</span> <span class="n">not</span> <span class="n">implemented</span> <span class="n">yet</span><span class="p">.</span></code></pre></div>
 
 <p>Annoying isn’t it ;-)</p>
 
@@ -177,7 +170,7 @@ application actually throws your exception.</p>
       </ul>
     </span>
     <span class="social-links">
-      <h3>Share this article:</h3>
+      <h3>Share this now on Twitter!</h3>
       <a
         href="https://twitter.com/intent/tweet?text='The 6 habits of poor API design', via @DaveJSaunders&url=http://www.davejsaunders.com/2014/03/22/the-public-face-of-your-api.html"
         class="tweet-link"

@@ -41,8 +41,7 @@ attributes on images can have a huge impact on their experience.</p>
 
 <h1 id="with-an-alt-attribute">With an ‘alt’ attribute</h1>
 
-<div class="highlight"><pre><code class="csharp"><span class="p">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="p">=</span><span class="s">&quot;hero.jpg&quot;</span> <span class="n">alt</span><span class="p">=</span><span class="s">&quot;A person using the product&quot;</span><span class="p">/&gt;</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="p">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="p">=</span><span class="s">&quot;hero.jpg&quot;</span> <span class="n">alt</span><span class="p">=</span><span class="s">&quot;A person using the product&quot;</span><span class="p">/&gt;</span></code></pre></div>
 
 <p>Here, VoiceOver reads out:</p>
 
@@ -58,8 +57,7 @@ and could distract from the content?</p>
 
 <h1 id="without-an-alt-attribute">Without an ‘alt’ attribute</h1>
 
-<div class="highlight"><pre><code class="csharp"><span class="p">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="p">=</span><span class="s">&quot;hero.jpg&quot;</span> <span class="p">/&gt;</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="p">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="p">=</span><span class="s">&quot;hero.jpg&quot;</span> <span class="p">/&gt;</span></code></pre></div>
 
 <p>Here, VoiceOver reads out:</p>
 
@@ -72,8 +70,7 @@ the screen reader will read the file name of the image.</strong> A better practi
 
 <h1 id="with-an-empty-alt-attribute">With an empty alt attribute</h1>
 
-<div class="highlight"><pre><code class="csharp"><span class="p">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="p">=</span><span class="s">&quot;hero.jpg&quot;</span> <span class="n">alt</span><span class="p">=</span><span class="s">&quot;&quot;</span> <span class="p">/&gt;</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="p">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="p">=</span><span class="s">&quot;hero.jpg&quot;</span> <span class="n">alt</span><span class="p">=</span><span class="s">&quot;&quot;</span> <span class="p">/&gt;</span></code></pre></div>
 
 <p>Here the screen reader skips the image altogether, as if it wasn’t there. That’s a much better experience for a visually impaired user than the
 content being interrupted with file names.</p>
@@ -83,8 +80,7 @@ content being interrupted with file names.</p>
 <p>If you’re building a responsive site, you’re probably using
 <em>backround-image</em> in CSS to swap out the images using media queries.</p>
 
-<div class="highlight"><pre><code class="csharp"><span class="n">background</span><span class="p">-</span><span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="err">&#39;</span><span class="n">hero</span><span class="p">.</span><span class="n">jpg</span><span class="err">&#39;</span><span class="p">);</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="n">background</span><span class="p">-</span><span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="err">&#39;</span><span class="n">hero</span><span class="p">.</span><span class="n">jpg</span><span class="err">&#39;</span><span class="p">);</span></code></pre></div>
 
 <p>That’s all well and good, but just be aware that screen readers will normally ignore
 background images in CSS.</p>
@@ -92,9 +88,8 @@ background images in CSS.</p>
 <p>You can make up for this using a couple of extra attributes on the element that
 contains the background image:</p>
 
-<div class="highlight"><pre><code class="csharp"><span class="p">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="p">=</span><span class="s">&quot;hero-image&quot;</span> <span class="n">role</span><span class="p">=</span><span class="s">&quot;img&quot;</span> <span class="n">aria</span><span class="p">-</span><span class="n">label</span><span class="p">=</span><span class="s">&quot;A person using the product&quot;</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="n">div</span><span class="p">&gt;</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="p">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="p">=</span><span class="s">&quot;hero-image&quot;</span> <span class="n">role</span><span class="p">=</span><span class="s">&quot;img&quot;</span> <span class="n">aria</span><span class="p">-</span><span class="n">label</span><span class="p">=</span><span class="s">&quot;A person using the product&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="n">div</span><span class="p">&gt;</span></code></pre></div>
 
 <p>Here, the ‘role’ attribute tells the screen reader that this div is for holding an
 image, the ‘aria-label’ attribute allows us to
@@ -132,16 +127,16 @@ If you want to try this yourself, OSX has a built in screen reader that works fo
       <h3>You might also like:</h3>
       <ul>
         
+          <li><a href="/2015/04/26/paging-in-restful-web-services.html">Query string paging in RESTful web services</a></li>
+        
           <li><a href="/2014/03/22/the-public-face-of-your-api.html">The 6 habits of poor API design</a></li>
         
           <li><a href="/2015/03/03/efficient-string-manipulation-in-csharp.html">Efficient string concatination in C#</a></li>
         
-          <li><a href="/2015/03/03/standups-youre-doing-it-wrong.html">The Daily Stand-up - You’re doing it wrong</a></li>
-        
       </ul>
     </span>
     <span class="social-links">
-      <h3>Share this article:</h3>
+      <h3>Share this now on Twitter!</h3>
       <a
         href="https://twitter.com/intent/tweet?text='Why 'alt' attributes on images matter', via @DaveJSaunders&url=http://www.davejsaunders.com/2014/10/27/why-alt-tags-matter.html"
         class="tweet-link"

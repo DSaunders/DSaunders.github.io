@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Query string paging in RESTful web services</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+    <meta name="description" content="Why paging using the query string is my preference for RESTful API.">
+    <meta name="author" content="Dave Saunders">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+
+  </head>
+  <body class="blog-post">
+
+    <article id="header">
+
+      <span id="header-content">
+
+        <h1>
+        <a href="/blog.html">Dave Saunders</a>
+        </h1>
+        <!-- <h2>--- Blog ---</h2> -->
+
+      </span>
+    </article>
+
+    <div class="post">
+
+  <h2>Query string paging in RESTful web services</h2>
+  <p class="meta">Originally posted in April 2015</p>
+
+  <span class="post-content">
+    <p>When we’re building a RESTful web service, the principles of REST tells us that a URL should represent a resource.</p>
+
+<p>So <code>/api/products/123</code> will represent the product with an ID of 123.
+If we follow that pattern, then <code>/api/products/</code> should represent <em>all</em> products.</p>
+
+<p>That’s all well and good, but what if there are thousands of products? We can’t send all of them in the response, as that would really upset clients on a slow connection. We’re going to need to implement some sort of paging.</p>
+
+<p>We have a number of options available to us, but my personal opinion is that we should use the query string.</p>
+
+<h1 id="why-query-string-paging">Why query string paging?</h1>
+
+<p>I’ve seen some responses on Stack Overflow that discourage the query string being used <em>at all</em> when adhering to the principles of REST.</p>
+
+<p><a href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3968</a> says:</p>
+
+<blockquote>
+  <p>The query component contains non-hierarchical data that, along with data in the path component (Section 3.3), serves to identify a resource </p>
+</blockquote>
+
+<p>I would argue that defining paramters for paging comes under ‘non-hierarchical data’, and therefore I think the query string is perfect for our purposes.</p>
+
+<p>Using the query string for paging is also easy for the client to test in a browser and easy to reason about.</p>
+
+<p>My preference is to offer a URL like this:</p>
+
+<p><code>/api/products?offset=20&amp;limit=40</code>.</p>
+
+<p>This means ‘starting from item 20, give me the next 40 items’. This allows the client to fine control over the paging of the resource to suit their needs.</p>
+
+<h1 id="linking-between-pages">Linking between pages</h1>
+
+<p>RESTful web services should provide ‘dicoverability’. In other words, one resource should link to another so that the consumer can navigate the API using only these links.</p>
+
+<p>When paging, the body of the response should provide links to the <code>next</code>, <code>previous</code>, <code>first</code> and <code>last</code> page of this resource (or as many of these as are relevant).</p>
+
+<p>Each page should, <strong>as with all resources in the API</strong>, provide a link to the itself using <code>self</code>.</p>
+
+<p>Here is an example (this uses the <a href="http://stateless.co/hal_specification.html">HAL</a> schema for JSON, others are available):</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="p">{</span>
+    <span class="s">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&quot;self&quot;</span><span class="p">:</span>  <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products?offset=40&amp;limit=40&quot;</span>  <span class="p">},</span>
+        <span class="s">&quot;first&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products?offset=0&amp;limit=40&quot;</span>   <span class="p">},</span>
+        <span class="s">&quot;last&quot;</span><span class="p">:</span>  <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products?offset=120&amp;limit=40&quot;</span> <span class="p">},</span>
+        <span class="s">&quot;next&quot;</span><span class="p">:</span>  <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products?offset=80&amp;limit=40&quot;</span>  <span class="p">},</span>
+        <span class="s">&quot;prev&quot;</span><span class="p">:</span>  <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products?offset=0&amp;limit=40&quot;</span>   <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>Because we’re using the query string, it’s really easy to provide links to the next page. It’s also very easy for the consumer of our API to understand and modify for their needs.</p>
+
+<h1 id="linking-to-the-resource-from-another-resource">Linking to the resource from another resource</h1>
+
+<p>We need to be able to link to this resource from other pages, for example:</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="p">{</span>
+    <span class="s">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
+    	<span class="s">&quot;self&quot;</span><span class="p">:</span>      <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/&quot;</span> <span class="p">},</span>
+        <span class="s">&quot;products&quot;</span><span class="p">:</span>  <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products&quot;</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>So how do we tell the consumer about paging?</p>
+
+<p>One option is that we just don’t mention it here at all and just put it in the documentation.</p>
+
+<p>When the consumer navigates to the <code>/api/products</code> URL, the <code>self</code> link in the response will indicate that they are on the first page, and allow them to navigate from there.</p>
+
+<p>Unfortunately, this isn’t helpful until you actually <em>get</em> to the <code>products</code> resource.</p>
+
+<p>Another option is to link the the first page:</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="p">{</span>
+    <span class="s">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
+    	<span class="s">&quot;self&quot;</span><span class="p">:</span>      <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/&quot;</span> <span class="p">},</span>
+        <span class="s">&quot;products&quot;</span><span class="p">:</span>  <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products?offset=0&amp;limit=40&quot;</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>The problem with this is that if we add more query string parameters (for example, searching or ordering) then the URL grows and becomes even harder to read.</p>
+
+<p>Because we are constructing a real URL, we would also have to provide default values for each query string parameter. What should the default value of a <code>searchTerm</code> parameter be, for example?</p>
+
+<p>The URI Templating Spec (<a href="http://tools.ietf.org/html/rfc6570">RFC6570</a>) helps us with this, allowing us to provide a template that describes the query string parameters.</p>
+
+<p>For our <code>products</code> resource, it would look like this:</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="p">{</span>
+    <span class="s">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
+    	<span class="s">&quot;self&quot;</span><span class="p">:</span>      <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/&quot;</span> <span class="p">},</span>
+        <span class="s">&quot;products&quot;</span><span class="p">:</span>  <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products{?offset,limit}&quot;</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>I find this to be much clearer.</p>
+
+<h1 id="total-count">Total count</h1>
+
+<p>Finally, it’s also nice to include the <em>total</em> amount of <code>products</code> availble.</p>
+
+<p>The most common way to do this is with a custom HTTP response header (for example <code>X-Total-Count</code>).</p>
+
+<p>There’s nothing to say you <em>have</em> to do this, but it’s good practice to do so and the consumers of your API will thank you for it.</p>
+
+<h1 id="further-reading">Further reading</h1>
+
+<p>If you want to read more about the things mentioned in this article, check out these links:</p>
+
+<ul>
+	<li>Chapter 5 from Roy Fielding's Dissertation: <a href="Representational State Transfer (REST)">Representational State Transfer (REST)</a>
+	<li>Uniform Resource Identifier (URI): Generic Syntax : <a href="http://www.ietf.org/rfc/rfc3986.txt">(RFC 3968)</a></li>
+	<li>Hypertext Application Language <a href="http://stateless.co/hal_specification.html">(HAL)</a></li>
+	<li>The URI Templating Spec <a href="http://tools.ietf.org/html/rfc6570">(RFC6570)</a></li>
+
+
+
+</li></ul>
+
+  </span>
+
+  <div class="post-footer">
+    <span class="related-links">
+      <h3>You might also like:</h3>
+      <ul>
+        
+          <li><a href="/2014/03/22/the-public-face-of-your-api.html">The 6 habits of poor API design</a></li>
+        
+          <li><a href="/2015/03/03/efficient-string-manipulation-in-csharp.html">Efficient string concatination in C#</a></li>
+        
+          <li><a href="/2014/06/10/its-not-agiles-fault.html">It's not Agile's fault</a></li>
+        
+      </ul>
+    </span>
+    <span class="social-links">
+      <h3>Share this now on Twitter!</h3>
+      <a
+        href="https://twitter.com/intent/tweet?text='Query string paging in RESTful web services', via @DaveJSaunders&url=http://www.davejsaunders.com/2015/04/26/paging-in-restful-web-services.html"
+        class="tweet-link"
+        onClick="_gaq.push(['_trackEvent', 'Links', 'Tweet', 'Post - Bottom']);"
+        title="Tweet this" target="_blank"></a>
+    </span>
+  </div>
+
+</div>
+
+
+    <script type="text/javascript" src="//use.typekit.net/lmg7vwv.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+    <script>
+    	var _gaq = _gaq || [];
+    	var _gaq = [['_setAccount', 'UA-40239142-1']];
+
+    	// Track page view
+    	_gaq.push(
+    		['_trackPageview']
+    	);
+
+    	(function () {
+    		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    	})();
+    </script>
+    </body>
+</html>
