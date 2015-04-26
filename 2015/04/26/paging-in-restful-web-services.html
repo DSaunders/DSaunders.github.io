@@ -38,11 +38,19 @@
 <p>So <code>/api/products/123</code> will represent the product with an ID of 123.
 If we follow that pattern, then <code>/api/products/</code> should represent <em>all</em> products.</p>
 
-<p>That’s all well and good, but what if there are thousands of products? We can’t send all of them in the response, as that would really upset clients on a slow connection. We’re going to need to implement some sort of paging.</p>
+<p>That’s all well and good, but what if there are thousands of products? We can’t send all of them in the response, as that would really upset consumers on a slow connection. We’re going to need to implement some sort of paging.</p>
 
 <p>We have a number of options available to us, but my personal opinion is that we should use the query string.</p>
 
 <h1 id="why-query-string-paging">Why query string paging?</h1>
+
+<p>Using the query string for paging is easy for the consumer to test in a browser and easy to reason about.</p>
+
+<p>My preference is to offer a URL like this:</p>
+
+<p><code>/api/products?offset=20&amp;limit=40</code>.</p>
+
+<p>This means ‘starting from item 20, give me the next 40 items’. This allows the consumer to fine control over the paging of the resource to suit their needs.</p>
 
 <p>I’ve seen some responses on Stack Overflow that discourage the query string being used <em>at all</em> when adhering to the principles of REST.</p>
 
@@ -52,15 +60,7 @@ If we follow that pattern, then <code>/api/products/</code> should represent <em
   <p>The query component contains non-hierarchical data that, along with data in the path component (Section 3.3), serves to identify a resource </p>
 </blockquote>
 
-<p>I would argue that defining paramters for paging comes under ‘non-hierarchical data’, and therefore I think the query string is perfect for our purposes.</p>
-
-<p>Using the query string for paging is also easy for the client to test in a browser and easy to reason about.</p>
-
-<p>My preference is to offer a URL like this:</p>
-
-<p><code>/api/products?offset=20&amp;limit=40</code>.</p>
-
-<p>This means ‘starting from item 20, give me the next 40 items’. This allows the client to fine control over the paging of the resource to suit their needs.</p>
+<p>Which seems to indicate that we can use the query string to help represent the resource. I would argue that <em>offset</em> and <em>limiit</em> information is ‘non-hierarchical’ data, and thus is permitted.</p>
 
 <h1 id="linking-between-pages">Linking between pages</h1>
 
