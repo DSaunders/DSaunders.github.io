@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
 
     <meta charset="utf-8">
@@ -15,31 +15,27 @@
   </head>
   <body class="blog-post">
 
-    <article id="header">
-
-      <span id="header-content">
+    <header id="header">
 
         <h1>
         <a href="/blog.html">Dave Saunders</a>
         </h1>
-        <!-- <h2>--- Blog ---</h2> -->
 
-      </span>
-    </article>
+    </header>
 
     <div class="post">
 
   <h2>What's new in C#</h2>
   <p class="meta">Originally posted in April 2014</p>
 
-  <span class="post-content">
+  <content class="post-content" role="article">
     <p>At Build 2014, Microsoft unveiled a few new features of C#.
 Some of these are simply ‘syntactic sugar’, while others are
 going to be really useful.</p>
 
 <p>Here’s a few of my favourites.</p>
 
-<h1 id="statics-in-using-statements">Statics in Using Statements</h1>
+<p>#Statics in Using Statements</p>
 
 <p>Visual Basic had this already, but statics in using statements are now in C#.</p>
 
@@ -48,18 +44,21 @@ of that class’ static members into scope.</p>
 
 <p>Essentially it means you can now replace this:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">class</span> <span class="nc">Program</span>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="k">class</span> <span class="nc">Program</span>
 <span class="p">{</span>
   <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
   <span class="p">{</span>
     <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello world&quot;</span><span class="p">);</span>
     <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Another Message&quot;</span><span class="p">);</span>
   <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre>
+</figure>
 
 <p>with this:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">using</span> <span class="nn">Console</span><span class="p">;</span>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="k">using</span> <span class="nn">Console</span><span class="p">;</span>
 
 <span class="k">class</span> <span class="nc">Program</span>
 <span class="p">{</span>
@@ -68,15 +67,17 @@ of that class’ static members into scope.</p>
     <span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Hello world&quot;</span><span class="p">);</span>
     <span class="n">WriteLine</span><span class="p">(</span><span class="s">&quot;Another Message&quot;</span><span class="p">);</span>
   <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre>
+</figure>
 
 <p>This is a small change, but could help to make code more readable.</p>
 
-<h1 id="primary-constructors">Primary Constructors</h1>
+<p>#Primary Constructors</p>
 
 <p>We write code like this all the time:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">Shape</span>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">Shape</span>
 <span class="p">{</span>
   <span class="k">private</span> <span class="k">readonly</span> <span class="kt">int</span> <span class="n">_sides</span><span class="p">;</span>
 
@@ -84,7 +85,8 @@ of that class’ static members into scope.</p>
   <span class="p">{</span>
     <span class="n">_sides</span> <span class="p">=</span> <span class="n">sides</span><span class="p">;</span>
   <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre>
+</figure>
 
 <p>This is a constructor that takes an argument, that is then stored in a private member.
 This is especially common when using an IoC container; where we pass in
@@ -92,56 +94,70 @@ our dependencies, store them in private members and use them later.</p>
 
 <p>C# can now generate this boilerplate constructor code for us, and it looks a lot nicer:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nf">Shape</span> <span class="p">(</span><span class="kt">int</span> <span class="n">sides</span><span class="p">)</span>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nf">Shape</span> <span class="p">(</span><span class="kt">int</span> <span class="n">sides</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="k">private</span> <span class="k">readonly</span> <span class="kt">int</span> <span class="n">_sides</span> <span class="p">=</span> <span class="n">sides</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre>
+</figure>
 
 <p>In fact, you don’t even need to define the <em>private readonly</em> backing
 variable; you can declare access modifiers for the members like this:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nf">Shape</span> <span class="p">(</span><span class="k">private</span> <span class="k">readonly</span> <span class="kt">int</span> <span class="n">sides</span><span class="p">)</span>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nf">Shape</span> <span class="p">(</span><span class="k">private</span> <span class="k">readonly</span> <span class="kt">int</span> <span class="n">sides</span><span class="p">)</span>
 <span class="p">{</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre>
+</figure>
 
 <p>This means that a constructor will be auto-generated, taking <em>sides</em> as an
 argument. It will then be mapped to a <em>private readonly</em> member variable.</p>
 
-<h1 id="binary-literals">Binary literals</h1>
+<p>#Binary literals</p>
 
 <p>You can now declare binary literals, and use ‘spacers’ in them to make them
 more readable. Like this:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">binaryValue</span> <span class="p">=</span> <span class="p">&amp;</span><span class="m">0010</span><span class="n">_0100</span></code></pre></div>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">binaryValue</span> <span class="p">=</span> <span class="p">&amp;</span><span class="m">0010</span><span class="n">_0100</span></code></pre>
+</figure>
 
-<h1 id="dictionary-initialisers">Dictionary Initialisers</h1>
+<p>#Dictionary Initialisers</p>
 
 <p>In the latest C#, you can populate indexers when initialising objects.</p>
 
 <p>Replacing:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">someClass</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyClass</span><span class="p">();</span>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">someClass</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyClass</span><span class="p">();</span>
 <span class="n">someClass</span><span class="p">[</span><span class="s">&quot;value1&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="m">1</span>
-<span class="n">someClass</span><span class="p">[</span><span class="s">&quot;value2&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="s">&quot;Hello World&quot;</span><span class="p">;</span></code></pre></div>
+<span class="n">someClass</span><span class="p">[</span><span class="s">&quot;value2&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="s">&quot;Hello World&quot;</span><span class="p">;</span></code></pre>
+</figure>
 
 <p>with:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">someClass</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyClass</span><span class="p">()</span> <span class="p">{</span> <span class="p">[</span><span class="s">&quot;value1&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;value2&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="s">&quot;Hello World&quot;</span> <span class="p">};</span></code></pre></div>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">someClass</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MyClass</span><span class="p">()</span> <span class="p">{</span> <span class="p">[</span><span class="s">&quot;value1&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;value2&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="s">&quot;Hello World&quot;</span> <span class="p">};</span></code></pre>
+</figure>
 
-<h1 id="indexed-members">Indexed Members</h1>
+<p>#Indexed Members</p>
 
 <p>There is a new addition that means you can make indexers
 look a little more like ‘normal’ members, so that:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="n">myClass</span><span class="p">[</span><span class="s">&quot;Value1&quot;</span><span class="p">]</span></code></pre></div>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="n">myClass</span><span class="p">[</span><span class="s">&quot;Value1&quot;</span><span class="p">]</span></code></pre>
+</figure>
 
 <p>can now be written as:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="n">myClass</span><span class="p">.</span><span class="err">$</span><span class="n">Value1</span></code></pre></div>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="n">myClass</span><span class="p">.</span><span class="err">$</span><span class="n">Value1</span></code></pre>
+</figure>
 
 <p>This isn’t much, but it certainly looks a lot neater.</p>
 
-<h1 id="declaration-expressions">Declaration Expressions</h1>
+<p>#Declaration Expressions</p>
 
 <p>This is my <em>favourite</em> new feature. It’s only small, but it’s something i’ve been
 wanting for a long time.</p>
@@ -152,24 +168,29 @@ before.</p>
 
 <p>No more of this:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">outValue</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
-<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="kt">int</span><span class="p">.</span><span class="n">TryParse</span><span class="p">(</span><span class="n">someValue</span><span class="p">,</span> <span class="k">out</span> <span class="n">outValue</span><span class="p">);</span></code></pre></div>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">outValue</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span>
+<span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="kt">int</span><span class="p">.</span><span class="n">TryParse</span><span class="p">(</span><span class="n">someValue</span><span class="p">,</span> <span class="k">out</span> <span class="n">outValue</span><span class="p">);</span></code></pre>
+</figure>
 
 <p>Now we can do this:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="kt">int</span><span class="p">.</span><span class="n">TryParse</span><span class="p">(</span><span class="n">someValue</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">outValue</span><span class="p">);</span></code></pre></div>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="kt">int</span><span class="p">.</span><span class="n">TryParse</span><span class="p">(</span><span class="n">someValue</span><span class="p">,</span> <span class="k">out</span> <span class="kt">var</span> <span class="n">outValue</span><span class="p">);</span></code></pre>
+</figure>
 
 <p>The compiler can infer the type of the out parameter; so we
 are even allowed to use <em>var</em> here.</p>
 
-<h1 id="exception-filters">Exception Filters</h1>
+<p>#Exception Filters</p>
 
 <p>This is another Visual Basic feature that is coming to C#. It wasn’t shown in
 the demo at Build, but it allows us to add filters to our catch blocks.</p>
 
 <p>It will probably look something like this:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">try</span>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="k">try</span>
 <span class="p">{</span>
 
 <span class="p">}</span>
@@ -181,9 +202,10 @@ the demo at Build, but it allows us to add filters to our catch blocks.</p>
 <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="c1">// Catch everything else..</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre>
+</figure>
 
-<h1 id="so-when-can-i-use-it">So when can I use it?</h1>
+<p>#So when can I use it?</p>
 
 <p>These features are currently in preview as part of the latest Roslyn release.
 It’s probably best not to use this stuff in production yet, but we can already
@@ -192,33 +214,27 @@ download it and play around with it until it’s officially released.</p>
 <p>You can find it
 <a href="http://msdn.microsoft.com/en-gb/vstudio/roslyn.aspx" target="_blank">here</a></p>
 
-  </span>
+  </content>
 
   <div class="post-footer">
     <span class="related-links">
       <h3>You might also like:</h3>
       <ul>
         
-          <li><a href="/2014/03/22/the-public-face-of-your-api.html">The 6 habits of poor API design</a></li>
+        <li><a href="/2015/05/10/how-to-ask-for-estimates.html">How old was Gandhi? (or how to ask for software estimates)</a></li>
         
-          <li><a href="/2015/03/03/efficient-string-manipulation-in-csharp.html">Efficient string concatination in C#</a></li>
+        <li><a href="/2015/04/26/paging-in-restful-web-services.html">Query string paging in RESTful web services</a></li>
         
-          <li><a href="/2015/04/26/paging-in-restful-web-services.html">Query string paging in RESTful web services</a></li>
+        <li><a href="/2015/03/03/standups-youre-doing-it-wrong.html">The Daily Stand-up - You’re doing it wrong</a></li>
         
       </ul>
     </span>
     <span class="social-links">
-      <!--<h3>Share this now on Twitter!</h3>
+      <h3>Follow me!</h3>
       <a
-        href="https://twitter.com/intent/tweet?text='What's new in C#', via @DaveJSaunders&url=http://www.davejsaunders.com/2014/04/05/roslyn-csharp-features.html"
-        class="tweet-link"
-        onClick="_gaq.push(['_trackEvent', 'Links', 'Tweet', 'Post - Bottom']);"
-        title="Tweet this" target="_blank"></a>-->
-        <h3>Follow me!</h3>
-      <a
-        href="https://twitter.com/DaveJSaunders"
-        class="tweet-link"
-        title="Follow @DaveJSaunders" target="_blank"></a>
+      href="https://twitter.com/DaveJSaunders"
+      class="tweet-link"
+      title="Follow @DaveJSaunders" target="_blank"></a>
     </span>
   </div>
 
@@ -242,6 +258,21 @@ download it and play around with it until it’s officially released.</p>
     		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     	})();
+    </script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {}; 
+      _dcs.account = '1265048';
+      
+      (function() {
+        var dc = document.createElement('script');
+        dc.type = 'text/javascript'; dc.async = true; 
+        dc.src = '//tag.getdrip.com/1265048.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(dc, s);
+      })();
     </script>
     </body>
 </html>

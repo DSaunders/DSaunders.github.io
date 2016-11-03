@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
 
     <meta charset="utf-8">
@@ -15,24 +15,20 @@
   </head>
   <body class="blog-post">
 
-    <article id="header">
-
-      <span id="header-content">
+    <header id="header">
 
         <h1>
         <a href="/blog.html">Dave Saunders</a>
         </h1>
-        <!-- <h2>--- Blog ---</h2> -->
 
-      </span>
-    </article>
+    </header>
 
     <div class="post">
 
   <h2>Forget everything you've ever learnt</h2>
   <p class="meta">Originally posted in October 2013</p>
 
-  <span class="post-content">
+  <content class="post-content" role="article">
     <p>I previously worked somewhere where I spent about a third of my time in C++. I had to learn how much memory to allocate (only as much as you need) and when dispose of it again (as soon as possible).  I struggled with pointers-to-pointers and had regular fights with threading.</p>
 
 <p>Now, I work almost entirely in C# and I’m unlikely to ever go back to C++.  Now I don’t know (or care) whether the variables I’m using live in memory for a second or an hour, it’s all done for me (and frankly much better than I could do it myself).</p>
@@ -43,7 +39,7 @@
 
 <p>Maybe this is good.  Maybe it means it’s OK to put all that old knowledge away in the back of our minds for later and use the room for something more important…</p>
 
-<h1 id="think-differently">Think Differently</h1>
+<p>#Think Differently</p>
 
 <p>What if we just decided that we were no longer going to try to learn everything about a framework or a language?  What if we decided to dump all that stuff and use the space to think about how to apply best practices to what we do, how to improve our workflow or to come up with some cool new ideas?</p>
 
@@ -55,33 +51,27 @@
 
 <p>As the tools get better, is remembering ‘stuff’ becoming less important than general attitude?  Or has it always been that way?</p>
 
-  </span>
+  </content>
 
   <div class="post-footer">
     <span class="related-links">
       <h3>You might also like:</h3>
       <ul>
         
-          <li><a href="/2013/09/19/its-about-the-journey.html">It's about the journey</a></li>
+        <li><a href="/2015/05/10/how-to-ask-for-estimates.html">How old was Gandhi? (or how to ask for software estimates)</a></li>
         
-          <li><a href="/2013/12/14/the-attitude.html">The Attitude</a></li>
+        <li><a href="/2015/04/26/paging-in-restful-web-services.html">Query string paging in RESTful web services</a></li>
         
-          <li><a href="/2014/06/10/its-not-agiles-fault.html">It's not Agile's fault</a></li>
+        <li><a href="/2015/03/03/standups-youre-doing-it-wrong.html">The Daily Stand-up - You’re doing it wrong</a></li>
         
       </ul>
     </span>
     <span class="social-links">
-      <!--<h3>Share this now on Twitter!</h3>
+      <h3>Follow me!</h3>
       <a
-        href="https://twitter.com/intent/tweet?text='Forget everything you've ever learnt', via @DaveJSaunders&url=http://www.davejsaunders.com/2013/10/09/forget-everything-youve-ever-learnt.html"
-        class="tweet-link"
-        onClick="_gaq.push(['_trackEvent', 'Links', 'Tweet', 'Post - Bottom']);"
-        title="Tweet this" target="_blank"></a>-->
-        <h3>Follow me!</h3>
-      <a
-        href="https://twitter.com/DaveJSaunders"
-        class="tweet-link"
-        title="Follow @DaveJSaunders" target="_blank"></a>
+      href="https://twitter.com/DaveJSaunders"
+      class="tweet-link"
+      title="Follow @DaveJSaunders" target="_blank"></a>
     </span>
   </div>
 
@@ -105,6 +95,21 @@
     		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     	})();
+    </script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {}; 
+      _dcs.account = '1265048';
+      
+      (function() {
+        var dc = document.createElement('script');
+        dc.type = 'text/javascript'; dc.async = true; 
+        dc.src = '//tag.getdrip.com/1265048.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(dc, s);
+      })();
     </script>
     </body>
 </html>

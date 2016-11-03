@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
 
     <meta charset="utf-8">
@@ -15,24 +15,20 @@
   </head>
   <body class="blog-post">
 
-    <article id="header">
-
-      <span id="header-content">
+    <header id="header">
 
         <h1>
         <a href="/blog.html">Dave Saunders</a>
         </h1>
-        <!-- <h2>--- Blog ---</h2> -->
 
-      </span>
-    </article>
+    </header>
 
     <div class="post">
 
   <h2>Fail today ..</h2>
   <p class="meta">Originally posted in October 2013</p>
 
-  <span class="post-content">
+  <content class="post-content" role="article">
     <p>I am privileged to work with people who are very interested in the Agile work flow and Continuous Integration.  As I learn more about these things myself, I realise there is a common theme across everything we are trying to achieve:</p>
 
 <p><em>Fail as quickly as possible.</em></p>
@@ -43,7 +39,7 @@
 
 <p>If we have the ability to do that, we allow people to fail without fear; which means we can try new things and push our software forward, rather than play it safe.</p>
 
-<h1 id="user-stories">User Stories</h1>
+<p>#User Stories</p>
 
 <p>User stories are one of the earliest stages of building a feature, where we sit down and describe how the user will interact with our product.</p>
 
@@ -57,7 +53,7 @@
 
 <p>It’s better to find this out now than two weeks down the line when we are under huge pressure to ship it.  Something that can seem simple when written down can actually be incredibly difficult to implement in code.  This is probably the time to have that discussion.</p>
 
-<h1 id="unit-tests">Unit Tests</h1>
+<p>#Unit Tests</p>
 
 <p>Isn’t it cool that we can have an automated process that will catch bugs before we even commit our code to source control?  If we have good unit tests around a feature, we have much more confidence that it will behave the way we intended.</p>
 
@@ -67,7 +63,7 @@
 
 <p>This all relies on us writing good tests of course.  I am still trying to learn the best practices around unit testing, but there are loads of resources out there to help.</p>
 
-<h1 id="stagingtest-servers">Staging/Test Servers</h1>
+<p>#Staging/Test Servers</p>
 
 <p>Even if we are reasonably happy that the feature is as intended and the code is robust, it might be a good idea to stage it somewhere before letting it loose.  In an ideal world, we would do all of our development in an environment identical to that in which the final product will run.  In practice that is actually quite hard to achieve.</p>
 
@@ -77,33 +73,27 @@
 
 <p>These are just some of the ways to trap problems early before they get as far as production. Did I miss any?</p>
 
-  </span>
+  </content>
 
   <div class="post-footer">
     <span class="related-links">
       <h3>You might also like:</h3>
       <ul>
         
-          <li><a href="/2014/02/28/slow-down-go-faster.html">Slow down, go faster</a></li>
+        <li><a href="/2015/05/10/how-to-ask-for-estimates.html">How old was Gandhi? (or how to ask for software estimates)</a></li>
         
-          <li><a href="/2014/06/10/its-not-agiles-fault.html">It's not Agile's fault</a></li>
+        <li><a href="/2015/04/26/paging-in-restful-web-services.html">Query string paging in RESTful web services</a></li>
         
-          <li><a href="/2013/09/19/its-about-the-journey.html">It's about the journey</a></li>
+        <li><a href="/2015/03/03/standups-youre-doing-it-wrong.html">The Daily Stand-up - You’re doing it wrong</a></li>
         
       </ul>
     </span>
     <span class="social-links">
-      <!--<h3>Share this now on Twitter!</h3>
+      <h3>Follow me!</h3>
       <a
-        href="https://twitter.com/intent/tweet?text='Fail today ..', via @DaveJSaunders&url=http://www.davejsaunders.com/2013/10/11/fail-today-ship-better-software-tomorrow.html"
-        class="tweet-link"
-        onClick="_gaq.push(['_trackEvent', 'Links', 'Tweet', 'Post - Bottom']);"
-        title="Tweet this" target="_blank"></a>-->
-        <h3>Follow me!</h3>
-      <a
-        href="https://twitter.com/DaveJSaunders"
-        class="tweet-link"
-        title="Follow @DaveJSaunders" target="_blank"></a>
+      href="https://twitter.com/DaveJSaunders"
+      class="tweet-link"
+      title="Follow @DaveJSaunders" target="_blank"></a>
     </span>
   </div>
 
@@ -127,6 +117,21 @@
     		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     	})();
+    </script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {}; 
+      _dcs.account = '1265048';
+      
+      (function() {
+        var dc = document.createElement('script');
+        dc.type = 'text/javascript'; dc.async = true; 
+        dc.src = '//tag.getdrip.com/1265048.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(dc, s);
+      })();
     </script>
     </body>
 </html>

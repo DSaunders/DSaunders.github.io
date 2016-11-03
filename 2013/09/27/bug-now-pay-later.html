@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
 
     <meta charset="utf-8">
@@ -15,31 +15,27 @@
   </head>
   <body class="blog-post">
 
-    <article id="header">
-
-      <span id="header-content">
+    <header id="header">
 
         <h1>
         <a href="/blog.html">Dave Saunders</a>
         </h1>
-        <!-- <h2>--- Blog ---</h2> -->
 
-      </span>
-    </article>
+    </header>
 
     <div class="post">
 
   <h2>Bug now, pay later</h2>
   <p class="meta">Originally posted in September 2013</p>
 
-  <span class="post-content">
+  <content class="post-content" role="article">
     <p>I was recently fortunate enough to go to the .NET Rocks! UK tour.  In it, Richard Campbell talked briefly about ‘technical debt’.  I thought it would be interesting to explore that metaphor further in a blog post.</p>
 
 <p>Technical debt is when we write code we know will cause us problems later.  That could be because it’s the easy way out, or perhaps because we just don’t know how to tackle the problem any better right now.</p>
 
 <p>I like the term technical debt because it implies a decision on the part of the developer.  Calling it bad code implies poor development skills, technical debt implies the developer made a conscious decision to borrow against the project now and pay it off later.</p>
 
-<h1 id="borrowing-against-a-project">Borrowing against a project</h1>
+<p>#Borrowing against a project</p>
 
 <p>Governments and banks are run on borrowing.  Take the money now and pay it off later, with interest. Software projects are the same.</p>
 
@@ -49,7 +45,7 @@
 
 <p>Is it better to borrow now and have the instant reward (finishing a feature on time, fixing a bug quicker), knowing we will have to pay it off later with interest?</p>
 
-<h1 id="paying-off-the-debt">Paying off the debt</h1>
+<p>#Paying off the debt</p>
 
 <p>Waiting until your code comes back to bite you is the equivalent of waiting for the debt collectors to come knocking.  At this point all we can do is pay them as much as we can afford at the time and defer them for a while.  If we are going to accrue technical debt we have to have a strategy for paying it back.</p>
 
@@ -61,33 +57,27 @@
 
 <p>How do you manage technical debt?</p>
 
-  </span>
+  </content>
 
   <div class="post-footer">
     <span class="related-links">
       <h3>You might also like:</h3>
       <ul>
         
-          <li><a href="/2014/06/10/its-not-agiles-fault.html">It's not Agile's fault</a></li>
+        <li><a href="/2015/05/10/how-to-ask-for-estimates.html">How old was Gandhi? (or how to ask for software estimates)</a></li>
         
-          <li><a href="/2013/09/19/its-about-the-journey.html">It's about the journey</a></li>
+        <li><a href="/2015/04/26/paging-in-restful-web-services.html">Query string paging in RESTful web services</a></li>
         
-          <li><a href="/2014/02/28/slow-down-go-faster.html">Slow down, go faster</a></li>
+        <li><a href="/2015/03/03/standups-youre-doing-it-wrong.html">The Daily Stand-up - You’re doing it wrong</a></li>
         
       </ul>
     </span>
     <span class="social-links">
-      <!--<h3>Share this now on Twitter!</h3>
+      <h3>Follow me!</h3>
       <a
-        href="https://twitter.com/intent/tweet?text='Bug now, pay later', via @DaveJSaunders&url=http://www.davejsaunders.com/2013/09/27/bug-now-pay-later.html"
-        class="tweet-link"
-        onClick="_gaq.push(['_trackEvent', 'Links', 'Tweet', 'Post - Bottom']);"
-        title="Tweet this" target="_blank"></a>-->
-        <h3>Follow me!</h3>
-      <a
-        href="https://twitter.com/DaveJSaunders"
-        class="tweet-link"
-        title="Follow @DaveJSaunders" target="_blank"></a>
+      href="https://twitter.com/DaveJSaunders"
+      class="tweet-link"
+      title="Follow @DaveJSaunders" target="_blank"></a>
     </span>
   </div>
 
@@ -111,6 +101,21 @@
     		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     	})();
+    </script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {}; 
+      _dcs.account = '1265048';
+      
+      (function() {
+        var dc = document.createElement('script');
+        dc.type = 'text/javascript'; dc.async = true; 
+        dc.src = '//tag.getdrip.com/1265048.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(dc, s);
+      })();
     </script>
     </body>
 </html>

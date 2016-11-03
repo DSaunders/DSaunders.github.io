@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
 
     <meta charset="utf-8">
@@ -15,28 +15,26 @@
   </head>
   <body class="blog-post">
 
-    <article id="header">
-
-      <span id="header-content">
+    <header id="header">
 
         <h1>
         <a href="/blog.html">Dave Saunders</a>
         </h1>
-        <!-- <h2>--- Blog ---</h2> -->
 
-      </span>
-    </article>
+    </header>
 
     <div class="post">
 
   <h2>The 6 habits of poor API design</h2>
   <p class="meta">Originally posted in March 2014</p>
 
-  <span class="post-content">
+  <content class="post-content" role="article">
     <p>We generally talk about APIs as something we call over HTTP to interact with
 a third party service, but of course any time you do this:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">void</span> <span class="nf">HelloWorld</span><span class="p">()</span></code></pre></div>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">void</span> <span class="nf">HelloWorld</span><span class="p">()</span></code></pre>
+</figure>
 
 <p>you are writing an API.</p>
 
@@ -46,7 +44,7 @@ functionality. It’s easy to get that wrong.</p>
 
 <p>Here are some points to consider when writing your next public class.</p>
 
-<h1 id="sharing-too-much-in-public">1. Sharing too much in public</h1>
+<p>#1. Sharing too much in public</p>
 
 <p>Always use the <em>principle of least privilege</em>. That means that you only expose
 the minimum necessary for the consumer of your API to get the job done.</p>
@@ -57,19 +55,21 @@ need to have access to the method that generates the connection string.</p>
 <p>Think about what the consumer of your API <em>needs</em> to see. If they don’t <em>need</em> it,
  make it private.</p>
 
-<h1 id="leaking-implementation-details">2. Leaking implementation details</h1>
+<p>#2. Leaking implementation details</p>
 
 <p>When designing a class or interface, it is generally a bad idea to expose
 <em>how it works</em> to the consumer, they only need to know <em>what it does</em>.</p>
 
 <p>Consider this simplified example:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">UsersDatabase</span>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">UsersDatabase</span>
 <span class="p">{</span>
    <span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">QuerySqlServerForUser</span><span class="p">(</span><span class="kt">string</span> <span class="n">userName</span><span class="p">)</span>
    <span class="p">{</span>
    <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre>
+</figure>
 
 <p>This method exposes too much detail about how it works internally. If we were
 to switch to a no-sql database for instance, the method name would make no
@@ -82,18 +82,20 @@ We could return IEnumerable here instead.</p>
 
 <p>This might be better:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">UsersDatabase</span>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">UsersDatabase</span>
 <span class="p">{</span>
    <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">GetUserByName</span><span class="p">(</span><span class="kt">string</span> <span class="n">userName</span><span class="p">)</span>
    <span class="p">{</span>
    <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre>
+</figure>
 
 <p>We should also be using an interface and an IoC container so that the caller
 does not need to rely on our concrete class, but this is an over-simplified
 example so you’ll have to let me off on this occassion.</p>
 
-<h1 id="little-or-no-documentation">3. Little or no documentation</h1>
+<p>#3. Little or no documentation</p>
 
 <p>There are few things worse that typing a method name out, expecting the IDE
 to tell you what the parameters are and what they do.. and seeing nothing.</p>
@@ -102,16 +104,18 @@ to tell you what the parameters are and what they do.. and seeing nothing.</p>
 Visual Studio has great facilities for doing this, making it so easy that there
 is really no reason <em>not</em> to do it.</p>
 
-<h1 id="poor-naming">4. Poor naming</h1>
+<p>#4. Poor naming</p>
 
 <p>Just because you have good documentation, it does not mean you can just use
 any old method name and expect people to figure out what it does.</p>
 
 <p>I bet you see things like this all the time:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="kt">int</span><span class="p">[]</span> <span class="nf">GetUsers</span><span class="p">(</span><span class="kt">string</span> <span class="n">filter</span><span class="p">)</span>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"> <span class="k">public</span> <span class="kt">int</span><span class="p">[]</span> <span class="nf">GetUsers</span><span class="p">(</span><span class="kt">string</span> <span class="n">filter</span><span class="p">)</span>
  <span class="p">{</span>
- <span class="p">}</span></code></pre></div>
+ <span class="p">}</span></code></pre>
+</figure>
 
 <p>Pardon? Get which users? What is the filter? Why does it return an array of
 integers?</p>
@@ -123,22 +127,26 @@ method to see whether it’s what they need.</p>
 
 <p>This would be an improvement:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="kt">int</span><span class="p">[]</span> <span class="nf">GetIdsOfUsersWithSurname</span><span class="p">(</span><span class="kt">string</span> <span class="n">surname</span><span class="p">)</span>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"> <span class="k">public</span> <span class="kt">int</span><span class="p">[]</span> <span class="nf">GetIdsOfUsersWithSurname</span><span class="p">(</span><span class="kt">string</span> <span class="n">surname</span><span class="p">)</span>
  <span class="p">{</span>
- <span class="p">}</span></code></pre></div>
+ <span class="p">}</span></code></pre>
+</figure>
 
 <p>Yes, it’s a long method name, but how many times recently have you ever typed
 the full name of a method? Auto-complete is pretty good; long method names are
 not an issue (until they get the point where they compromise readability).</p>
 
-<h1 id="incompleteness">5. Incompleteness</h1>
+<p>#5. Incompleteness</p>
 
 <p>To the consumer of an API, this will seriously ruin your day:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="kt">int</span><span class="p">[]</span> <span class="nf">GetIdsOfUsersWithSurname</span><span class="p">(</span><span class="kt">string</span> <span class="n">surname</span><span class="p">)</span>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"> <span class="k">public</span> <span class="kt">int</span><span class="p">[]</span> <span class="nf">GetIdsOfUsersWithSurname</span><span class="p">(</span><span class="kt">string</span> <span class="n">surname</span><span class="p">)</span>
  <span class="p">{</span>
    <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
- <span class="p">}</span></code></pre></div>
+ <span class="p">}</span></code></pre>
+</figure>
 
 <p>If it’s not finished, don’t make it public. If you are implementing an interface
 and you don’t need all of the public methods, it’s probably a sign that the
@@ -148,39 +156,35 @@ interface isn’t specific enough. Consider refactoring.</p>
 With any luck, the developer will see it at design time, before their
 application actually throws your exception.</p>
 
-<h1 id="section">6.</h1>
+<p>#6.</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="n">This</span> <span class="n">part</span> <span class="n">of</span> <span class="n">the</span> <span class="n">post</span> <span class="k">is</span> <span class="n">not</span> <span class="n">implemented</span> <span class="n">yet</span><span class="p">.</span></code></pre></div>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="n">This</span> <span class="n">part</span> <span class="n">of</span> <span class="n">the</span> <span class="n">post</span> <span class="k">is</span> <span class="n">not</span> <span class="n">implemented</span> <span class="n">yet</span><span class="p">.</span></code></pre>
+</figure>
 
 <p>Annoying isn’t it ;-)</p>
 
-  </span>
+  </content>
 
   <div class="post-footer">
     <span class="related-links">
       <h3>You might also like:</h3>
       <ul>
         
-          <li><a href="/2014/06/10/its-not-agiles-fault.html">It's not Agile's fault</a></li>
+        <li><a href="/2015/05/10/how-to-ask-for-estimates.html">How old was Gandhi? (or how to ask for software estimates)</a></li>
         
-          <li><a href="/2015/03/03/efficient-string-manipulation-in-csharp.html">Efficient string concatination in C#</a></li>
+        <li><a href="/2015/04/26/paging-in-restful-web-services.html">Query string paging in RESTful web services</a></li>
         
-          <li><a href="/2014/02/28/slow-down-go-faster.html">Slow down, go faster</a></li>
+        <li><a href="/2015/03/03/standups-youre-doing-it-wrong.html">The Daily Stand-up - You’re doing it wrong</a></li>
         
       </ul>
     </span>
     <span class="social-links">
-      <!--<h3>Share this now on Twitter!</h3>
+      <h3>Follow me!</h3>
       <a
-        href="https://twitter.com/intent/tweet?text='The 6 habits of poor API design', via @DaveJSaunders&url=http://www.davejsaunders.com/2014/03/22/the-public-face-of-your-api.html"
-        class="tweet-link"
-        onClick="_gaq.push(['_trackEvent', 'Links', 'Tweet', 'Post - Bottom']);"
-        title="Tweet this" target="_blank"></a>-->
-        <h3>Follow me!</h3>
-      <a
-        href="https://twitter.com/DaveJSaunders"
-        class="tweet-link"
-        title="Follow @DaveJSaunders" target="_blank"></a>
+      href="https://twitter.com/DaveJSaunders"
+      class="tweet-link"
+      title="Follow @DaveJSaunders" target="_blank"></a>
     </span>
   </div>
 
@@ -204,6 +208,21 @@ application actually throws your exception.</p>
     		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     	})();
+    </script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {}; 
+      _dcs.account = '1265048';
+      
+      (function() {
+        var dc = document.createElement('script');
+        dc.type = 'text/javascript'; dc.async = true; 
+        dc.src = '//tag.getdrip.com/1265048.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(dc, s);
+      })();
     </script>
     </body>
 </html>

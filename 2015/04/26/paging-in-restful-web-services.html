@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
 
     <meta charset="utf-8">
@@ -15,24 +15,20 @@
   </head>
   <body class="blog-post">
 
-    <article id="header">
-
-      <span id="header-content">
+    <header id="header">
 
         <h1>
         <a href="/blog.html">Dave Saunders</a>
         </h1>
-        <!-- <h2>--- Blog ---</h2> -->
 
-      </span>
-    </article>
+    </header>
 
     <div class="post">
 
   <h2>Query string paging in RESTful web services</h2>
   <p class="meta">Originally posted in April 2015</p>
 
-  <span class="post-content">
+  <content class="post-content" role="article">
     <p>When we’re building a RESTful web service, the principles of REST tells us that a URL should represent a resource.</p>
 
 <p>So <code>/api/products/123</code> will represent the product with an ID of 123.
@@ -42,7 +38,7 @@ If we follow that pattern, then <code>/api/products/</code> should represent <em
 
 <p>We have a number of options available to us, but my personal opinion is that we should use the query string.</p>
 
-<h1 id="why-query-string-paging">Why query string paging?</h1>
+<p>#Why query string paging?</p>
 
 <p>Using the query string for paging is easy for the consumer to test in a browser and easy to reason about.</p>
 
@@ -62,7 +58,7 @@ If we follow that pattern, then <code>/api/products/</code> should represent <em
 
 <p>Which seems to indicate that we can use the query string to help represent the resource. I would argue that <em>offset</em> and <em>limiit</em> information is ‘non-hierarchical’ data, and thus is permitted.</p>
 
-<h1 id="linking-between-pages">Linking between pages</h1>
+<p>#Linking between pages</p>
 
 <p>RESTful web services should provide ‘dicoverability’. In other words, one resource should link to another so that the consumer can navigate the API using only these links.</p>
 
@@ -72,7 +68,8 @@ If we follow that pattern, then <code>/api/products/</code> should represent <em
 
 <p>Here is an example (this uses the <a href="http://stateless.co/hal_specification.html">HAL</a> schema for JSON, others are available):</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="p">{</span>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="p">{</span>
     <span class="s">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s">&quot;self&quot;</span><span class="p">:</span>  <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products?offset=40&amp;limit=40&quot;</span>  <span class="p">},</span>
         <span class="s">&quot;first&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products?offset=0&amp;limit=40&quot;</span>   <span class="p">},</span>
@@ -80,20 +77,23 @@ If we follow that pattern, then <code>/api/products/</code> should represent <em
         <span class="s">&quot;next&quot;</span><span class="p">:</span>  <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products?offset=80&amp;limit=40&quot;</span>  <span class="p">},</span>
         <span class="s">&quot;prev&quot;</span><span class="p">:</span>  <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products?offset=0&amp;limit=40&quot;</span>   <span class="p">}</span>
     <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre>
+</figure>
 
 <p>Because we’re using the query string, it’s really easy to provide links to the next page. It’s also very easy for the consumer of our API to understand and modify for their needs.</p>
 
-<h1 id="linking-to-the-resource-from-another-resource">Linking to the resource from another resource</h1>
+<p>#Linking to the resource from another resource</p>
 
 <p>We need to be able to link to this resource from other pages, for example:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="p">{</span>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="p">{</span>
     <span class="s">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
     	<span class="s">&quot;self&quot;</span><span class="p">:</span>      <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/&quot;</span> <span class="p">},</span>
         <span class="s">&quot;products&quot;</span><span class="p">:</span>  <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products&quot;</span> <span class="p">}</span>
     <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre>
+</figure>
 
 <p>So how do we tell the consumer about paging?</p>
 
@@ -105,12 +105,14 @@ If we follow that pattern, then <code>/api/products/</code> should represent <em
 
 <p>Another option is to link the the first page:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="p">{</span>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="p">{</span>
     <span class="s">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
     	<span class="s">&quot;self&quot;</span><span class="p">:</span>      <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/&quot;</span> <span class="p">},</span>
         <span class="s">&quot;products&quot;</span><span class="p">:</span>  <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products?offset=0&amp;limit=40&quot;</span> <span class="p">}</span>
     <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre>
+</figure>
 
 <p>The problem with this is that if we add more query string parameters (for example, searching or ordering) then the URL grows and becomes even harder to read.</p>
 
@@ -120,16 +122,18 @@ If we follow that pattern, then <code>/api/products/</code> should represent <em
 
 <p>For our <code>products</code> resource, it would look like this:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="p">{</span>
+<figure class="highlight">
+  <pre><code class="language-csharp" data-lang="csharp"><span class="p">{</span>
     <span class="s">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
     	<span class="s">&quot;self&quot;</span><span class="p">:</span>      <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/&quot;</span> <span class="p">},</span>
         <span class="s">&quot;products&quot;</span><span class="p">:</span>  <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products{?offset,limit}&quot;</span> <span class="p">}</span>
     <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre>
+</figure>
 
 <p>I find this to be much clearer.</p>
 
-<h1 id="total-count">Total count</h1>
+<p>#Total count</p>
 
 <p>Finally, it’s also nice to include the <em>total</em> amount of <code>products</code> availble.</p>
 
@@ -137,7 +141,7 @@ If we follow that pattern, then <code>/api/products/</code> should represent <em
 
 <p>There’s nothing to say you <em>have</em> to do this, but it’s good practice to do so and the consumers of your API will thank you for it.</p>
 
-<h1 id="further-reading">Further reading</h1>
+<p>#Further reading</p>
 
 <p>If you want to read more about the things mentioned in this article, check out these links:</p>
 
@@ -151,33 +155,27 @@ If we follow that pattern, then <code>/api/products/</code> should represent <em
 
 </li></ul>
 
-  </span>
+  </content>
 
   <div class="post-footer">
     <span class="related-links">
       <h3>You might also like:</h3>
       <ul>
         
-          <li><a href="/2014/03/22/the-public-face-of-your-api.html">The 6 habits of poor API design</a></li>
+        <li><a href="/2015/05/10/how-to-ask-for-estimates.html">How old was Gandhi? (or how to ask for software estimates)</a></li>
         
-          <li><a href="/2015/03/03/efficient-string-manipulation-in-csharp.html">Efficient string concatination in C#</a></li>
+        <li><a href="/2015/03/03/standups-youre-doing-it-wrong.html">The Daily Stand-up - You’re doing it wrong</a></li>
         
-          <li><a href="/2014/06/10/its-not-agiles-fault.html">It's not Agile's fault</a></li>
+        <li><a href="/2015/03/03/efficient-string-manipulation-in-csharp.html">Efficient string concatination in C#</a></li>
         
       </ul>
     </span>
     <span class="social-links">
-      <!--<h3>Share this now on Twitter!</h3>
+      <h3>Follow me!</h3>
       <a
-        href="https://twitter.com/intent/tweet?text='Query string paging in RESTful web services', via @DaveJSaunders&url=http://www.davejsaunders.com/2015/04/26/paging-in-restful-web-services.html"
-        class="tweet-link"
-        onClick="_gaq.push(['_trackEvent', 'Links', 'Tweet', 'Post - Bottom']);"
-        title="Tweet this" target="_blank"></a>-->
-        <h3>Follow me!</h3>
-      <a
-        href="https://twitter.com/DaveJSaunders"
-        class="tweet-link"
-        title="Follow @DaveJSaunders" target="_blank"></a>
+      href="https://twitter.com/DaveJSaunders"
+      class="tweet-link"
+      title="Follow @DaveJSaunders" target="_blank"></a>
     </span>
   </div>
 
@@ -201,6 +199,21 @@ If we follow that pattern, then <code>/api/products/</code> should represent <em
     		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     	})();
+    </script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {}; 
+      _dcs.account = '1265048';
+      
+      (function() {
+        var dc = document.createElement('script');
+        dc.type = 'text/javascript'; dc.async = true; 
+        dc.src = '//tag.getdrip.com/1265048.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(dc, s);
+      })();
     </script>
     </body>
 </html>

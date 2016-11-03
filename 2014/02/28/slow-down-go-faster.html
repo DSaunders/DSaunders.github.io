@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
 
     <meta charset="utf-8">
@@ -15,24 +15,20 @@
   </head>
   <body class="blog-post">
 
-    <article id="header">
-
-      <span id="header-content">
+    <header id="header">
 
         <h1>
         <a href="/blog.html">Dave Saunders</a>
         </h1>
-        <!-- <h2>--- Blog ---</h2> -->
 
-      </span>
-    </article>
+    </header>
 
     <div class="post">
 
   <h2>Slow down, go faster</h2>
   <p class="meta">Originally posted in February 2014</p>
 
-  <span class="post-content">
+  <content class="post-content" role="article">
     <p>We always want to move faster; faster requirements capture, faster and more efficient coding, faster to production. That’s all well and good, but if we try to go too fast, to soon, things can go really bad.</p>
 
 <p>Let’s take a step back, take a breath and slow down.</p>
@@ -43,7 +39,7 @@
 
 <p>Let’s worry about doing it right first, doing it well second, and then we can make all the other stuff quicker later.</p>
 
-<h1 id="good-requirements">Good requirements</h1>
+<p>#Good requirements</p>
 
 <p>I’ll just clarify before everybody runs for their browser’s back button, by requirements I do not necessarily mean a 2 foot tall stack of A4 paper which nobody will read. We do, however, need something to work from.</p>
 
@@ -53,7 +49,7 @@
 
 <p>Take time at the start of the process to define the requirements properly. Get all of the various emails and documents into one place, and write a clear set of requirements.</p>
 
-<h1 id="write-some-tests">Write some tests</h1>
+<p>#Write some tests</p>
 
 <p>Unit testing adds very little time to a project, so let’s get that out of the way now. It might take you 5 minutes longer to type the thing, but we all know by now that the bulk of the time spent on something is in the thinking, not in how long it types to press the keys to put the letters on the screen.</p>
 
@@ -61,7 +57,7 @@
 
 <p>We don’t need to keep discussing this. It’s 2014, just write some tests already.</p>
 
-<h1 id="collaborate">Collaborate</h1>
+<p>#Collaborate</p>
 
 <p>Before you start a particularly complex user story, spend five minutes with another developer discussing it.</p>
 
@@ -69,7 +65,7 @@
 
 <p>The worst case scenario is that you both have the same approach and you have spent five minutes agreeing with each other.</p>
 
-<h1 id="pair">Pair</h1>
+<p>#Pair</p>
 
 <p>Good luck selling this to non-developers, but pair programming is actually quite efficient. Working together on a difficult problem often means it is solved quicker. It is also more likely to produce cleaner, more maintainable code, as it provides the benefit of real-time code review.</p>
 
@@ -77,7 +73,7 @@
 
 <p>I’m not suggesting that we all pair 100% of the time, but it should be a regular practice and accepted (even encouraged) by the organisation.</p>
 
-<h1 id="daily-stand-ups">Daily stand ups</h1>
+<p>#Daily stand ups</p>
 
 <p>Stand ups are ten minutes well spent.</p>
 
@@ -87,33 +83,27 @@
 
 <p><em>N.B. Any in-depth conversations should be parked and discussed outside of the stand up to avoid breaking the momentum of the group.</em></p>
 
-  </span>
+  </content>
 
   <div class="post-footer">
     <span class="related-links">
       <h3>You might also like:</h3>
       <ul>
         
-          <li><a href="/2014/06/10/its-not-agiles-fault.html">It's not Agile's fault</a></li>
+        <li><a href="/2015/05/10/how-to-ask-for-estimates.html">How old was Gandhi? (or how to ask for software estimates)</a></li>
         
-          <li><a href="/2015/03/03/standups-youre-doing-it-wrong.html">The Daily Stand-up - You’re doing it wrong</a></li>
+        <li><a href="/2015/04/26/paging-in-restful-web-services.html">Query string paging in RESTful web services</a></li>
         
-          <li><a href="/2013/10/11/fail-today-ship-better-software-tomorrow.html">Fail today ..</a></li>
+        <li><a href="/2015/03/03/standups-youre-doing-it-wrong.html">The Daily Stand-up - You’re doing it wrong</a></li>
         
       </ul>
     </span>
     <span class="social-links">
-      <!--<h3>Share this now on Twitter!</h3>
+      <h3>Follow me!</h3>
       <a
-        href="https://twitter.com/intent/tweet?text='Slow down, go faster', via @DaveJSaunders&url=http://www.davejsaunders.com/2014/02/28/slow-down-go-faster.html"
-        class="tweet-link"
-        onClick="_gaq.push(['_trackEvent', 'Links', 'Tweet', 'Post - Bottom']);"
-        title="Tweet this" target="_blank"></a>-->
-        <h3>Follow me!</h3>
-      <a
-        href="https://twitter.com/DaveJSaunders"
-        class="tweet-link"
-        title="Follow @DaveJSaunders" target="_blank"></a>
+      href="https://twitter.com/DaveJSaunders"
+      class="tweet-link"
+      title="Follow @DaveJSaunders" target="_blank"></a>
     </span>
   </div>
 
@@ -137,6 +127,21 @@
     		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     	})();
+    </script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {}; 
+      _dcs.account = '1265048';
+      
+      (function() {
+        var dc = document.createElement('script');
+        dc.type = 'text/javascript'; dc.async = true; 
+        dc.src = '//tag.getdrip.com/1265048.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(dc, s);
+      })();
     </script>
     </body>
 </html>

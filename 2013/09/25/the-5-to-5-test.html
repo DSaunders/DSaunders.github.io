@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
 
     <meta charset="utf-8">
@@ -15,31 +15,27 @@
   </head>
   <body class="blog-post">
 
-    <article id="header">
-
-      <span id="header-content">
+    <header id="header">
 
         <h1>
         <a href="/blog.html">Dave Saunders</a>
         </h1>
-        <!-- <h2>--- Blog ---</h2> -->
 
-      </span>
-    </article>
+    </header>
 
     <div class="post">
 
   <h2>The 5-to-5 test</h2>
   <p class="meta">Originally posted in September 2013</p>
 
-  <span class="post-content">
+  <content class="post-content" role="article">
     <p>Everybody has their threshold, the point where the nice shiny new DevOps process goes out of the window  and it’s just easier to do it the old way.</p>
 
 <p>I reached mine at 7:15pm.  After hours of struggling with deployments, it was just easier to change the code on the live site and commit it to source control later.  That brilliant new Continuous Integration pipeline went out of the window and was replaced by a copy of Notepad.  I knew it was wrong, and I felt bad afterwards, but I did it anyway.</p>
 
 <p>When we cross this threshold we try to justify it to ourselves; ‘it was too urgent to do it the proper way’, ‘it’s OK just this once’ etc.  But the truth is, it’s not our fault…</p>
 
-<h1 id="humans-are-lazy-developers-are-efficient-we-are-both">Humans are lazy, developers are efficient.. we are both.</h1>
+<p>#Humans are lazy, developers are efficient.. we are both.</p>
 
 <p>Humans are programmed to be lazy.  Why expend needless effort doing it the long way when we can do it quicker and move on to something else?  We will always tend towards the path of least resistance.</p>
 
@@ -47,7 +43,7 @@
 
 <p>We can resist these instincts for a while if we know the harder way is the right way, but that will only last for so long.   When our back is against the wall and the pressure is on, we will always cheat.</p>
 
-<h1 id="the-5to5-test">The 5to5 test</h1>
+<p>#The 5to5 test</p>
 
 <p>With that in mind, I would like to propose a new metric to measure the maturity of a DevOps process.  The ’5to5 test’.</p>
 
@@ -57,7 +53,7 @@
 
 <p>Hopefully, your threshold won’t be 5 to 5, it might be 7:15pm like me.  If you’re really keen you might hold out until 3am, but eventually you will break and choose the easy path to get the job done.</p>
 
-<h1 id="passing-the-5-to-5-test">Passing the 5 to 5 test.</h1>
+<p>#Passing the 5 to 5 test.</p>
 
 <p>There are two ways to make sure your process passes the test; make the new process easier or make the old process harder.</p>
 
@@ -71,33 +67,27 @@
 
 <p>How many of your DevOps processes would pass the 5 to 5 test?</p>
 
-  </span>
+  </content>
 
   <div class="post-footer">
     <span class="related-links">
       <h3>You might also like:</h3>
       <ul>
         
-          <li><a href="/2014/02/28/slow-down-go-faster.html">Slow down, go faster</a></li>
+        <li><a href="/2015/05/10/how-to-ask-for-estimates.html">How old was Gandhi? (or how to ask for software estimates)</a></li>
         
-          <li><a href="/2014/06/10/its-not-agiles-fault.html">It's not Agile's fault</a></li>
+        <li><a href="/2015/04/26/paging-in-restful-web-services.html">Query string paging in RESTful web services</a></li>
         
-          <li><a href="/2013/10/17/are-you-solving-the-wrong-problem.html">Are you solving the wrong problem?</a></li>
+        <li><a href="/2015/03/03/standups-youre-doing-it-wrong.html">The Daily Stand-up - You’re doing it wrong</a></li>
         
       </ul>
     </span>
     <span class="social-links">
-      <!--<h3>Share this now on Twitter!</h3>
+      <h3>Follow me!</h3>
       <a
-        href="https://twitter.com/intent/tweet?text='The 5-to-5 test', via @DaveJSaunders&url=http://www.davejsaunders.com/2013/09/25/the-5-to-5-test.html"
-        class="tweet-link"
-        onClick="_gaq.push(['_trackEvent', 'Links', 'Tweet', 'Post - Bottom']);"
-        title="Tweet this" target="_blank"></a>-->
-        <h3>Follow me!</h3>
-      <a
-        href="https://twitter.com/DaveJSaunders"
-        class="tweet-link"
-        title="Follow @DaveJSaunders" target="_blank"></a>
+      href="https://twitter.com/DaveJSaunders"
+      class="tweet-link"
+      title="Follow @DaveJSaunders" target="_blank"></a>
     </span>
   </div>
 
@@ -121,6 +111,21 @@
     		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     	})();
+    </script>
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {}; 
+      _dcs.account = '1265048';
+      
+      (function() {
+        var dc = document.createElement('script');
+        dc.type = 'text/javascript'; dc.async = true; 
+        dc.src = '//tag.getdrip.com/1265048.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(dc, s);
+      })();
     </script>
     </body>
 </html>
