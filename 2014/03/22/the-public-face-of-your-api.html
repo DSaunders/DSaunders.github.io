@@ -44,7 +44,7 @@ functionality. It’s easy to get that wrong.</p>
 
 <p>Here are some points to consider when writing your next public class.</p>
 
-<p>#1. Sharing too much in public</p>
+<h1 id="sharing-too-much-in-public">1. Sharing too much in public</h1>
 
 <p>Always use the <em>principle of least privilege</em>. That means that you only expose
 the minimum necessary for the consumer of your API to get the job done.</p>
@@ -55,7 +55,7 @@ need to have access to the method that generates the connection string.</p>
 <p>Think about what the consumer of your API <em>needs</em> to see. If they don’t <em>need</em> it,
  make it private.</p>
 
-<p>#2. Leaking implementation details</p>
+<h1 id="leaking-implementation-details">2. Leaking implementation details</h1>
 
 <p>When designing a class or interface, it is generally a bad idea to expose
 <em>how it works</em> to the consumer, they only need to know <em>what it does</em>.</p>
@@ -95,7 +95,7 @@ We could return IEnumerable here instead.</p>
 does not need to rely on our concrete class, but this is an over-simplified
 example so you’ll have to let me off on this occassion.</p>
 
-<p>#3. Little or no documentation</p>
+<h1 id="little-or-no-documentation">3. Little or no documentation</h1>
 
 <p>There are few things worse that typing a method name out, expecting the IDE
 to tell you what the parameters are and what they do.. and seeing nothing.</p>
@@ -104,7 +104,7 @@ to tell you what the parameters are and what they do.. and seeing nothing.</p>
 Visual Studio has great facilities for doing this, making it so easy that there
 is really no reason <em>not</em> to do it.</p>
 
-<p>#4. Poor naming</p>
+<h1 id="poor-naming">4. Poor naming</h1>
 
 <p>Just because you have good documentation, it does not mean you can just use
 any old method name and expect people to figure out what it does.</p>
@@ -137,7 +137,7 @@ method to see whether it’s what they need.</p>
 the full name of a method? Auto-complete is pretty good; long method names are
 not an issue (until they get the point where they compromise readability).</p>
 
-<p>#5. Incompleteness</p>
+<h1 id="incompleteness">5. Incompleteness</h1>
 
 <p>To the consumer of an API, this will seriously ruin your day:</p>
 
@@ -156,7 +156,7 @@ interface isn’t specific enough. Consider refactoring.</p>
 With any luck, the developer will see it at design time, before their
 application actually throws your exception.</p>
 
-<p>#6.</p>
+<h1 id="section">6.</h1>
 
 <figure class="highlight">
   <pre><code class="language-csharp" data-lang="csharp"><span class="n">This</span> <span class="n">part</span> <span class="n">of</span> <span class="n">the</span> <span class="n">post</span> <span class="k">is</span> <span class="n">not</span> <span class="n">implemented</span> <span class="n">yet</span><span class="p">.</span></code></pre>

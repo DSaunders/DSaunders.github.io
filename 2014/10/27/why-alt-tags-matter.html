@@ -35,7 +35,7 @@ attributes on images can have a huge impact on their experience.</p>
 <p>I tested a simple page using the screen reader included with OSX called <em>VoiceOver</em>. I tried images <em>with</em> alt attributes, <em>without</em> alt attributes and with
 <em>empty</em> alt attributes. Let’s take a look at what happens:</p>
 
-<p>#With an ‘alt’ attribute</p>
+<h1 id="with-an-alt-attribute">With an ‘alt’ attribute</h1>
 
 <figure class="highlight">
   <pre><code class="language-csharp" data-lang="csharp"><span class="p">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="p">=</span><span class="s">&quot;hero.jpg&quot;</span> <span class="n">alt</span><span class="p">=</span><span class="s">&quot;A person using the product&quot;</span><span class="p">/&gt;</span></code></pre>
@@ -53,7 +53,7 @@ and could distract from the content?</p>
 
 <p>Let’s try <em>not</em> providing an ‘alt’ attribute.</p>
 
-<p>#Without an ‘alt’ attribute</p>
+<h1 id="without-an-alt-attribute">Without an ‘alt’ attribute</h1>
 
 <figure class="highlight">
   <pre><code class="language-csharp" data-lang="csharp"><span class="p">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="p">=</span><span class="s">&quot;hero.jpg&quot;</span> <span class="p">/&gt;</span></code></pre>
@@ -68,7 +68,7 @@ and could distract from the content?</p>
 <p>Well that’s not what we wanted. <strong>When you don’t provide an alt attribute,
 the screen reader will read the file name of the image.</strong> A better practice  is to provide an <em>empty</em> alt attribute.</p>
 
-<p>#With an empty alt attribute</p>
+<h1 id="with-an-empty-alt-attribute">With an empty alt attribute</h1>
 
 <figure class="highlight">
   <pre><code class="language-csharp" data-lang="csharp"><span class="p">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="p">=</span><span class="s">&quot;hero.jpg&quot;</span> <span class="n">alt</span><span class="p">=</span><span class="s">&quot;&quot;</span> <span class="p">/&gt;</span></code></pre>
@@ -77,7 +77,7 @@ the screen reader will read the file name of the image.</strong> A better practi
 <p>Here the screen reader skips the image altogether, as if it wasn’t there. That’s a much better experience for a visually impaired user than the
 content being interrupted with file names.</p>
 
-<p>#’Hang on, we’re doing the responsive thing’</p>
+<h1 id="hang-on-were-doing-the-responsive-thing">‘Hang on, we’re doing the responsive thing’</h1>
 
 <p>If you’re building a responsive site, you’re probably using
 <em>backround-image</em> in CSS to swap out the images using media queries.</p>
@@ -109,7 +109,7 @@ describe the image in the same way as an ‘alt’ attribute would.</p>
 
 <p>That’s much better.</p>
 
-<p>#The moral of the story</p>
+<h1 id="the-moral-of-the-story">The moral of the story</h1>
 
 <p>If the image is <strong>important to the content</strong>, describe it in the alt attribute.</p>
 

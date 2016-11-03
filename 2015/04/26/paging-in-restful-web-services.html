@@ -38,7 +38,7 @@ If we follow that pattern, then <code>/api/products/</code> should represent <em
 
 <p>We have a number of options available to us, but my personal opinion is that we should use the query string.</p>
 
-<p>#Why query string paging?</p>
+<h1 id="why-query-string-paging">Why query string paging?</h1>
 
 <p>Using the query string for paging is easy for the consumer to test in a browser and easy to reason about.</p>
 
@@ -58,7 +58,7 @@ If we follow that pattern, then <code>/api/products/</code> should represent <em
 
 <p>Which seems to indicate that we can use the query string to help represent the resource. I would argue that <em>offset</em> and <em>limiit</em> information is ‘non-hierarchical’ data, and thus is permitted.</p>
 
-<p>#Linking between pages</p>
+<h1 id="linking-between-pages">Linking between pages</h1>
 
 <p>RESTful web services should provide ‘dicoverability’. In other words, one resource should link to another so that the consumer can navigate the API using only these links.</p>
 
@@ -82,7 +82,7 @@ If we follow that pattern, then <code>/api/products/</code> should represent <em
 
 <p>Because we’re using the query string, it’s really easy to provide links to the next page. It’s also very easy for the consumer of our API to understand and modify for their needs.</p>
 
-<p>#Linking to the resource from another resource</p>
+<h1 id="linking-to-the-resource-from-another-resource">Linking to the resource from another resource</h1>
 
 <p>We need to be able to link to this resource from other pages, for example:</p>
 
@@ -133,7 +133,7 @@ If we follow that pattern, then <code>/api/products/</code> should represent <em
 
 <p>I find this to be much clearer.</p>
 
-<p>#Total count</p>
+<h1 id="total-count">Total count</h1>
 
 <p>Finally, it’s also nice to include the <em>total</em> amount of <code>products</code> availble.</p>
 
@@ -141,7 +141,7 @@ If we follow that pattern, then <code>/api/products/</code> should represent <em
 
 <p>There’s nothing to say you <em>have</em> to do this, but it’s good practice to do so and the consumers of your API will thank you for it.</p>
 
-<p>#Further reading</p>
+<h1 id="further-reading">Further reading</h1>
 
 <p>If you want to read more about the things mentioned in this article, check out these links:</p>
 

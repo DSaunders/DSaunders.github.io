@@ -33,7 +33,7 @@
 
 <p>Let’s take a look at the various ways that we can concatinate strings and see what’s actually happening behind the scenes.</p>
 
-<p>#Result is known at compile time</p>
+<h1 id="result-is-known-at-compile-time">Result is known at compile time</h1>
 
 <p>This is the simplest case. If the compiler can work out what the resulting string will be, it may decide to concatinate the string for you at compile time.</p>
 
@@ -51,7 +51,7 @@
 
 <p>This is obviously very efficient!</p>
 
-<p>#Concatinating strings on one line</p>
+<h1 id="concatinating-strings-on-one-line">Concatinating strings on one line</h1>
 
 <p>I’ve seen answers on stackoverflow, and heard people talk anecdotally, about how concatinating multiple strings using the <code>+</code> opertator is bad practice.</p>
 
@@ -71,7 +71,7 @@
 
 <p>This is actually a very efficient way of concatinating strings. If you are concatinating strings in a loop, however, this is not the best option.</p>
 
-<p>#Concatinating strings in loop</p>
+<h1 id="concatinating-strings-in-loop">Concatinating strings in loop</h1>
 
 <p>If you were to concatinate strings in a loop using the <code>+</code> operator, you could potentially end up with multiple redundant string allocations:</p>
 
@@ -107,7 +107,7 @@
 
 <p>This is much more efficient when concatinating multiple strings in a loop.</p>
 
-<p>#String.Format</p>
+<h1 id="stringformat">String.Format</h1>
 
 <p>Which is more efficient?</p>
 
@@ -137,7 +137,7 @@
 
 <p>If formatting the string makes more sense, don’t be afraid to use it, just know what is happening underneath.</p>
 
-<p>#Large strings</p>
+<h1 id="large-strings">Large strings</h1>
 
 <p>In some extreme cases, you might be working with very large strings that might be large enough to end up on the <em>Large Object Heap</em> (for example, large JSON strings). If the string isn’t intended to be around for long, you generally <em>don’t</em> want it to end up on there.</p>
 
@@ -160,7 +160,7 @@
 
 <p>It is worth noting that if you are working with strings of this size, you might consider whether you can use a <a href="https://msdn.microsoft.com/en-us/library/system.io.stream(v=vs.110).aspx">stream</a> instead.</p>
 
-<p>#Conclusion</p>
+<h1 id="conclusion">Conclusion</h1>
 
 <p>As mentioned above, <strong>readability is more important than small optimisations</strong>. That said, when two options are equally clear, it is worth knowing which is more efficient and how they work behind the scenes.</p>
 
