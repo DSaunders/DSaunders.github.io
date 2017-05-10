@@ -3,6 +3,21 @@
   
     
     <url>
+      <loc>http://www.davejsaunders.com/2017/05/06/memory-leak-lambdas.html</loc>
+      
+        <lastmod>2017-05-06T11:00:00+01:00</lastmod>
+      
+      
+        <changefreq>monthly</changefreq>
+      
+      
+        <priority>0.5</priority>
+      
+    </url>
+    
+  
+    
+    <url>
       <loc>http://www.davejsaunders.com/2016/11/10/user-authentication-with-postgres.html</loc>
       
         <lastmod>2016-11-10T17:00:00+00:00</lastmod>
@@ -396,7 +411,7 @@
     <url>
       <loc>http://www.davejsaunders.com/blog.html</loc>
       
-        <lastmod>2016-11-10T17:05:09+00:00</lastmod>
+        <lastmod>2017-05-10T20:14:13+01:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -411,7 +426,7 @@
     <url>
       <loc>http://www.davejsaunders.com/</loc>
       
-        <lastmod>2016-11-10T17:05:09+00:00</lastmod>
+        <lastmod>2017-05-10T20:14:13+01:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -426,7 +441,7 @@
     <url>
       <loc>http://www.davejsaunders.com/css/main.css</loc>
       
-        <lastmod>2016-11-10T17:05:09+00:00</lastmod>
+        <lastmod>2017-05-10T20:14:13+01:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
@@ -441,7 +456,7 @@
     <url>
       <loc>http://www.davejsaunders.com/sitemap.xml</loc>
       
-        <lastmod>2016-11-10T17:05:09+00:00</lastmod>
+        <lastmod>2017-05-10T20:14:13+01:00</lastmod>
       
       
         <changefreq>monthly</changefreq>
