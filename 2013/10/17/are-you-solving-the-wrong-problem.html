@@ -1,35 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    
+    <title>Are you solving the wrong problem?</title>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Are you solving the wrong problem?</title>
-    <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
-    <meta name="description" content="">
     <meta name="author" content="Dave Saunders">
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/syntax.css">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <style type="text/css">
+      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;color:#444}html,body{height:100%;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}.content-section{padding:140px 20px}@media all and (min-width: 660px){.content-section{padding:90px 20px}}
+    </style>
+
+    <style type="text/css">
+      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#a3a3a3;margin-bottom:40px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:40px 0 25px 0;line-height:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content pre{font-size:1.5em}.post content ul,.post content ol{border-left:5px solid #f56e73;padding:5px 0 5px 35px;margin:10px 0}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content img{width:100%}.post content blockquote{border-left:5px solid #f56e73;padding:5px 0 0px 15px;margin:10px 0}
+    </style>
+
+      <link rel="stylesheet" href="/css/syntax.css"
   </head>
+
   <body class="blog-post">
 
-    <header id="header">
-
-        <h1>
-        <a href="/blog.html">Dave Saunders</a>
-        </h1>
-
+    <header>        
+        <h1><a href="/">Dave Saunders</a></h1>
+        <a href="/#blog">Blog</a>
+        <a href="/#contact">Contact</a>
     </header>
 
-    <div class="post">
+    <div class="post content-section">
 
-  <h2>Are you solving the wrong problem?</h2>
-  <p class="meta">Originally posted in October 2013</p>
+      <h1>Are you solving the wrong problem?</h1>
+      <p class="meta">Originally posted in October 2013</p>
 
-  <content class="post-content" role="article">
-    <p>I can sum up what I have learnt this week in one sentence:</p>
+      <content class="post-content" role="article">
+        <p>I can sum up what I have learnt this week in one sentence:</p>
 
 <p>If the problem seems too difficult, you might be solving the wrong problem.</p>
 
@@ -53,67 +58,44 @@
 
 <p>Next time I am over-faced by something that seems too complicated, I won’t hesitate to ask somebody to sit with me and discuss it. If it is a ‘three weeks and a whiteboard’ problem, the five minutes spent discussing it now is insignificant.  It’s more likely, however, that I am over-complicating it, in which case that five minutes will be paid back in spades by the quicker solution we arrive at together.</p>
 
-  </content>
+      </content>
 
-  <div class="post-footer">
-    <span class="related-links">
-      <h3>You might also like:</h3>
-      <ul>
-        
-        <li><a href="/2017/05/06/memory-leak-lambdas.html">How to leak memory with lambda expressions</a></li>
-        
-        <li><a href="/2016/11/10/user-authentication-with-postgres.html">Easy password hashing with Postgres and pgcrypto</a></li>
-        
-        <li><a href="/2016/11/03/routing-in-go-with-vestigo.html">Routing in Go with Vestigo</a></li>
-        
-      </ul>
-    </span>
-    <span class="social-links">
-      <h3>Follow me!</h3>
-      <a
-      href="https://twitter.com/DaveJSaunders"
-      class="tweet-link"
-      title="Follow @DaveJSaunders" target="_blank"></a>
-    </span>
-  </div>
+      <!--<div class="post-footer">
+        <span class="related-links">
+          <h3>You might also like:</h3>
+          <ul>
+            
+            <li><a href="/2017/05/06/memory-leak-lambdas.html">How to leak memory with lambda expressions</a></li>
+            
+            <li><a href="/2016/11/10/user-authentication-with-postgres.html">Easy password hashing with Postgres and pgcrypto</a></li>
+            
+            <li><a href="/2016/11/03/routing-in-go-with-vestigo.html">Routing in Go with Vestigo</a></li>
+            
+          </ul>
+        </span>
+      </div>-->
 
-</div>
-
-
-
-    <script>
-    	var _gaq = _gaq || [];
-    	var _gaq = [['_setAccount', 'UA-40239142-1']];
-
-    	// Track page view
-    	_gaq.push(
-    		['_trackPageview']
-    	);
-
-    	(function () {
-    		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    	})();
-    </script>
-
-    <!-- Drip -->
-    <script type="text/javascript">
-      var _dcq = _dcq || [];
-      var _dcs = _dcs || {}; 
-      _dcs.account = '1265048';
-      
-      (function() {
-        var dc = document.createElement('script');
-        dc.type = 'text/javascript'; dc.async = true; 
-        dc.src = '//tag.getdrip.com/1265048.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(dc, s);
-      })();
-    </script>
+    </div>
 
     
-    <script type="text/javascript" src="//use.typekit.net/lmg7vwv.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-    </body>
+    <!-- Google Analytics -->
+    <!--<script>
+      var _gaq = _gaq || [];
+      var _gaq = [['_setAccount', 'UA-40239142-1']];
+
+      // Track page view
+      _gaq.push(
+        ['_trackPageview']
+      );
+
+      (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>  -->
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Signika" rel="stylesheet">
+
+  </body>
 </html>
