@@ -10,11 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style type="text/css">
-      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;color:#444}html,body{height:100%;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}.content-section{padding:140px 20px}@media all and (min-width: 660px){.content-section{padding:90px 20px}}
+      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;color:#444}html,body{height:100%;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}.content-section{padding:140px 20px}@media all and (min-width: 660px){.content-section{padding:110px 20px}}
     </style>
 
     <style type="text/css">
-      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#a3a3a3;margin-bottom:40px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:40px 0 25px 0;line-height:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content pre{font-size:1.5em}.post content ul,.post content ol{border-left:5px solid #f56e73;padding:5px 0 5px 35px;margin:10px 0}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content img{width:100%}.post content blockquote{border-left:5px solid #f56e73;padding:5px 0 0px 15px;margin:10px 0}
+      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#a3a3a3;margin-bottom:40px}.post .back-link{text-align:center;margin-top:80px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:40px 0 25px 0;line-height:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content pre{font-size:1.5em}.post content ul,.post content ol{border-left:5px solid #f56e73;padding:5px 0 5px 35px;margin:10px 0}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content strong{font-weight:bold}.post content img{max-width:100%;display:block;margin:20px auto}.post content blockquote{border-left:5px solid #f56e73;padding:5px 0 0px 15px;margin:10px 0}
     </style>
 
       <link rel="stylesheet" href="/css/syntax.css"
@@ -35,39 +35,43 @@
 
       <content class="post-content" role="article">
         <p>I previously worked somewhere where I spent about a third of my time in C++. I had to learn how much memory to allocate (only as much as you need) and when dispose of it again (as soon as possible).  I struggled with pointers-to-pointers and had regular fights with threading.</p>
-
-<p>Now, I work almost entirely in C# and I’m unlikely to ever go back to C++.  Now I don’t know (or care) whether the variables I’m using live in memory for a second or an hour, it’s all done for me (and frankly much better than I could do it myself).</p>
-
-<p>Likewise, I remember learning HTML in Windows Notepad with a huge book next to me for reference.  Now any good editor like Sublime Text will auto-complete your HTML tags and tell you if you make a mistake.  If you forget the syntax for something, you can find it in seconds on Google or StackOverflow.</p>
-
-<p>We no longer need to remember the in-depth workings of the platform we are writing for, or even the syntax.  This is increasingly done for us by the tools we use.</p>
-
-<p>Maybe this is good.  Maybe it means it’s OK to put all that old knowledge away in the back of our minds for later and use the room for something more important…</p>
-
-<h1 id="think-differently">Think Differently</h1>
-
-<p>What if we just decided that we were no longer going to try to learn everything about a framework or a language?  What if we decided to dump all that stuff and use the space to think about how to apply best practices to what we do, how to improve our workflow or to come up with some cool new ideas?</p>
-
-<p>When I think about all the smartest people I have worked with, they aren’t the people who know every dark corner of a given programming language.  They are the people who have new ideas, are passionate about something and are good problem solvers.  They might have to look things up every now and then, but they can intelligently apply the solutions they find and optimise them for their own use.</p>
-
-<p>We generally tend to compare developers based on what they know (‘that guy is a JavaScript expert!’).  Could it be that we are looking at this the wrong way?  I would much rather see people compared on how good their ideas are, how interested they are in learning new things and how well they cope with change.</p>
-
-<p>The language you have spent hours poring over will not be around forever.  A good developer will be able to transfer the patterns and practices they have learnt to something new.  A bad developer will be left in the dust, wondering why they spent so long worrying about memory management in C++.</p>
-
-<p>As the tools get better, is remembering ‘stuff’ becoming less important than general attitude?  Or has it always been that way?</p>
-
+        
+        <p>Now, I work almost entirely in C# and I’m unlikely to ever go back to C++.  Now I don’t know (or care) whether the variables I’m using live in memory for a second or an hour, it’s all done for me (and frankly much better than I could do it myself).</p>
+        
+        <p>Likewise, I remember learning HTML in Windows Notepad with a huge book next to me for reference.  Now any good editor like Sublime Text will auto-complete your HTML tags and tell you if you make a mistake.  If you forget the syntax for something, you can find it in seconds on Google or StackOverflow.</p>
+        
+        <p>We no longer need to remember the in-depth workings of the platform we are writing for, or even the syntax.  This is increasingly done for us by the tools we use.</p>
+        
+        <p>Maybe this is good.  Maybe it means it’s OK to put all that old knowledge away in the back of our minds for later and use the room for something more important…</p>
+        
+        <h1 id="think-differently">Think Differently</h1>
+        
+        <p>What if we just decided that we were no longer going to try to learn everything about a framework or a language?  What if we decided to dump all that stuff and use the space to think about how to apply best practices to what we do, how to improve our workflow or to come up with some cool new ideas?</p>
+        
+        <p>When I think about all the smartest people I have worked with, they aren’t the people who know every dark corner of a given programming language.  They are the people who have new ideas, are passionate about something and are good problem solvers.  They might have to look things up every now and then, but they can intelligently apply the solutions they find and optimise them for their own use.</p>
+        
+        <p>We generally tend to compare developers based on what they know (‘that guy is a JavaScript expert!’).  Could it be that we are looking at this the wrong way?  I would much rather see people compared on how good their ideas are, how interested they are in learning new things and how well they cope with change.</p>
+        
+        <p>The language you have spent hours poring over will not be around forever.  A good developer will be able to transfer the patterns and practices they have learnt to something new.  A bad developer will be left in the dust, wondering why they spent so long worrying about memory management in C++.</p>
+        
+        <p>As the tools get better, is remembering ‘stuff’ becoming less important than general attitude?  Or has it always been that way?</p>
+        
       </content>
+
+      <div class="back-link">
+        <a href="/#blog">&#8592; Back to the blog</a>
+      </div>
 
       <!--<div class="post-footer">
         <span class="related-links">
           <h3>You might also like:</h3>
           <ul>
             
+            <li><a href="/2017/06/07/google-amp-wrong-answer-right-question.html">Google's AMP - The wrong answer to the right question</a></li>
+            
             <li><a href="/2017/05/06/memory-leak-lambdas.html">How to leak memory with lambda expressions</a></li>
             
             <li><a href="/2016/11/10/user-authentication-with-postgres.html">Easy password hashing with Postgres and pgcrypto</a></li>
-            
-            <li><a href="/2016/11/03/routing-in-go-with-vestigo.html">Routing in Go with Vestigo</a></li>
             
           </ul>
         </span>
@@ -93,7 +97,22 @@
       })();
     </script>  
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Signika" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Signika" rel="stylesheet">
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {}; 
+      _dcs.account = '1265048';
+      
+      (function() {
+        var dc = document.createElement('script');
+        dc.type = 'text/javascript'; dc.async = true; 
+        dc.src = '//tag.getdrip.com/1265048.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
 
   </body>
 </html>

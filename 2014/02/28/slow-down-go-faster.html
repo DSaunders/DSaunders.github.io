@@ -10,11 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style type="text/css">
-      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;color:#444}html,body{height:100%;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}.content-section{padding:140px 20px}@media all and (min-width: 660px){.content-section{padding:90px 20px}}
+      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;color:#444}html,body{height:100%;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}.content-section{padding:140px 20px}@media all and (min-width: 660px){.content-section{padding:110px 20px}}
     </style>
 
     <style type="text/css">
-      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#a3a3a3;margin-bottom:40px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:40px 0 25px 0;line-height:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content pre{font-size:1.5em}.post content ul,.post content ol{border-left:5px solid #f56e73;padding:5px 0 5px 35px;margin:10px 0}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content img{width:100%}.post content blockquote{border-left:5px solid #f56e73;padding:5px 0 0px 15px;margin:10px 0}
+      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#a3a3a3;margin-bottom:40px}.post .back-link{text-align:center;margin-top:80px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:40px 0 25px 0;line-height:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content pre{font-size:1.5em}.post content ul,.post content ol{border-left:5px solid #f56e73;padding:5px 0 5px 35px;margin:10px 0}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content strong{font-weight:bold}.post content img{max-width:100%;display:block;margin:20px auto}.post content blockquote{border-left:5px solid #f56e73;padding:5px 0 0px 15px;margin:10px 0}
     </style>
 
       <link rel="stylesheet" href="/css/syntax.css"
@@ -35,71 +35,75 @@
 
       <content class="post-content" role="article">
         <p>We always want to move faster; faster requirements capture, faster and more efficient coding, faster to production. That’s all well and good, but if we try to go too fast, to soon, things can go really bad.</p>
-
-<p>Let’s take a step back, take a breath and slow down.</p>
-
-<p>The fastest way to get from requirements to production is to do it right the first time. If our software sails through the QA process, and we build what the customer actually wants first time, doing it once must be quicker than doing it twice, or three times, right?</p>
-
-<p>The second fastest way is to do it well the first time. No project survives the user unscathed. You will have to come back to your code and make changes. Writing clear, maintainable code now will save you time hacking around it later on.</p>
-
-<p>Let’s worry about doing it right first, doing it well second, and then we can make all the other stuff quicker later.</p>
-
-<h1 id="good-requirements">Good requirements</h1>
-
-<p>I’ll just clarify before everybody runs for their browser’s back button, by requirements I do not necessarily mean a 2 foot tall stack of A4 paper which nobody will read. We do, however, need something to work from.</p>
-
-<p>Most people are probably doing waterfall with user stories under the guise of being Agile. That’s fine, it’s a perfectly valid solution and it works well. Those user stories are requirements; the stakeholder can read them, you can develop against them, test against them and clearly define when those requirements are complete.</p>
-
-<p>Five different versions of designs and three pages of emails going back and forth with a customer are not requirements. You cannot show that requirement to a stakeholder, you cannot be sure what exactly you are supposed to be testing against, and, if you have to spend an hour working our whether that change document from Wednesday is more or less recent than version 2.1.a of the design PSD, you cannot develop efficiently against them.</p>
-
-<p>Take time at the start of the process to define the requirements properly. Get all of the various emails and documents into one place, and write a clear set of requirements.</p>
-
-<h1 id="write-some-tests">Write some tests</h1>
-
-<p>Unit testing adds very little time to a project, so let’s get that out of the way now. It might take you 5 minutes longer to type the thing, but we all know by now that the bulk of the time spent on something is in the thinking, not in how long it types to press the keys to put the letters on the screen.</p>
-
-<p>Unit testing ensures that the feature actually works. It saves you the time and embarrassment of finding out from QA (or worse, the user) that your code is broken.</p>
-
-<p>We don’t need to keep discussing this. It’s 2014, just write some tests already.</p>
-
-<h1 id="collaborate">Collaborate</h1>
-
-<p>Before you start a particularly complex user story, spend five minutes with another developer discussing it.</p>
-
-<p>Often, we can just go headlong into code with only a half-baked idea of how to do it. It’s only when we get a day into the code that we realise it was probably the wrong way to approach it. Spending five minutes at the start discussing it with somebody else could save you from that.</p>
-
-<p>The worst case scenario is that you both have the same approach and you have spent five minutes agreeing with each other.</p>
-
-<h1 id="pair">Pair</h1>
-
-<p>Good luck selling this to non-developers, but pair programming is actually quite efficient. Working together on a difficult problem often means it is solved quicker. It is also more likely to produce cleaner, more maintainable code, as it provides the benefit of real-time code review.</p>
-
-<p>Over time, pairing will increase the overall momentum of the team. This is because it prevents knowledge silos, where certain developers have the super-secret-hidden-way of doing something that nobody else knows how to do. If that person is off work, or busy, the project stops. Pairing is a great way to avoid that.</p>
-
-<p>I’m not suggesting that we all pair 100% of the time, but it should be a regular practice and accepted (even encouraged) by the organisation.</p>
-
-<h1 id="daily-stand-ups">Daily stand ups</h1>
-
-<p>Stand ups are ten minutes well spent.</p>
-
-<p>They force everybody to think about their day up front. This is where they raise any issues they might have during the day which may block them, which means they need to think early about what issues they might face. Removing a developer’s blockers now means that they can work uninterrupted for the rest of the day. There is nothing that slows down development more than breaking a programmer’s concentration.</p>
-
-<p>Stand ups also help to avoid you solving a problem somebody else has already solved months ago in a different context. By discussing what you plan to do, it allows other developers to chip in now with knowledge and experience that could shave hours off of your development time.</p>
-
-<p><em>N.B. Any in-depth conversations should be parked and discussed outside of the stand up to avoid breaking the momentum of the group.</em></p>
-
+        
+        <p>Let’s take a step back, take a breath and slow down.</p>
+        
+        <p>The fastest way to get from requirements to production is to do it right the first time. If our software sails through the QA process, and we build what the customer actually wants first time, doing it once must be quicker than doing it twice, or three times, right?</p>
+        
+        <p>The second fastest way is to do it well the first time. No project survives the user unscathed. You will have to come back to your code and make changes. Writing clear, maintainable code now will save you time hacking around it later on.</p>
+        
+        <p>Let’s worry about doing it right first, doing it well second, and then we can make all the other stuff quicker later.</p>
+        
+        <h1 id="good-requirements">Good requirements</h1>
+        
+        <p>I’ll just clarify before everybody runs for their browser’s back button, by requirements I do not necessarily mean a 2 foot tall stack of A4 paper which nobody will read. We do, however, need something to work from.</p>
+        
+        <p>Most people are probably doing waterfall with user stories under the guise of being Agile. That’s fine, it’s a perfectly valid solution and it works well. Those user stories are requirements; the stakeholder can read them, you can develop against them, test against them and clearly define when those requirements are complete.</p>
+        
+        <p>Five different versions of designs and three pages of emails going back and forth with a customer are not requirements. You cannot show that requirement to a stakeholder, you cannot be sure what exactly you are supposed to be testing against, and, if you have to spend an hour working our whether that change document from Wednesday is more or less recent than version 2.1.a of the design PSD, you cannot develop efficiently against them.</p>
+        
+        <p>Take time at the start of the process to define the requirements properly. Get all of the various emails and documents into one place, and write a clear set of requirements.</p>
+        
+        <h1 id="write-some-tests">Write some tests</h1>
+        
+        <p>Unit testing adds very little time to a project, so let’s get that out of the way now. It might take you 5 minutes longer to type the thing, but we all know by now that the bulk of the time spent on something is in the thinking, not in how long it types to press the keys to put the letters on the screen.</p>
+        
+        <p>Unit testing ensures that the feature actually works. It saves you the time and embarrassment of finding out from QA (or worse, the user) that your code is broken.</p>
+        
+        <p>We don’t need to keep discussing this. It’s 2014, just write some tests already.</p>
+        
+        <h1 id="collaborate">Collaborate</h1>
+        
+        <p>Before you start a particularly complex user story, spend five minutes with another developer discussing it.</p>
+        
+        <p>Often, we can just go headlong into code with only a half-baked idea of how to do it. It’s only when we get a day into the code that we realise it was probably the wrong way to approach it. Spending five minutes at the start discussing it with somebody else could save you from that.</p>
+        
+        <p>The worst case scenario is that you both have the same approach and you have spent five minutes agreeing with each other.</p>
+        
+        <h1 id="pair">Pair</h1>
+        
+        <p>Good luck selling this to non-developers, but pair programming is actually quite efficient. Working together on a difficult problem often means it is solved quicker. It is also more likely to produce cleaner, more maintainable code, as it provides the benefit of real-time code review.</p>
+        
+        <p>Over time, pairing will increase the overall momentum of the team. This is because it prevents knowledge silos, where certain developers have the super-secret-hidden-way of doing something that nobody else knows how to do. If that person is off work, or busy, the project stops. Pairing is a great way to avoid that.</p>
+        
+        <p>I’m not suggesting that we all pair 100% of the time, but it should be a regular practice and accepted (even encouraged) by the organisation.</p>
+        
+        <h1 id="daily-stand-ups">Daily stand ups</h1>
+        
+        <p>Stand ups are ten minutes well spent.</p>
+        
+        <p>They force everybody to think about their day up front. This is where they raise any issues they might have during the day which may block them, which means they need to think early about what issues they might face. Removing a developer’s blockers now means that they can work uninterrupted for the rest of the day. There is nothing that slows down development more than breaking a programmer’s concentration.</p>
+        
+        <p>Stand ups also help to avoid you solving a problem somebody else has already solved months ago in a different context. By discussing what you plan to do, it allows other developers to chip in now with knowledge and experience that could shave hours off of your development time.</p>
+        
+        <p><em>N.B. Any in-depth conversations should be parked and discussed outside of the stand up to avoid breaking the momentum of the group.</em></p>
+        
       </content>
+
+      <div class="back-link">
+        <a href="/#blog">&#8592; Back to the blog</a>
+      </div>
 
       <!--<div class="post-footer">
         <span class="related-links">
           <h3>You might also like:</h3>
           <ul>
             
+            <li><a href="/2017/06/07/google-amp-wrong-answer-right-question.html">Google's AMP - The wrong answer to the right question</a></li>
+            
             <li><a href="/2017/05/06/memory-leak-lambdas.html">How to leak memory with lambda expressions</a></li>
             
             <li><a href="/2016/11/10/user-authentication-with-postgres.html">Easy password hashing with Postgres and pgcrypto</a></li>
-            
-            <li><a href="/2016/11/03/routing-in-go-with-vestigo.html">Routing in Go with Vestigo</a></li>
             
           </ul>
         </span>
@@ -125,7 +129,22 @@
       })();
     </script>  
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Signika" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Signika" rel="stylesheet">
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {}; 
+      _dcs.account = '1265048';
+      
+      (function() {
+        var dc = document.createElement('script');
+        dc.type = 'text/javascript'; dc.async = true; 
+        dc.src = '//tag.getdrip.com/1265048.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
 
   </body>
 </html>

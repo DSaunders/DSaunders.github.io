@@ -10,11 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style type="text/css">
-      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;color:#444}html,body{height:100%;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}.content-section{padding:140px 20px}@media all and (min-width: 660px){.content-section{padding:90px 20px}}
+      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;color:#444}html,body{height:100%;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}.content-section{padding:140px 20px}@media all and (min-width: 660px){.content-section{padding:110px 20px}}
     </style>
 
     <style type="text/css">
-      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#a3a3a3;margin-bottom:40px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:40px 0 25px 0;line-height:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content pre{font-size:1.5em}.post content ul,.post content ol{border-left:5px solid #f56e73;padding:5px 0 5px 35px;margin:10px 0}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content img{width:100%}.post content blockquote{border-left:5px solid #f56e73;padding:5px 0 0px 15px;margin:10px 0}
+      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#a3a3a3;margin-bottom:40px}.post .back-link{text-align:center;margin-top:80px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:40px 0 25px 0;line-height:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content pre{font-size:1.5em}.post content ul,.post content ol{border-left:5px solid #f56e73;padding:5px 0 5px 35px;margin:10px 0}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content strong{font-weight:bold}.post content img{max-width:100%;display:block;margin:20px auto}.post content blockquote{border-left:5px solid #f56e73;padding:5px 0 0px 15px;margin:10px 0}
     </style>
 
       <link rel="stylesheet" href="/css/syntax.css"
@@ -35,61 +35,65 @@
 
       <content class="post-content" role="article">
         <p>I am privileged to work with people who are very interested in the Agile work flow and Continuous Integration.  As I learn more about these things myself, I realise there is a common theme across everything we are trying to achieve:</p>
-
-<p><em>Fail as quickly as possible.</em></p>
-
-<p>As long as humans are writing code, bugs will happen and mistakes will be made; that’s entirely normal and is to be expected when creating something new.  The processes we put in place are designed to catch these failures at the earliest stage we can.</p>
-
-<p>If the customer sees the bug, we didn’t catch it early enough.  If we find it before it goes live, we can deal with it swiftly and move on.</p>
-
-<p>If we have the ability to do that, we allow people to fail without fear; which means we can try new things and push our software forward, rather than play it safe.</p>
-
-<h1 id="user-stories">User Stories</h1>
-
-<p>User stories are one of the earliest stages of building a feature, where we sit down and describe how the user will interact with our product.</p>
-
-<p>A colleague of mine suggested that this time is not just for writing cards for the Kanban board; it is also the time to address any queries and narrow down on the specifics of the requirement.</p>
-
-<p>Are we building something the user actually wants?  Are we implementing it correctly?</p>
-
-<p>This is generally when we should consider time estimates too:</p>
-
-<p>Is it realistic to fit this feature in to the next sprint?  Are we underestimating how long it will take?</p>
-
-<p>It’s better to find this out now than two weeks down the line when we are under huge pressure to ship it.  Something that can seem simple when written down can actually be incredibly difficult to implement in code.  This is probably the time to have that discussion.</p>
-
-<h1 id="unit-tests">Unit Tests</h1>
-
-<p>Isn’t it cool that we can have an automated process that will catch bugs before we even commit our code to source control?  If we have good unit tests around a feature, we have much more confidence that it will behave the way we intended.</p>
-
-<p>Testing whether a feature works is easy.  Testing the ‘edge-cases’, the unique occurrences that we don’t usually find until we’ve shipped, is hard.  That’s why unit testing is so great.  We can list all of the bad inputs or potential issues our code could have and know at build time whether we have coded a robust solution around those things.</p>
-
-<p>Unit testing also allows us to work on the code later without fear of breaking it.  We can re-factor, fix bugs and add something new; all the time knowing that the original functionality is not affected as long as the tests are passing.</p>
-
-<p>This all relies on us writing good tests of course.  I am still trying to learn the best practices around unit testing, but there are loads of resources out there to help.</p>
-
-<h1 id="stagingtest-servers">Staging/Test Servers</h1>
-
-<p>Even if we are reasonably happy that the feature is as intended and the code is robust, it might be a good idea to stage it somewhere before letting it loose.  In an ideal world, we would do all of our development in an environment identical to that in which the final product will run.  In practice that is actually quite hard to achieve.</p>
-
-<p>By deploying our code to a staging area (this is an exact replica of the live environment), we can reproduce the customer experience before releasing it into the wild.  This is the time when we can catch the ‘it works on my machine’ issues that every project has.  Any integration tests will also be run here.</p>
-
-<p>This is also a good place for the feature to be reviewed by any stakeholders.  What they are seeing should be exactly what the customer will see.  If any changes are needed, it’s not too late to make them before the code finally leaves the building.</p>
-
-<p>These are just some of the ways to trap problems early before they get as far as production. Did I miss any?</p>
-
+        
+        <p><em>Fail as quickly as possible.</em></p>
+        
+        <p>As long as humans are writing code, bugs will happen and mistakes will be made; that’s entirely normal and is to be expected when creating something new.  The processes we put in place are designed to catch these failures at the earliest stage we can.</p>
+        
+        <p>If the customer sees the bug, we didn’t catch it early enough.  If we find it before it goes live, we can deal with it swiftly and move on.</p>
+        
+        <p>If we have the ability to do that, we allow people to fail without fear; which means we can try new things and push our software forward, rather than play it safe.</p>
+        
+        <h1 id="user-stories">User Stories</h1>
+        
+        <p>User stories are one of the earliest stages of building a feature, where we sit down and describe how the user will interact with our product.</p>
+        
+        <p>A colleague of mine suggested that this time is not just for writing cards for the Kanban board; it is also the time to address any queries and narrow down on the specifics of the requirement.</p>
+        
+        <p>Are we building something the user actually wants?  Are we implementing it correctly?</p>
+        
+        <p>This is generally when we should consider time estimates too:</p>
+        
+        <p>Is it realistic to fit this feature in to the next sprint?  Are we underestimating how long it will take?</p>
+        
+        <p>It’s better to find this out now than two weeks down the line when we are under huge pressure to ship it.  Something that can seem simple when written down can actually be incredibly difficult to implement in code.  This is probably the time to have that discussion.</p>
+        
+        <h1 id="unit-tests">Unit Tests</h1>
+        
+        <p>Isn’t it cool that we can have an automated process that will catch bugs before we even commit our code to source control?  If we have good unit tests around a feature, we have much more confidence that it will behave the way we intended.</p>
+        
+        <p>Testing whether a feature works is easy.  Testing the ‘edge-cases’, the unique occurrences that we don’t usually find until we’ve shipped, is hard.  That’s why unit testing is so great.  We can list all of the bad inputs or potential issues our code could have and know at build time whether we have coded a robust solution around those things.</p>
+        
+        <p>Unit testing also allows us to work on the code later without fear of breaking it.  We can re-factor, fix bugs and add something new; all the time knowing that the original functionality is not affected as long as the tests are passing.</p>
+        
+        <p>This all relies on us writing good tests of course.  I am still trying to learn the best practices around unit testing, but there are loads of resources out there to help.</p>
+        
+        <h1 id="stagingtest-servers">Staging/Test Servers</h1>
+        
+        <p>Even if we are reasonably happy that the feature is as intended and the code is robust, it might be a good idea to stage it somewhere before letting it loose.  In an ideal world, we would do all of our development in an environment identical to that in which the final product will run.  In practice that is actually quite hard to achieve.</p>
+        
+        <p>By deploying our code to a staging area (this is an exact replica of the live environment), we can reproduce the customer experience before releasing it into the wild.  This is the time when we can catch the ‘it works on my machine’ issues that every project has.  Any integration tests will also be run here.</p>
+        
+        <p>This is also a good place for the feature to be reviewed by any stakeholders.  What they are seeing should be exactly what the customer will see.  If any changes are needed, it’s not too late to make them before the code finally leaves the building.</p>
+        
+        <p>These are just some of the ways to trap problems early before they get as far as production. Did I miss any?</p>
+        
       </content>
+
+      <div class="back-link">
+        <a href="/#blog">&#8592; Back to the blog</a>
+      </div>
 
       <!--<div class="post-footer">
         <span class="related-links">
           <h3>You might also like:</h3>
           <ul>
             
+            <li><a href="/2017/06/07/google-amp-wrong-answer-right-question.html">Google's AMP - The wrong answer to the right question</a></li>
+            
             <li><a href="/2017/05/06/memory-leak-lambdas.html">How to leak memory with lambda expressions</a></li>
             
             <li><a href="/2016/11/10/user-authentication-with-postgres.html">Easy password hashing with Postgres and pgcrypto</a></li>
-            
-            <li><a href="/2016/11/03/routing-in-go-with-vestigo.html">Routing in Go with Vestigo</a></li>
             
           </ul>
         </span>
@@ -115,7 +119,22 @@
       })();
     </script>  
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Signika" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Signika" rel="stylesheet">
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {}; 
+      _dcs.account = '1265048';
+      
+      (function() {
+        var dc = document.createElement('script');
+        dc.type = 'text/javascript'; dc.async = true; 
+        dc.src = '//tag.getdrip.com/1265048.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
 
   </body>
 </html>

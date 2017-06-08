@@ -10,11 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style type="text/css">
-      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;color:#444}html,body{height:100%;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}.content-section{padding:140px 20px}@media all and (min-width: 660px){.content-section{padding:90px 20px}}
+      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;color:#444}html,body{height:100%;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}.content-section{padding:140px 20px}@media all and (min-width: 660px){.content-section{padding:110px 20px}}
     </style>
 
     <style type="text/css">
-      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#a3a3a3;margin-bottom:40px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:40px 0 25px 0;line-height:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content pre{font-size:1.5em}.post content ul,.post content ol{border-left:5px solid #f56e73;padding:5px 0 5px 35px;margin:10px 0}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content img{width:100%}.post content blockquote{border-left:5px solid #f56e73;padding:5px 0 0px 15px;margin:10px 0}
+      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#a3a3a3;margin-bottom:40px}.post .back-link{text-align:center;margin-top:80px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:40px 0 25px 0;line-height:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content pre{font-size:1.5em}.post content ul,.post content ol{border-left:5px solid #f56e73;padding:5px 0 5px 35px;margin:10px 0}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content strong{font-weight:bold}.post content img{max-width:100%;display:block;margin:20px auto}.post content blockquote{border-left:5px solid #f56e73;padding:5px 0 0px 15px;margin:10px 0}
     </style>
 
       <link rel="stylesheet" href="/css/syntax.css"
@@ -35,53 +35,53 @@
 
       <content class="post-content" role="article">
         <p>So you’ve built a custom shipping method service in uCommerce, using <em>IShippingMethodService</em>, as in this article:</p>
-
-<p><a href="http://docs.ucommerce.net/ucommerce/v6/extending-ucommerce/shipping-method-service.html" target="_blank">Building a Custom Shipping Method Service</a></p>
-
-<p>Often, you want to display the cost of each shipping method to the user during the checkout process, before they actually select them.</p>
-
-<p>Wiggle does this well:</p>
-
-<p><img src="/img/checkout/wiggledelivery.png" class="full-width-image" alt="" /></p>
-
-<p>But how do you do this when you’re using a custom uCommerce <em>IShippingMethodService</em>, and you have your own logic for calculating the shipping costs of an order?</p>
-
-<h1 id="why-you-cant-use-shippingmethodgetpriceforcurrency">Why you can’t use ShippingMethod.GetPriceForCurrency()</h1>
-
-<p>Once you’ve told uCommerce to use your new <em>IShippingMethodService</em> for a shipping method..</p>
-
-<p><img src="/img/checkout/ucommerceshippingcommontab.png" class="full-width-image" alt="" /></p>
-
-<p>.. you might assume that you can use <em>ShippingMethod.GetPriceForCurrency()</em> to get the cost to ship your order, like this:</p>
-
-<figure class="highlight">
-  <pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">allShippingMethods</span> <span class="p">=</span> <span class="n">TransactionLibrary</span><span class="p">.</span><span class="n">GetShippingMethods</span><span class="p">(</span><span class="n">country</span><span class="p">);</span>
+        
+        <p><a href="http://docs.ucommerce.net/ucommerce/v6/extending-ucommerce/shipping-method-service.html" target="_blank">Building a Custom Shipping Method Service</a></p>
+        
+        <p>Often, you want to display the cost of each shipping method to the user during the checkout process, before they actually select them.</p>
+        
+        <p>Wiggle does this well:</p>
+        
+        <p><img src="/img/checkout/wiggledelivery.png" class="full-width-image" alt="" /></p>
+        
+        <p>But how do you do this when you’re using a custom uCommerce <em>IShippingMethodService</em>, and you have your own logic for calculating the shipping costs of an order?</p>
+        
+        <h1 id="why-you-cant-use-shippingmethodgetpriceforcurrency">Why you can’t use ShippingMethod.GetPriceForCurrency()</h1>
+        
+        <p>Once you’ve told uCommerce to use your new <em>IShippingMethodService</em> for a shipping method..</p>
+        
+        <p><img src="/img/checkout/ucommerceshippingcommontab.png" class="full-width-image" alt="" /></p>
+        
+        <p>.. you might assume that you can use <em>ShippingMethod.GetPriceForCurrency()</em> to get the cost to ship your order, like this:</p>
+        
+        <figure class="highlight">
+          <pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">allShippingMethods</span> <span class="p">=</span> <span class="n">TransactionLibrary</span><span class="p">.</span><span class="n">GetShippingMethods</span><span class="p">(</span><span class="n">country</span><span class="p">);</span>
 <span class="kt">var</span> <span class="n">currency</span> <span class="p">=</span> <span class="n">purchaseOrder</span><span class="p">.</span><span class="n">BillingCurrency</span><span class="p">;</span>
 
 <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">shippingMethod</span> <span class="k">in</span> <span class="n">allShippingMethods</span><span class="p">)</span>
 <span class="p">{</span>
 	<span class="kt">var</span> <span class="n">cost</span> <span class="p">=</span> <span class="n">shippingMethod</span><span class="p">.</span><span class="n">GetPriceForCurrency</span><span class="p">(</span><span class="n">currency</span><span class="p">);</span>
 <span class="p">}</span></code></pre>
-</figure>
-
-<p>Unfortunately, this uCommerce method only returns the first price from the shipping method’s <em>Pricing</em> tab that matches the given currency:</p>
-
-<p><img src="/img/checkout/ucommerceshippingprices.png" class="full-width-image" alt="" /></p>
-
-<p>It does not account for the calculations in your <em>IShippingMethodService</em>.</p>
-
-<p>#Correctly get the cost for each shipping method</p>
-
-<p>The correct way to do it is to manually call the <em>IShippingMethodService</em>, passing your current shipment.</p>
-
-<p>At run-time we do not know which implementation of <em>IShippingMethodService</em> is set against a shipping method in uCommerce. Helpfully, uCommerce exposes this for us through the method <em>GetShippingMethodService()</em>.</p>
-
-<p>Using this, we can simply get the relevant <em>IShippingMethodService</em> for
-a given shipping method, construct a fake <em>Shipment</em> object (using our real basket of course) and pass it to the service to find out how much it
-would cost to ship our basket with that shipping method.</p>
-
-<figure class="highlight">
-  <pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">purchaseOrder</span> <span class="p">=</span> <span class="n">TransactionLibrary</span><span class="p">.</span><span class="n">GetBasket</span><span class="p">().</span><span class="n">PurchaseOrder</span><span class="p">;</span>
+        </figure>
+        
+        <p>Unfortunately, this uCommerce method only returns the first price from the shipping method’s <em>Pricing</em> tab that matches the given currency:</p>
+        
+        <p><img src="/img/checkout/ucommerceshippingprices.png" class="full-width-image" alt="" /></p>
+        
+        <p>It does not account for the calculations in your <em>IShippingMethodService</em>.</p>
+        
+        <p>#Correctly get the cost for each shipping method</p>
+        
+        <p>The correct way to do it is to manually call the <em>IShippingMethodService</em>, passing your current shipment.</p>
+        
+        <p>At run-time we do not know which implementation of <em>IShippingMethodService</em> is set against a shipping method in uCommerce. Helpfully, uCommerce exposes this for us through the method <em>GetShippingMethodService()</em>.</p>
+        
+        <p>Using this, we can simply get the relevant <em>IShippingMethodService</em> for
+        a given shipping method, construct a fake <em>Shipment</em> object (using our real basket of course) and pass it to the service to find out how much it
+        would cost to ship our basket with that shipping method.</p>
+        
+        <figure class="highlight">
+          <pre><code class="language-csharp" data-lang="csharp"><span class="kt">var</span> <span class="n">purchaseOrder</span> <span class="p">=</span> <span class="n">TransactionLibrary</span><span class="p">.</span><span class="n">GetBasket</span><span class="p">().</span><span class="n">PurchaseOrder</span><span class="p">;</span>
 <span class="kt">var</span> <span class="n">allShippingMethods</span> <span class="p">=</span> <span class="n">TransactionLibrary</span><span class="p">.</span><span class="n">GetShippingMethods</span><span class="p">(</span><span class="n">country</span><span class="p">);</span>
 
 <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">shippingMethod</span> <span class="k">in</span> <span class="n">allShippingMethods</span><span class="p">)</span>
@@ -100,27 +100,31 @@ would cost to ship our basket with that shipping method.</p>
   <span class="kt">var</span> <span class="n">shippingMethodPrice</span>
  	 <span class="p">=</span> <span class="n">shippingService</span><span class="p">.</span><span class="n">CalculateShippingPrice</span><span class="p">(</span><span class="n">shipment</span><span class="p">);</span>
 <span class="p">}</span></code></pre>
-</figure>
-
-<p>Of course, you might want some null checks and you will need to actually do something with the resulting price to display it, but you get the idea.</p>
-
-<p>The default implementation of <em>IShippingMethodService</em> requires that you populate the <em>Country</em> in the <em>ShipmentAddress</em>, and the <em>PurchaseOrder</em> (as above), so make sure you
-set those in addition to whatever your custom service needs, just in case a given shipping method is using the default service.</p>
-
-<p>And that’s it! Once you know how, it’s fairly simple to display the costs of custom <em>IShippingMethodService</em>s to the user.</p>
-
+        </figure>
+        
+        <p>Of course, you might want some null checks and you will need to actually do something with the resulting price to display it, but you get the idea.</p>
+        
+        <p>The default implementation of <em>IShippingMethodService</em> requires that you populate the <em>Country</em> in the <em>ShipmentAddress</em>, and the <em>PurchaseOrder</em> (as above), so make sure you
+        set those in addition to whatever your custom service needs, just in case a given shipping method is using the default service.</p>
+        
+        <p>And that’s it! Once you know how, it’s fairly simple to display the costs of custom <em>IShippingMethodService</em>s to the user.</p>
+        
       </content>
+
+      <div class="back-link">
+        <a href="/#blog">&#8592; Back to the blog</a>
+      </div>
 
       <!--<div class="post-footer">
         <span class="related-links">
           <h3>You might also like:</h3>
           <ul>
             
+            <li><a href="/2017/06/07/google-amp-wrong-answer-right-question.html">Google's AMP - The wrong answer to the right question</a></li>
+            
             <li><a href="/2017/05/06/memory-leak-lambdas.html">How to leak memory with lambda expressions</a></li>
             
             <li><a href="/2016/11/10/user-authentication-with-postgres.html">Easy password hashing with Postgres and pgcrypto</a></li>
-            
-            <li><a href="/2016/11/03/routing-in-go-with-vestigo.html">Routing in Go with Vestigo</a></li>
             
           </ul>
         </span>
@@ -146,7 +150,22 @@ set those in addition to whatever your custom service needs, just in case a give
       })();
     </script>  
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Signika" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Signika" rel="stylesheet">
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {}; 
+      _dcs.account = '1265048';
+      
+      (function() {
+        var dc = document.createElement('script');
+        dc.type = 'text/javascript'; dc.async = true; 
+        dc.src = '//tag.getdrip.com/1265048.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
 
   </body>
 </html>

@@ -10,11 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style type="text/css">
-      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;color:#444}html,body{height:100%;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}.content-section{padding:140px 20px}@media all and (min-width: 660px){.content-section{padding:90px 20px}}
+      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;color:#444}html,body{height:100%;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}.content-section{padding:140px 20px}@media all and (min-width: 660px){.content-section{padding:110px 20px}}
     </style>
 
     <style type="text/css">
-      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#a3a3a3;margin-bottom:40px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:40px 0 25px 0;line-height:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content pre{font-size:1.5em}.post content ul,.post content ol{border-left:5px solid #f56e73;padding:5px 0 5px 35px;margin:10px 0}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content img{width:100%}.post content blockquote{border-left:5px solid #f56e73;padding:5px 0 0px 15px;margin:10px 0}
+      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#a3a3a3;margin-bottom:40px}.post .back-link{text-align:center;margin-top:80px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:40px 0 25px 0;line-height:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content pre{font-size:1.5em}.post content ul,.post content ol{border-left:5px solid #f56e73;padding:5px 0 5px 35px;margin:10px 0}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content strong{font-weight:bold}.post content img{max-width:100%;display:block;margin:20px auto}.post content blockquote{border-left:5px solid #f56e73;padding:5px 0 0px 15px;margin:10px 0}
     </style>
 
       <link rel="stylesheet" href="/css/syntax.css"
@@ -35,34 +35,34 @@
 
       <content class="post-content" role="article">
         <p>Lambda expressions are a great feature of C#, but it’s also quite easy to accidentally ‘leak’ memory when using them.</p>
-
-<p>When a lambda expression references a local variable, that expression (and the local variables it references) end up on the heap.
-If you use multiple lambda expressions within the same scope (a method, for example), all of them (and the multiple variables they reference) will have the same lifetime.</p>
-
-<p>In other words; that lambda expression that references the huge array, but is only used in the scope of the method, won’t be disposed when the method returns like you expect.. it will hang around until the last lambda created in that method is collected.</p>
-
-<h1 id="why-your-local-variable-is-heap-allocated">Why your local variable is heap-allocated</h1>
-
-<p>Lambda expressions don’t actually exist in the CLR, they are compiler magic, so we have to do something with them in order for the runtime to understand them.</p>
-
-<p>If your expression doesn’t refer to any local variables, the compiler can create a static method and rewrite your code to call that instead.</p>
-
-<p>If you reference a local variable though, things are a little more complicated..</p>
-
-<p>When you create a lambda expression, it’s perfectly possible that it could outlive the stack-frame. For example; it could be returned from the method or allocated to a member variable somewhere. That’s no good when you use a local variable in that lambda, because that variable might no longer exist when the lambda is used later.</p>
-
-<p>Because of that, the compiler has to keep it all on the heap. It does this by creating a new class with a method containing the contents of your lambda expression. The variables referred to in your expression become member variables in this new class.</p>
-
-<p>Your original code is then re-written to call this new method, safe in the knowledge that the the variables it uses will be there - kept alive in the new class.</p>
-
-<p>Here’s the catch though - if you use multiple lambda expressions in the same method, they are created as methods <em>in the same comiler generated class</em>. That means that every variable used in those expressions will stay alive until that class can be disposed.</p>
-
-<p>Let’s look at an example..</p>
-
-<h1 id="leaky-lambda-expressions-in-practice">Leaky lambda expressions in practice</h1>
-
-<figure class="highlight">
-  <pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+        
+        <p>When a lambda expression references a local variable, that expression (and the local variables it references) end up on the heap.
+        If you use multiple lambda expressions within the same scope (a method, for example), all of them (and the multiple variables they reference) will have the same lifetime.</p>
+        
+        <p>In other words; that lambda expression that references the huge array, but is only used in the scope of the method, won’t be disposed when the method returns like you expect.. it will hang around until the last lambda created in that method is collected.</p>
+        
+        <h1 id="why-your-local-variable-is-heap-allocated">Why your local variable is heap-allocated</h1>
+        
+        <p>Lambda expressions don’t actually exist in the CLR, they are compiler magic, so we have to do something with them in order for the runtime to understand them.</p>
+        
+        <p>If your expression doesn’t refer to any local variables, the compiler can create a static method and rewrite your code to call that instead.</p>
+        
+        <p>If you reference a local variable though, things are a little more complicated..</p>
+        
+        <p>When you create a lambda expression, it’s perfectly possible that it could outlive the stack-frame. For example; it could be returned from the method or allocated to a member variable somewhere. That’s no good when you use a local variable in that lambda, because that variable might no longer exist when the lambda is used later.</p>
+        
+        <p>Because of that, the compiler has to keep it all on the heap. It does this by creating a new class with a method containing the contents of your lambda expression. The variables referred to in your expression become member variables in this new class.</p>
+        
+        <p>Your original code is then re-written to call this new method, safe in the knowledge that the the variables it uses will be there - kept alive in the new class.</p>
+        
+        <p>Here’s the catch though - if you use multiple lambda expressions in the same method, they are created as methods <em>in the same comiler generated class</em>. That means that every variable used in those expressions will stay alive until that class can be disposed.</p>
+        
+        <p>Let’s look at an example..</p>
+        
+        <h1 id="leaky-lambda-expressions-in-practice">Leaky lambda expressions in practice</h1>
+        
+        <figure class="highlight">
+          <pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="n">Func</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">&gt;</span> <span class="n">Add1</span><span class="p">()</span>
     <span class="p">{</span>
@@ -74,20 +74,20 @@ If you use multiple lambda expressions within the same scope (a method, for exam
         <span class="k">return</span> <span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span> <span class="p">+</span> <span class="n">smallThing</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
-</figure>
-
-<p>Here we have a (slightly contrived) method with two lambda expressions. </p>
-
-<p>The first of them refers to a large byte array. It calculates the size of this array so we can write it to the console. We’d expect this to be cleaned up after the method returns.</p>
-
-<p>The other only closes over an integer, and is totally unrelated to the first. We return this lambda to the caller. </p>
-
-<p>Let’s take a look and see how this second expression keeps the large byte array alive.</p>
-
-<p>This is what the compiler generates for this class:</p>
-
-<figure class="highlight">
-  <pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+        </figure>
+        
+        <p>Here we have a (slightly contrived) method with two lambda expressions. </p>
+        
+        <p>The first of them refers to a large byte array. It calculates the size of this array so we can write it to the console. We’d expect this to be cleaned up after the method returns.</p>
+        
+        <p>The other only closes over an integer, and is totally unrelated to the first. We return this lambda to the caller. </p>
+        
+        <p>Let’s take a look and see how this second expression keeps the large byte array alive.</p>
+        
+        <p>This is what the compiler generates for this class:</p>
+        
+        <figure class="highlight">
+          <pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
 <span class="p">{</span>
 <span class="na">    [CompilerGenerated]</span>
     <span class="k">private</span> <span class="k">sealed</span> <span class="k">class</span> <span class="err">&lt;&gt;</span><span class="nc">c__DisplayClass0_0</span>
@@ -119,36 +119,40 @@ If you use multiple lambda expressions within the same scope (a method, for exam
         <span class="k">return</span> <span class="k">new</span> <span class="n">Func</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">&gt;(&lt;&gt;</span><span class="n">c__DisplayClass0_</span><span class="p">.&lt;</span><span class="n">Add1</span><span class="p">&gt;</span><span class="n">b__1</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span></code></pre>
-</figure>
-
-<p>Firstly, you can see that the compiler has generated a new class for us, named <code>&lt;&gt;c_DisplayClass0_0</code>. We can also see that both local variables (<code>bigThing</code> and <code>smallThing</code>) have been hoisted to become members of this common class.</p>
-
-<p>The re-written <code>Add1()</code> method sets these properties, rather than creating local variables.</p>
-
-<p>It then returns a function that refers to the method in our new class, therefore keeping everything alive until this returned function is collected.</p>
-
-<p>Lambdas are a great language feature, but use them with caution.</p>
-
-<p>If you want to find out more about how lambdas work in C#, check out:</p>
-<ul>
-    <li><a href="https://blogs.msdn.microsoft.com/ericlippert/2007/06/06/fyi-c-and-vb-closures-are-per-scope/    " target="_blank">A post on this subject</a> by Eric Lippert</li>
-    <li>A good article on C# closured from <a href="http://www.codethinked.com/c-closures-explained" target="_blank">CodeThinked</a></li>
-
-    
-</ul>
-
+        </figure>
+        
+        <p>Firstly, you can see that the compiler has generated a new class for us, named <code>&lt;&gt;c_DisplayClass0_0</code>. We can also see that both local variables (<code>bigThing</code> and <code>smallThing</code>) have been hoisted to become members of this common class.</p>
+        
+        <p>The re-written <code>Add1()</code> method sets these properties, rather than creating local variables.</p>
+        
+        <p>It then returns a function that refers to the method in our new class, therefore keeping everything alive until this returned function is collected.</p>
+        
+        <p>Lambdas are a great language feature, but use them with caution.</p>
+        
+        <p>If you want to find out more about how lambdas work in C#, check out:</p>
+        <ul>
+            <li><a href="https://blogs.msdn.microsoft.com/ericlippert/2007/06/06/fyi-c-and-vb-closures-are-per-scope/    " target="_blank">A post on this subject</a> by Eric Lippert</li>
+            <li>A good article on C# closured from <a href="http://www.codethinked.com/c-closures-explained" target="_blank">CodeThinked</a></li>
+        
+            
+        </ul>
+        
       </content>
+
+      <div class="back-link">
+        <a href="/#blog">&#8592; Back to the blog</a>
+      </div>
 
       <!--<div class="post-footer">
         <span class="related-links">
           <h3>You might also like:</h3>
           <ul>
             
+            <li><a href="/2017/06/07/google-amp-wrong-answer-right-question.html">Google's AMP - The wrong answer to the right question</a></li>
+            
             <li><a href="/2016/11/10/user-authentication-with-postgres.html">Easy password hashing with Postgres and pgcrypto</a></li>
             
             <li><a href="/2016/11/03/routing-in-go-with-vestigo.html">Routing in Go with Vestigo</a></li>
-            
-            <li><a href="/2015/05/10/how-to-ask-for-estimates.html">How to ask for software estimates</a></li>
             
           </ul>
         </span>
@@ -174,7 +178,22 @@ If you use multiple lambda expressions within the same scope (a method, for exam
       })();
     </script>  
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Signika" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Signika" rel="stylesheet">
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {}; 
+      _dcs.account = '1265048';
+      
+      (function() {
+        var dc = document.createElement('script');
+        dc.type = 'text/javascript'; dc.async = true; 
+        dc.src = '//tag.getdrip.com/1265048.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
 
   </body>
 </html>

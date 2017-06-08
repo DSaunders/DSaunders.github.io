@@ -10,11 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style type="text/css">
-      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;color:#444}html,body{height:100%;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}.content-section{padding:140px 20px}@media all and (min-width: 660px){.content-section{padding:90px 20px}}
+      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;color:#444}html,body{height:100%;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}.content-section{padding:140px 20px}@media all and (min-width: 660px){.content-section{padding:110px 20px}}
     </style>
 
     <style type="text/css">
-      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#a3a3a3;margin-bottom:40px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:40px 0 25px 0;line-height:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content pre{font-size:1.5em}.post content ul,.post content ol{border-left:5px solid #f56e73;padding:5px 0 5px 35px;margin:10px 0}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content img{width:100%}.post content blockquote{border-left:5px solid #f56e73;padding:5px 0 0px 15px;margin:10px 0}
+      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#a3a3a3;margin-bottom:40px}.post .back-link{text-align:center;margin-top:80px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:40px 0 25px 0;line-height:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content pre{font-size:1.5em}.post content ul,.post content ol{border-left:5px solid #f56e73;padding:5px 0 5px 35px;margin:10px 0}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content strong{font-weight:bold}.post content img{max-width:100%;display:block;margin:20px auto}.post content blockquote{border-left:5px solid #f56e73;padding:5px 0 0px 15px;margin:10px 0}
     </style>
 
       <link rel="stylesheet" href="/css/syntax.css"
@@ -35,55 +35,59 @@
 
       <content class="post-content" role="article">
         <p>Everybody has their threshold, the point where the nice shiny new DevOps process goes out of the window  and it’s just easier to do it the old way.</p>
-
-<p>I reached mine at 7:15pm.  After hours of struggling with deployments, it was just easier to change the code on the live site and commit it to source control later.  That brilliant new Continuous Integration pipeline went out of the window and was replaced by a copy of Notepad.  I knew it was wrong, and I felt bad afterwards, but I did it anyway.</p>
-
-<p>When we cross this threshold we try to justify it to ourselves; ‘it was too urgent to do it the proper way’, ‘it’s OK just this once’ etc.  But the truth is, it’s not our fault…</p>
-
-<h1 id="humans-are-lazy-developers-are-efficient-we-are-both">Humans are lazy, developers are efficient.. we are both.</h1>
-
-<p>Humans are programmed to be lazy.  Why expend needless effort doing it the long way when we can do it quicker and move on to something else?  We will always tend towards the path of least resistance.</p>
-
-<p>As developers, we spend all day looking for the most efficient way to do something.  That usually means the easiest and fastest solution to the problem at hand.</p>
-
-<p>We can resist these instincts for a while if we know the harder way is the right way, but that will only last for so long.   When our back is against the wall and the pressure is on, we will always cheat.</p>
-
-<h1 id="the-5to5-test">The 5to5 test</h1>
-
-<p>With that in mind, I would like to propose a new metric to measure the maturity of a DevOps process.  The ’5to5 test’.</p>
-
-<p>The test is simple:</p>
-
-<p>When it’s 5 minutes to 5 o’clock on a Friday afternoon and you need to get home for the weekend, is it easier to use your new process or just do it ‘the old way’?</p>
-
-<p>Hopefully, your threshold won’t be 5 to 5, it might be 7:15pm like me.  If you’re really keen you might hold out until 3am, but eventually you will break and choose the easy path to get the job done.</p>
-
-<h1 id="passing-the-5-to-5-test">Passing the 5 to 5 test.</h1>
-
-<p>There are two ways to make sure your process passes the test; make the new process easier or make the old process harder.</p>
-
-<p>By making the old process harder, you force developers to abide by the rules.If developers cannot access the server, they can’t change code on the live site. If you don’t physically let developers out of the door until they have committed their code then it won’t remain on their local machine rather than in the repository.</p>
-
-<p>I would argue, however, that this is neither sustainable or sensible.  If you have to enforce artificial barriers on developers to coerce them into using your new system, then it is not mature enough to completely replace the old one.  It doesn’t mean that the new way is wrong, just that it needs more work to make it the default behaviour.</p>
-
-<p>The more sensible solution is to make it so easy to follow the correct way, that it becomes natural.  For example, I failed to follow the correct process because it would take 10 minutes to go through the Continuous Integration pipeline and get my code on to the live site.  It doesn’t mean that our CI solution is wrong, far from it, it just means that it is not mature enough yet to be the default action by a desperate developer under pressure.</p>
-
-<p>I don’t know if it’s possible to every make any DevOps process easier than ‘cheating’, but that’s the goal we should be striving for.  Perhaps, if it was possible to deploy my code through the CI solution in only 5 minutes, I would have held out another hour before reverting to Notepad.  That’s not perfect, but it’s an improvement.</p>
-
-<p>How many of your DevOps processes would pass the 5 to 5 test?</p>
-
+        
+        <p>I reached mine at 7:15pm.  After hours of struggling with deployments, it was just easier to change the code on the live site and commit it to source control later.  That brilliant new Continuous Integration pipeline went out of the window and was replaced by a copy of Notepad.  I knew it was wrong, and I felt bad afterwards, but I did it anyway.</p>
+        
+        <p>When we cross this threshold we try to justify it to ourselves; ‘it was too urgent to do it the proper way’, ‘it’s OK just this once’ etc.  But the truth is, it’s not our fault…</p>
+        
+        <h1 id="humans-are-lazy-developers-are-efficient-we-are-both">Humans are lazy, developers are efficient.. we are both.</h1>
+        
+        <p>Humans are programmed to be lazy.  Why expend needless effort doing it the long way when we can do it quicker and move on to something else?  We will always tend towards the path of least resistance.</p>
+        
+        <p>As developers, we spend all day looking for the most efficient way to do something.  That usually means the easiest and fastest solution to the problem at hand.</p>
+        
+        <p>We can resist these instincts for a while if we know the harder way is the right way, but that will only last for so long.   When our back is against the wall and the pressure is on, we will always cheat.</p>
+        
+        <h1 id="the-5to5-test">The 5to5 test</h1>
+        
+        <p>With that in mind, I would like to propose a new metric to measure the maturity of a DevOps process.  The ’5to5 test’.</p>
+        
+        <p>The test is simple:</p>
+        
+        <p>When it’s 5 minutes to 5 o’clock on a Friday afternoon and you need to get home for the weekend, is it easier to use your new process or just do it ‘the old way’?</p>
+        
+        <p>Hopefully, your threshold won’t be 5 to 5, it might be 7:15pm like me.  If you’re really keen you might hold out until 3am, but eventually you will break and choose the easy path to get the job done.</p>
+        
+        <h1 id="passing-the-5-to-5-test">Passing the 5 to 5 test.</h1>
+        
+        <p>There are two ways to make sure your process passes the test; make the new process easier or make the old process harder.</p>
+        
+        <p>By making the old process harder, you force developers to abide by the rules.If developers cannot access the server, they can’t change code on the live site. If you don’t physically let developers out of the door until they have committed their code then it won’t remain on their local machine rather than in the repository.</p>
+        
+        <p>I would argue, however, that this is neither sustainable or sensible.  If you have to enforce artificial barriers on developers to coerce them into using your new system, then it is not mature enough to completely replace the old one.  It doesn’t mean that the new way is wrong, just that it needs more work to make it the default behaviour.</p>
+        
+        <p>The more sensible solution is to make it so easy to follow the correct way, that it becomes natural.  For example, I failed to follow the correct process because it would take 10 minutes to go through the Continuous Integration pipeline and get my code on to the live site.  It doesn’t mean that our CI solution is wrong, far from it, it just means that it is not mature enough yet to be the default action by a desperate developer under pressure.</p>
+        
+        <p>I don’t know if it’s possible to every make any DevOps process easier than ‘cheating’, but that’s the goal we should be striving for.  Perhaps, if it was possible to deploy my code through the CI solution in only 5 minutes, I would have held out another hour before reverting to Notepad.  That’s not perfect, but it’s an improvement.</p>
+        
+        <p>How many of your DevOps processes would pass the 5 to 5 test?</p>
+        
       </content>
+
+      <div class="back-link">
+        <a href="/#blog">&#8592; Back to the blog</a>
+      </div>
 
       <!--<div class="post-footer">
         <span class="related-links">
           <h3>You might also like:</h3>
           <ul>
             
+            <li><a href="/2017/06/07/google-amp-wrong-answer-right-question.html">Google's AMP - The wrong answer to the right question</a></li>
+            
             <li><a href="/2017/05/06/memory-leak-lambdas.html">How to leak memory with lambda expressions</a></li>
             
             <li><a href="/2016/11/10/user-authentication-with-postgres.html">Easy password hashing with Postgres and pgcrypto</a></li>
-            
-            <li><a href="/2016/11/03/routing-in-go-with-vestigo.html">Routing in Go with Vestigo</a></li>
             
           </ul>
         </span>
@@ -109,7 +113,22 @@
       })();
     </script>  
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Signika" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Signika" rel="stylesheet">
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {}; 
+      _dcs.account = '1265048';
+      
+      (function() {
+        var dc = document.createElement('script');
+        dc.type = 'text/javascript'; dc.async = true; 
+        dc.src = '//tag.getdrip.com/1265048.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
 
   </body>
 </html>

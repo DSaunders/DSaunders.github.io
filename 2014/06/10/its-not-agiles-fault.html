@@ -10,11 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style type="text/css">
-      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;color:#444}html,body{height:100%;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}.content-section{padding:140px 20px}@media all and (min-width: 660px){.content-section{padding:90px 20px}}
+      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;color:#444}html,body{height:100%;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}.content-section{padding:140px 20px}@media all and (min-width: 660px){.content-section{padding:110px 20px}}
     </style>
 
     <style type="text/css">
-      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#a3a3a3;margin-bottom:40px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:40px 0 25px 0;line-height:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content pre{font-size:1.5em}.post content ul,.post content ol{border-left:5px solid #f56e73;padding:5px 0 5px 35px;margin:10px 0}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content img{width:100%}.post content blockquote{border-left:5px solid #f56e73;padding:5px 0 0px 15px;margin:10px 0}
+      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#a3a3a3;margin-bottom:40px}.post .back-link{text-align:center;margin-top:80px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:40px 0 25px 0;line-height:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content pre{font-size:1.5em}.post content ul,.post content ol{border-left:5px solid #f56e73;padding:5px 0 5px 35px;margin:10px 0}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content strong{font-weight:bold}.post content img{max-width:100%;display:block;margin:20px auto}.post content blockquote{border-left:5px solid #f56e73;padding:5px 0 0px 15px;margin:10px 0}
     </style>
 
       <link rel="stylesheet" href="/css/syntax.css"
@@ -35,93 +35,97 @@
 
       <content class="post-content" role="article">
         <p>Recently, <a href="https://twitter.com/mikehadlow">Mike Hadlow</a> wrote a great article entitled <a href="http://mikehadlow.blogspot.co.uk/2014/06/heisenberg-developers.html">‘Heisenberg Developers’</a>.</p>
-
-<p>The article is essentially a story about how management brought in what I’ll call an ‘agile-ish’ process.</p>
-
-<p>The article is a great cautionary tale about how not to alienate your development team. I  would like to contrast Mike’s story with my experience of working in agile teams. I’m worried that there are other people in the same situation as Mike, who will turn against ‘Agile’ because of similar experiences.</p>
-
-<p>It doesn’t have to be this way..</p>
-
-<h1 id="micro-management-of-features">Micro-management of features</h1>
-
-<p>Mike describes how a process was put in place that required developers to split larger requirements into smaller tasks, until everything was less than a day long.</p>
-
-<p>He talks about  how the developers that stayed with the organisation during this change (or came in afterwards) were a different type of developer; less passionate programmers who were happy to work on one small task at a time and not think about the bigger picture.</p>
-
-<blockquote>
-  <p>As one explained to me, “you take the next item off the list, do the work, check it in, and you don’t have to worry about it.”</p>
-</blockquote>
-
-<p>This is definitely a danger; I’ve met the developers who are happy to work on their task in isolation, with no interest in the overall design.</p>
-
-<p>The solution is this.. don’t hire these people. I do think that some agile processes can make it easy to hide this kind of behaviour for a while, but no agile evangelist worth their salt will advocate that a developer isolates themselves and just churns out features with no awareness of the overall picture.</p>
-
-<p>Once a developer works on a user story, that story belongs to them. They are responsible for seeing it all the way through to production. If it doesn’t play nice with others, it’s their responsibility. If it doesn’t fit into the way the guy across the office is architecting his solution, it’s their responsibility. That way, the team is forced to work together and develop an architecture that works for everybody.</p>
-
-<p>Breaking larger features into smaller tasks has other benefits too. It forces the stakeholder to be more specific about their requirements. It would love to be able to spend a few weeks working on a feature totally uninterrupted. The chances are though, that what I develop would have little relation to what the stakeholder wanted. Small user-stories force this out into the open before we write a single line of code.</p>
-
-<h1 id="sprint-planning">Sprint planning</h1>
-
-<blockquote>
-  <p>As soon as you ask a developer to tell you exactly what he’s going to do over the next 8 days (or worse weeks or months), you kill much of the creativity and serendipity.</p>
-</blockquote>
-
-<p>I totally agree, but I think there’s a difference between forcing a developer to predict every hour of the next sprint, and just prioritising tasks.</p>
-
-<p>Sprint planning should be about deciding what is going to add most value to the business over the next couple of weeks, and deciding how much of it can reasonably be done.</p>
-
-<p>Developers should not be tied strictly to these estimates; sometimes we get it right, often we get it wildly wrong. It happens (and the business should be able to deal with it), but it’s reasonable to expect us to provide at least an indication of how long something will take.</p>
-
-<p>I dislike estimates as much as the next guy, but if I was paying the bills, I’d like to have at least a rough idea what functionality I was going to be getting for the next 2 weeks of my development budget.</p>
-
-<h1 id="lack-of-refactoring">Lack of refactoring</h1>
-
-<p>Mike talks about how they could not refactor their code when they needed to.</p>
-
-<blockquote>
-  <p>Whenever there was any debate about refactoring the code, or backing out of a problematic feature, the new guys would argue against it, saying it was ‘ivory tower’, and not delivering features. The PM would veto the work and side with the new guys.</p>
-</blockquote>
-
-<p>I have to say that refactoring is not automatically out of the question in an agile team. I have worked in a team where I would be quite confident to approach the PM and tell them that I would have to take a little longer over the current user-story because I needed to refactor a related part of the code.</p>
-
-<p>A user-story is not ‘done’ until the developer is happy with the code. If a developer finds something they can improve along the way, it is their professional responsibility to fix it. Not doing so will ultimately slow the project down in the long run (as Mike describes in his article) as the technical debt mounts up.</p>
-
-<h1 id="being-measured">Being measured</h1>
-
-<p>The crux of the article is that by measuring a developer, you slow them down. Whilst I think this is true in the case of Mike’s team, with Mike’s management, I don’t think it’s always true.</p>
-
-<p>I’m a data geek, and I actually love having metrics around the development process. I want to know how many story points are left in the sprint; how many stories are queued up for the next live release; how much technical debt we are carrying. Knowing this stuff makes the team better and tells us where the process works and where it doesn’t.</p>
-
-<p>The danger of this is that we measure <em>developers</em> instead of the <em>team</em>. The metrics are designed to make the team more efficient, if we start to hold individual developers accountable then it becomes every man for himself and all is lost.</p>
-
-<h1 id="conclusion">Conclusion</h1>
-
-<p>I agree with almost everything Mike says in his article. I would have the same feelings had I been in that team. To be clear, Mike never once says that the entire ‘agile’ process is wrong.</p>
-
-<p>I think it’s important however, to explicitly disassociate teams like that with the overall goal of ‘doing agile’.</p>
-
-<p>Whatever names people dream up for the agile process to put on their certificates, the whole point of it is to be able to adapt to improve the overall team.</p>
-
-<p>In Mike’s instance, the process wasn’t working. The <em>truly agile</em> thing for management to do in that organisation would be to rethink the process.</p>
-
-<p>If you read Mark’s article and you are in the same boat, please don’t let it put you off any of the concepts the management were <em>trying</em> (badly) to introduce.</p>
-
-<p>Some organisations are dysfunctional and just happen to be trying out agile processes..</p>
-
-<p>These places would be dysfunctional regardless, <strong>it’s not Agile’s fault</strong>.</p>
-
+        
+        <p>The article is essentially a story about how management brought in what I’ll call an ‘agile-ish’ process.</p>
+        
+        <p>The article is a great cautionary tale about how not to alienate your development team. I  would like to contrast Mike’s story with my experience of working in agile teams. I’m worried that there are other people in the same situation as Mike, who will turn against ‘Agile’ because of similar experiences.</p>
+        
+        <p>It doesn’t have to be this way..</p>
+        
+        <h1 id="micro-management-of-features">Micro-management of features</h1>
+        
+        <p>Mike describes how a process was put in place that required developers to split larger requirements into smaller tasks, until everything was less than a day long.</p>
+        
+        <p>He talks about  how the developers that stayed with the organisation during this change (or came in afterwards) were a different type of developer; less passionate programmers who were happy to work on one small task at a time and not think about the bigger picture.</p>
+        
+        <blockquote>
+          <p>As one explained to me, “you take the next item off the list, do the work, check it in, and you don’t have to worry about it.”</p>
+        </blockquote>
+        
+        <p>This is definitely a danger; I’ve met the developers who are happy to work on their task in isolation, with no interest in the overall design.</p>
+        
+        <p>The solution is this.. don’t hire these people. I do think that some agile processes can make it easy to hide this kind of behaviour for a while, but no agile evangelist worth their salt will advocate that a developer isolates themselves and just churns out features with no awareness of the overall picture.</p>
+        
+        <p>Once a developer works on a user story, that story belongs to them. They are responsible for seeing it all the way through to production. If it doesn’t play nice with others, it’s their responsibility. If it doesn’t fit into the way the guy across the office is architecting his solution, it’s their responsibility. That way, the team is forced to work together and develop an architecture that works for everybody.</p>
+        
+        <p>Breaking larger features into smaller tasks has other benefits too. It forces the stakeholder to be more specific about their requirements. It would love to be able to spend a few weeks working on a feature totally uninterrupted. The chances are though, that what I develop would have little relation to what the stakeholder wanted. Small user-stories force this out into the open before we write a single line of code.</p>
+        
+        <h1 id="sprint-planning">Sprint planning</h1>
+        
+        <blockquote>
+          <p>As soon as you ask a developer to tell you exactly what he’s going to do over the next 8 days (or worse weeks or months), you kill much of the creativity and serendipity.</p>
+        </blockquote>
+        
+        <p>I totally agree, but I think there’s a difference between forcing a developer to predict every hour of the next sprint, and just prioritising tasks.</p>
+        
+        <p>Sprint planning should be about deciding what is going to add most value to the business over the next couple of weeks, and deciding how much of it can reasonably be done.</p>
+        
+        <p>Developers should not be tied strictly to these estimates; sometimes we get it right, often we get it wildly wrong. It happens (and the business should be able to deal with it), but it’s reasonable to expect us to provide at least an indication of how long something will take.</p>
+        
+        <p>I dislike estimates as much as the next guy, but if I was paying the bills, I’d like to have at least a rough idea what functionality I was going to be getting for the next 2 weeks of my development budget.</p>
+        
+        <h1 id="lack-of-refactoring">Lack of refactoring</h1>
+        
+        <p>Mike talks about how they could not refactor their code when they needed to.</p>
+        
+        <blockquote>
+          <p>Whenever there was any debate about refactoring the code, or backing out of a problematic feature, the new guys would argue against it, saying it was ‘ivory tower’, and not delivering features. The PM would veto the work and side with the new guys.</p>
+        </blockquote>
+        
+        <p>I have to say that refactoring is not automatically out of the question in an agile team. I have worked in a team where I would be quite confident to approach the PM and tell them that I would have to take a little longer over the current user-story because I needed to refactor a related part of the code.</p>
+        
+        <p>A user-story is not ‘done’ until the developer is happy with the code. If a developer finds something they can improve along the way, it is their professional responsibility to fix it. Not doing so will ultimately slow the project down in the long run (as Mike describes in his article) as the technical debt mounts up.</p>
+        
+        <h1 id="being-measured">Being measured</h1>
+        
+        <p>The crux of the article is that by measuring a developer, you slow them down. Whilst I think this is true in the case of Mike’s team, with Mike’s management, I don’t think it’s always true.</p>
+        
+        <p>I’m a data geek, and I actually love having metrics around the development process. I want to know how many story points are left in the sprint; how many stories are queued up for the next live release; how much technical debt we are carrying. Knowing this stuff makes the team better and tells us where the process works and where it doesn’t.</p>
+        
+        <p>The danger of this is that we measure <em>developers</em> instead of the <em>team</em>. The metrics are designed to make the team more efficient, if we start to hold individual developers accountable then it becomes every man for himself and all is lost.</p>
+        
+        <h1 id="conclusion">Conclusion</h1>
+        
+        <p>I agree with almost everything Mike says in his article. I would have the same feelings had I been in that team. To be clear, Mike never once says that the entire ‘agile’ process is wrong.</p>
+        
+        <p>I think it’s important however, to explicitly disassociate teams like that with the overall goal of ‘doing agile’.</p>
+        
+        <p>Whatever names people dream up for the agile process to put on their certificates, the whole point of it is to be able to adapt to improve the overall team.</p>
+        
+        <p>In Mike’s instance, the process wasn’t working. The <em>truly agile</em> thing for management to do in that organisation would be to rethink the process.</p>
+        
+        <p>If you read Mark’s article and you are in the same boat, please don’t let it put you off any of the concepts the management were <em>trying</em> (badly) to introduce.</p>
+        
+        <p>Some organisations are dysfunctional and just happen to be trying out agile processes..</p>
+        
+        <p>These places would be dysfunctional regardless, <strong>it’s not Agile’s fault</strong>.</p>
+        
       </content>
+
+      <div class="back-link">
+        <a href="/#blog">&#8592; Back to the blog</a>
+      </div>
 
       <!--<div class="post-footer">
         <span class="related-links">
           <h3>You might also like:</h3>
           <ul>
             
+            <li><a href="/2017/06/07/google-amp-wrong-answer-right-question.html">Google's AMP - The wrong answer to the right question</a></li>
+            
             <li><a href="/2017/05/06/memory-leak-lambdas.html">How to leak memory with lambda expressions</a></li>
             
             <li><a href="/2016/11/10/user-authentication-with-postgres.html">Easy password hashing with Postgres and pgcrypto</a></li>
-            
-            <li><a href="/2016/11/03/routing-in-go-with-vestigo.html">Routing in Go with Vestigo</a></li>
             
           </ul>
         </span>
@@ -147,7 +151,22 @@
       })();
     </script>  
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Signika" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Signika" rel="stylesheet">
+
+    <!-- Drip -->
+    <script type="text/javascript">
+      var _dcq = _dcq || [];
+      var _dcs = _dcs || {}; 
+      _dcs.account = '1265048';
+      
+      (function() {
+        var dc = document.createElement('script');
+        dc.type = 'text/javascript'; dc.async = true; 
+        dc.src = '//tag.getdrip.com/1265048.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(dc, s);
+      })();
+    </script>
 
   </body>
 </html>
