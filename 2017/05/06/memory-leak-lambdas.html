@@ -51,7 +51,7 @@
         
         <p>When you create a lambda expression, it’s perfectly possible that it could outlive the stack-frame. For example; it could be returned from the method or allocated to a member variable somewhere. That’s no good when you use a local variable in that lambda, because that variable might no longer exist when the lambda is used later.</p>
         
-        <p>Because of that, the compiler has to keep it all on the heap. It does this by creating a new class with a method containing the contents of your lambda expression. The variables referred to in your expression become member variables in this new class.</p>
+        <p>Because of that, the compiler has to keep it all on the heap. It does this by creating a new class with a method containing the contents of your lambda expression. The variables referenced in your expression become member variables in this new class.</p>
         
         <p>Your original code is then re-written to call this new method, safe in the knowledge that the the variables it uses will be there - kept alive in the new class.</p>
         
@@ -194,7 +194,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Signika" rel="stylesheet">
 
     <!-- Drip -->
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       var _dcq = _dcq || [];
       var _dcs = _dcs || {}; 
       _dcs.account = '1265048';
@@ -206,7 +206,7 @@
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(dc, s);
       })();
-    </script>
+    </script> -->
 
   </body>
 </html>
