@@ -10,23 +10,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style type="text/css">
-      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;color:#444}html,body{height:100%;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}.content-section{padding:140px 20px}@media all and (min-width: 660px){.content-section{padding:110px 20px}}
+      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}html,body{height:100%;color:#444;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header ul li{display:inline-block;list-style:none;border-right:1px solid #a3a3a3}header ul li:last-of-type{border:0}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}header a.active{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}.content-section{padding:160px 20px 0 20px}@media all and (min-width: 660px){.content-section{padding:130px 20px 0 20px}}
     </style>
 
     <style type="text/css">
-      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#a3a3a3;margin-bottom:40px}.post .back-link{text-align:center;margin-top:80px;margin-bottom:80px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:40px 0 25px 0;line-height:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content pre{font-size:1.5em}.post content blockquote,.post content ul,.post content ol{border-left:5px solid #f56e73;margin:10px 0}.post content blockquote{padding:5px 0 0px 15px}.post content ul,.post content ol{padding:5px 0 5px 35px}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content strong{font-weight:bold}.post content img{max-width:100%;display:block;margin:20px auto}
+      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#a3a3a3;margin-bottom:40px}.post .back-link{text-align:center;margin-top:80px;margin-bottom:80px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:40px 0 25px 0;line-height:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content pre{font-size:1.5em}.post content blockquote,.post content ul,.post content ol{border-left:5px solid #f56e73;margin:10px 0}.post content blockquote{padding:5px 0 0px 15px}.post content ul,.post content ol{padding:5px 0 5px 35px}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content strong{font-weight:bold}.post content img{max-width:100%;display:block;margin:20px auto}footer{padding:20px;width:100%;text-align:center;padding:25px 0;bottom:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;flex-direction:column;color:white;border-top:20px solid white;background:#f56e73;position:fixed}footer h2{display:inline-block;margin-bottom:10px;border-bottom:1px solid #fccdcf}footer p{border-bottom:1px solid #fccdcf}footer a{color:white}footer a:visited,footer a:active,footer a:hover{color:white}@media all and (min-width: 660px){.content-section{padding-bottom:100px}}
     </style>
 
-      <link rel="stylesheet" href="/css/syntax.css"
+    <link rel="stylesheet" href="/css/syntax.css" />
   </head>
 
   <body class="blog-post">
 
     <header>        
-        <h1><a href="/">Dave Saunders</a></h1>
-        <a href="/#blog">Blog</a>
-        <a href="/#contact">Contact</a>
-    </header>
+      <h1><a href="/">Dave Saunders</a></h1>
+      <ul>        
+        <li><a  class="active"  href="/#blog">Blog</a></li>
+        <li><a  href="/write-better-code.html">Write better code</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </header>   
 
     <div class="post content-section">
 
@@ -58,7 +61,7 @@
         <p><a href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3968</a> says:</p>
         
         <blockquote>
-          <p>The query component contains non-hierarchical data that, along with data in the path component (Section 3.3), serves to identify a resource </p>
+          <p>The query component contains non-hierarchical data that, along with data in the path component (Section 3.3), serves to identify a resource</p>
         </blockquote>
         
         <p>Which seems to indicate that we can use the query string to help represent the resource. I would argue that <em>offset</em> and <em>limit</em> information is ‘non-hierarchical’ data, and thus is permitted.</p>
@@ -74,7 +77,7 @@
         <p>Here is an example (this uses the <a href="http://stateless.co/hal_specification.html">HAL</a> schema for JSON, others are available):</p>
         
         <figure class="highlight">
-          <pre><code class="language-csharp" data-lang="csharp"><span class="p">{</span>
+          <pre><code class="language-csharp" data-lang="csharp"><span></span><span class="p">{</span>
     <span class="s">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s">&quot;self&quot;</span><span class="p">:</span>  <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products?offset=40&amp;limit=40&quot;</span>  <span class="p">},</span>
         <span class="s">&quot;first&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products?offset=0&amp;limit=40&quot;</span>   <span class="p">},</span>
@@ -92,7 +95,7 @@
         <p>We need to be able to link to this resource from other pages, for example:</p>
         
         <figure class="highlight">
-          <pre><code class="language-csharp" data-lang="csharp"><span class="p">{</span>
+          <pre><code class="language-csharp" data-lang="csharp"><span></span><span class="p">{</span>
     <span class="s">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
     	<span class="s">&quot;self&quot;</span><span class="p">:</span>      <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/&quot;</span> <span class="p">},</span>
         <span class="s">&quot;products&quot;</span><span class="p">:</span>  <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products&quot;</span> <span class="p">}</span>
@@ -111,7 +114,7 @@
         <p>Another option is to link the the first page:</p>
         
         <figure class="highlight">
-          <pre><code class="language-csharp" data-lang="csharp"><span class="p">{</span>
+          <pre><code class="language-csharp" data-lang="csharp"><span></span><span class="p">{</span>
     <span class="s">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
     	<span class="s">&quot;self&quot;</span><span class="p">:</span>      <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/&quot;</span> <span class="p">},</span>
         <span class="s">&quot;products&quot;</span><span class="p">:</span>  <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products?offset=0&amp;limit=40&quot;</span> <span class="p">}</span>
@@ -128,7 +131,7 @@
         <p>For our <code>products</code> resource, it would look like this:</p>
         
         <figure class="highlight">
-          <pre><code class="language-csharp" data-lang="csharp"><span class="p">{</span>
+          <pre><code class="language-csharp" data-lang="csharp"><span></span><span class="p">{</span>
     <span class="s">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
     	<span class="s">&quot;self&quot;</span><span class="p">:</span>      <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/&quot;</span> <span class="p">},</span>
         <span class="s">&quot;products&quot;</span><span class="p">:</span>  <span class="p">{</span> <span class="s">&quot;href&quot;</span><span class="p">:</span> <span class="s">&quot;/api/products{?offset,limit}&quot;</span> <span class="p">}</span>
@@ -155,7 +158,7 @@
         	<li>Uniform Resource Identifier (URI): Generic Syntax : <a href="http://www.ietf.org/rfc/rfc3986.txt">(RFC 3968)</a></li>
         	<li>Hypertext Application Language <a href="http://stateless.co/hal_specification.html">(HAL)</a></li>
         	<li>The URI Templating Spec <a href="http://tools.ietf.org/html/rfc6570">(RFC6570)</a></li>
-        
+        &lt;/ul&gt;
         
         
         </li></ul>
@@ -166,35 +169,13 @@
         <a href="/#blog">&#8592; Back to the blog</a>
       </div>
 
-      <!--<div class="post-footer">
-        <span class="related-links">
-          <h3>You might also like:</h3>
-          <ul>
-            
-            <li><a href="/2017/06/07/google-amp-wrong-answer-right-question.html">Google's AMP - The wrong answer to the right question</a></li>
-            
-            <li><a href="/2017/05/06/memory-leak-lambdas.html">How to leak memory with lambda expressions</a></li>
-            
-            <li><a href="/2016/11/10/user-authentication-with-postgres.html">Easy password hashing with Postgres and pgcrypto</a></li>
-            
-          </ul>
-        </span>
-      </div>-->
-
-      <div id="disqus_thread"></div>
-      <script>
-      
-      (function() { // DON'T EDIT BELOW THIS LINE
-      var d = document, s = d.createElement('script');
-      s.src = 'https://davejsaunders.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-      })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                                  
-
     </div>
+
+    <footer>     
+      <a  href="/write-better-code.html">
+        <p>Want to write better code, with one short email a week?</p>      
+      </a>
+    </footer>
 
     
     <!-- Google Analytics -->
@@ -214,22 +195,7 @@
       })();
     </script>  
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Signika" rel="stylesheet">
-
-    <!-- Drip -->
-    <!-- <script type="text/javascript">
-      var _dcq = _dcq || [];
-      var _dcs = _dcs || {}; 
-      _dcs.account = '1265048';
-      
-      (function() {
-        var dc = document.createElement('script');
-        dc.type = 'text/javascript'; dc.async = true; 
-        dc.src = '//tag.getdrip.com/1265048.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(dc, s);
-      })();
-    </script> -->
-
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Signika&display=swap" rel="stylesheet">
   </body>
+
 </html>
