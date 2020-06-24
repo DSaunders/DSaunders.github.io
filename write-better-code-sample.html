@@ -14,7 +14,7 @@
     </style>
       
     <style type="text/css">
-      body{background-color:#fdfdfd}#write-better-code-sample{width:100%;max-width:750px;margin:0 auto}#write-better-code-sample .email{border:2px solid #d6d6d6;border-radius:10px;background-color:white;-webkit-box-shadow:0px -1px 10px -2px #c4c4c4;-moz-box-shadow:0px -1px 10px -2px #c4c4c4;box-shadow:0px -1px 10px -2px #c4c4c4}#write-better-code-sample .email .email-field{border-bottom:2px solid #d6d6d6;padding:15px 15px 5px 15px}@media all and (min-width: 530px){#write-better-code-sample .email .email-field{padding:15px 20px 5px 20px}}#write-better-code-sample .email .email-field h3{display:inline-block;font-size:1em;width:75px}#write-better-code-sample .email .email-field h3.subject-title{margin-bottom:10px}@media all and (min-width: 530px){#write-better-code-sample .email .email-field h3{width:80px}}#write-better-code-sample .email .email-field p{display:inline-block}#write-better-code-sample .email .email-field p.to{color:#a3a3a3}#write-better-code-sample .email .email-field p.subject{color:#f56e73}#write-better-code-sample .email .email-body{padding:30px}#write-better-code-sample p{margin-bottom:10px}#write-better-code-sample p.hello{margin-bottom:30px}#write-better-code-sample p.signoff{margin-top:30px}#write-better-code-sample pre{font-size:1.5em}#write-better-code-sample i{padding-right:2px}#write-better-code-sample small{display:block;margin-top:30px;color:#a3a3a3}.content-section{padding-top:40px}.back-link{text-align:center;margin-top:40px;margin-bottom:80px}
+      body{background-color:#f7f7f7;color:#535151}#write-better-code-sample{width:100%;max-width:600px;margin:0 auto}#write-better-code-sample .email{border-radius:3px;background-color:white}#write-better-code-sample .email .email-field{border-bottom:2px solid #d6d6d6;padding:15px 15px 5px 15px}@media all and (min-width: 530px){#write-better-code-sample .email .email-field{padding:15px 20px 5px 20px}}#write-better-code-sample .email .email-field h3{display:inline-block;font-size:1em;width:75px}#write-better-code-sample .email .email-field h3.subject-title{margin-bottom:10px}@media all and (min-width: 530px){#write-better-code-sample .email .email-field h3{width:80px}}#write-better-code-sample .email .email-field p{display:inline-block}#write-better-code-sample .email .email-field p.to{color:#a3a3a3}#write-better-code-sample .email .email-field p.subject{color:#f56e73}#write-better-code-sample .email .email-body{padding:30px}#write-better-code-sample p{margin-bottom:15px}#write-better-code-sample p.hello{margin-bottom:30px}#write-better-code-sample p.signoff{margin-top:30px;margin-bottom:35px}#write-better-code-sample pre{font-size:1.5em}#write-better-code-sample i{padding-right:2px}#write-better-code-sample small{display:block;margin-top:30px;color:#a3a3a3;text-align:center;line-height:2em;font-size:0.8em}#write-better-code-sample img{width:100%;margin:30px 0}#write-better-code-sample hr{color:#f5f5f5;margin:30px 0}.content-section{padding-top:40px}.back-link{text-align:center;margin-top:40px;margin-bottom:80px}
     </style>
     <link rel="stylesheet" href="/css/syntax.css" />
 
@@ -22,54 +22,56 @@
 
   <body>
 
-    <div class="content-section" id="write-better-code-sample">
+<div class="content-section" id="write-better-code-sample">
 
     <div class="email">
 
-            <div class="email-field">
-                <h3>To:</h3>
-                <p class="to">you@example.com</p>
-            </div>
-            <div class="email-field">
-                <h3 class="subject-title">Subject:</h3>
-                <p class="subject">This week: Replace comments with methods</p>
-            </div>
+        <div class="email-field">
+            <h3>To:</h3>
+            <p class="to">you@example.com</p>
+        </div>
+        <div class="email-field">
+            <h3 class="subject-title">Subject:</h3>
+            <p class="subject">This Week: Replace comments with functions</p>
+        </div>
 
-            <div class="email-body">
+        <div class="email-body">
 
             <p class="hello">Good morning!</p>
 
-                <p>Often, comments explain something that could better be described with code:</p>
-    <figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">if</span> <span class="p">(</span><span class="n">customersFirstOrder</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="c1">// Shipping is free</span>
-    <span class="n">order</span><span class="p">.</span><span class="k">value</span> <span class="p">=</span> <span class="n">order</span><span class="p">.</span><span class="k">value</span> <span class="p">-</span> <span class="n">order</span><span class="p">.</span><span class="n">shipping</span><span class="p">;</span>
-<span class="p">}</span></code></pre></figure>
+            <p>This week, look for comments that can be replaced with function calls.</p>
 
-This is a great opportunity to extract the code in to a method:
-<figure class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">if</span> <span class="p">(</span><span class="n">customersFirstOrder</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">ApplyFreeShipping</span><span class="p">();</span>
-<span class="p">}</span></code></pre></figure>
+            <p>Often, comments explain something that could better be described with code:</p>
 
-            <p>This is more readable to somebody skimming the code.</p>
+            <img src="/img/write-better-code-sample-wrong.jpeg" />
+
+            <p>This is a great opportunity to extract the commented code into a new function:</p>
+
+            <img src="/img/write-better-code-sample-right.jpeg" />
+
+            <p>This is more readable to somebody skimming the 'example' function.</p>
             <p>
-                The reader no longer needs to concern themselves 
-                with <i>how</i>  free shipping is applied, only that it <i>is</i> applied in a particular code path.
+                The reader no longer needs to concern themselves
+                with <i>how</i> free shipping is applied, only that it <i>is</i> applied in a particular code path.
             </p>
 
-            <p class="signoff">Have a great week</p>
-            <p>.. Dave</p>
+            <p class="signoff">Have a great week!</p>
+
+            <p>Thanks, <br />Dave</p>
+
+            <hr />
 
             <small>
-                You are receiving this email because you subscribed to my 
-                <a href="/write-better-code.html">write better code</a> series. You can <a>unsubscribe</a> here.</small>
+                You are receiving this email because you subscribed to my
+                <a href="/write-better-code.html">write better code</a> series.<br />
+                You can <a>unsubscribe</a> here.
+            </small>
         </div>
     </div>
 
     <div class="back-link">
         <a href="/write-better-code.html">&#8592; Back</a>
-      </div>
+    </div>
 </div>
 
     
