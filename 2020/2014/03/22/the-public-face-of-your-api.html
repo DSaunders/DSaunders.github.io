@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <title>The 6 habits of poor API design</title>
+
+    <meta charset="utf-8">
+    <meta name="author" content="Dave Saunders">
+    <meta name="description" content="How to improve the public face of your code">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style type="text/css">
+      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}html,body{height:100%;color:#444;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}.content-section{padding:160px 20px 0 20px}@media all and (min-width: 660px){.content-section{padding:130px 20px 0 20px}}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header ul li{display:inline-block;list-style:none;border-right:1px solid #bbb9b9}header ul li:last-of-type{border:0}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}header a.active{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}
+    </style>
+
+    <style type="text/css">
+      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#bbb9b9;margin-bottom:40px}.post .back-link{text-align:center;margin-top:80px;margin-bottom:80px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:55px 0 25px 0;line-height:1.2em}.post content h1{font-size:1.8em}.post content h2{font-size:1.5em}.post content h3{font-size:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content .footer-text{color:#bbb9b9;margin-top:30px}.post content pre{font-size:1.5em}.post content blockquote,.post content ul,.post content ol{border-left:5px solid #f56e73;margin:10px 0}.post content blockquote{padding:5px 0 0px 15px}.post content ul,.post content ol{padding:5px 0 5px 35px}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content strong{font-weight:bold}.post content img{max-width:100%;display:block;margin:20px auto}.post content .spacer{height:20px;display:block}footer{padding:20px;width:100%;text-align:center;padding:25px 0;bottom:-80px;height:60px;color:white;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;flex-direction:column;background:#f56e73;position:fixed;-webkit-box-shadow:0px -1px 10px -2px #f56e73;-moz-box-shadow:0px -1px 10px -2px #f56e73;box-shadow:0px -1px 10px -2px #f56e73}footer.foo{bottom:0px;transition:all 1s}footer h2{display:inline-block;margin-bottom:10px;border-bottom:1px solid #fccdcf}footer .link{border-bottom:1px solid #fccdcf}footer a{color:white}footer a:visited,footer a:active,footer a:hover{color:white}@media all and (min-width: 660px){.content-section{padding-bottom:100px}}
+    </style>
+
+    <link rel="stylesheet" href="/css/syntax.css" />
+  </head>
+
+  <body class="blog-post">
+
+    <header>        
+      <h1><a href="/">Dave Saunders</a></h1>
+      <ul>        
+        <li><a  class="active"  href="/#blog">Blog</a></li>
+        <li><a  href="/#projects">Projects</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </header>   
+
+    <div class="post content-section">
+
+      <h1>The 6 habits of poor API design</h1>
+      <p class="meta">Originally posted in March 2014</p>
+
+      <content class="post-content" role="article">
+        <p>We generally talk about APIs as something we call over HTTP to interact with
+        a third party service, but of course any time you do this:</p>
+        
+        <figure class="highlight">
+          <pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">public</span> <span class="k">void</span> <span class="nf">HelloWorld</span><span class="p">()</span></code></pre>
+        </figure>
+        
+        <p>you are writing an API.</p>
+        
+        <p>Whenever you write code that is publicly exposed (even if it’s only to other
+        classes in the same project) you must consider how you are going to present that
+        functionality. It’s easy to get that wrong.</p>
+        
+        <p>Here are some points to consider when writing your next public class.</p>
+        
+        <h1 id="1-sharing-too-much-in-public">1. Sharing too much in public</h1>
+        
+        <p>Always use the <em>principle of least privilege</em>. That means that you only expose
+        the minimum necessary for the consumer of your API to get the job done.</p>
+        
+        <p>For example; if I’m writing code against a class that wraps a user database, I do not
+        need to have access to the method that generates the connection string.</p>
+        
+        <p>Think about what the consumer of your API <em>needs</em> to see. If they don’t <em>need</em> it,
+         make it private.</p>
+        
+        <h1 id="2-leaking-implementation-details">2. Leaking implementation details</h1>
+        
+        <p>When designing a class or interface, it is generally a bad idea to expose
+        <em>how it works</em> to the consumer, they only need to know <em>what it does</em>.</p>
+        
+        <p>Consider this simplified example:</p>
+        
+        <figure class="highlight">
+          <pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">UsersDatabase</span>
+<span class="p">{</span>
+   <span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">QuerySqlServerForUser</span><span class="p">(</span><span class="kt">string</span> <span class="n">userName</span><span class="p">)</span>
+   <span class="p">{</span>
+   <span class="p">}</span>
+<span class="p">}</span></code></pre>
+        </figure>
+        
+        <p>This method exposes too much detail about how it works internally. If we were
+        to switch to a no-sql database for instance, the method name would make no
+        sense and would have to be renamed and every call to it changed.</p>
+        
+        <p>We are also telling the user that the Users will be returned in a List. This
+        prevents us from using a different data structure in future and forces the
+        caller to use List too, taking that decision out of their hands.
+        We could return IEnumerable here instead.</p>
+        
+        <p>This might be better:</p>
+        
+        <figure class="highlight">
+          <pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">public</span> <span class="k">class</span> <span class="nc">UsersDatabase</span>
+<span class="p">{</span>
+   <span class="k">public</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">User</span><span class="p">&gt;</span> <span class="n">GetUserByName</span><span class="p">(</span><span class="kt">string</span> <span class="n">userName</span><span class="p">)</span>
+   <span class="p">{</span>
+   <span class="p">}</span>
+<span class="p">}</span></code></pre>
+        </figure>
+        
+        <p>We should also be using an interface and an IoC container so that the caller
+        does not need to rely on our concrete class, but this is an over-simplified
+        example so you’ll have to let me off on this occassion.</p>
+        
+        <h1 id="3-little-or-no-documentation">3. Little or no documentation</h1>
+        
+        <p>There are few things worse that typing a method name out, expecting the IDE
+        to tell you what the parameters are and what they do.. and seeing nothing.</p>
+        
+        <p>Document your public methods and classes.
+        Visual Studio has great facilities for doing this, making it so easy that there
+        is really no reason <em>not</em> to do it.</p>
+        
+        <h1 id="4-poor-naming">4. Poor naming</h1>
+        
+        <p>Just because you have good documentation, it does not mean you can just use
+        any old method name and expect people to figure out what it does.</p>
+        
+        <p>I bet you see things like this all the time:</p>
+        
+        <figure class="highlight">
+          <pre><code class="language-csharp" data-lang="csharp"><span></span> <span class="k">public</span> <span class="kt">int</span><span class="p">[]</span> <span class="nf">GetUsers</span><span class="p">(</span><span class="kt">string</span> <span class="n">filter</span><span class="p">)</span>
+ <span class="p">{</span>
+ <span class="p">}</span></code></pre>
+        </figure>
+        
+        <p>Pardon? Get which users? What is the filter? Why does it return an array of
+        integers?</p>
+        
+        <p>When the consumer of you API looks at the list of methods and properties
+        available to them, it shoud be obvious how they are used. Documentation
+        is very helpful here, but you cannot force the user to check every single
+        method to see whether it’s what they need.</p>
+        
+        <p>This would be an improvement:</p>
+        
+        <figure class="highlight">
+          <pre><code class="language-csharp" data-lang="csharp"><span></span> <span class="k">public</span> <span class="kt">int</span><span class="p">[]</span> <span class="nf">GetIdsOfUsersWithSurname</span><span class="p">(</span><span class="kt">string</span> <span class="n">surname</span><span class="p">)</span>
+ <span class="p">{</span>
+ <span class="p">}</span></code></pre>
+        </figure>
+        
+        <p>Yes, it’s a long method name, but how many times recently have you ever typed
+        the full name of a method? Auto-complete is pretty good; long method names are
+        not an issue (until they get the point where they compromise readability).</p>
+        
+        <h1 id="5-incompleteness">5. Incompleteness</h1>
+        
+        <p>To the consumer of an API, this will seriously ruin your day:</p>
+        
+        <figure class="highlight">
+          <pre><code class="language-csharp" data-lang="csharp"><span></span> <span class="k">public</span> <span class="kt">int</span><span class="p">[]</span> <span class="nf">GetIdsOfUsersWithSurname</span><span class="p">(</span><span class="kt">string</span> <span class="n">surname</span><span class="p">)</span>
+ <span class="p">{</span>
+   <span class="k">throw</span> <span class="k">new</span> <span class="nf">NotImplementedException</span><span class="p">();</span>
+ <span class="p">}</span></code></pre>
+        </figure>
+        
+        <p>If it’s not finished, don’t make it public. If you are implementing an interface
+        and you don’t need all of the public methods, it’s probably a sign that the
+        interface isn’t specific enough. Consider refactoring.</p>
+        
+        <p>If you absolutely <em>must</em> do this, please add some documentation to that effect.
+        With any luck, the developer will see it at design time, before their
+        application actually throws your exception.</p>
+        
+        <h1 id="6">6.</h1>
+        
+        <figure class="highlight">
+          <pre><code class="language-csharp" data-lang="csharp"><span></span><span class="n">This</span> <span class="n">part</span> <span class="n">of</span> <span class="n">the</span> <span class="n">post</span> <span class="k">is</span> <span class="n">not</span> <span class="n">implemented</span> <span class="n">yet</span><span class="p">.</span></code></pre>
+        </figure>
+        
+        <p>Annoying isn’t it ;-)</p>
+        
+      </content>
+
+      <div class="back-link">
+        <a href="/#blog">&#8592; Back to the blog</a>
+      </div>
+
+    </div>
+
+    <a  href="http://www.davejsaunders.com/write-better-code.html?utm_source=blog_post&utm_medium=footer_banner&utm_campaign=read_next">
+      <footer id="footer">     
+          <p>Read Next: <span class="link">"Write better code"</span></p>
+      </footer>
+    </a>
+
+    
+    <!-- Google Analytics -->
+    <script>
+      var _gaq = _gaq || [];
+      var _gaq = [['_setAccount', 'UA-40239142-1']];
+
+      // Track page view
+      _gaq.push(
+        ['_trackPageview']
+      );
+
+      (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>  
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Signika&display=swap" rel="stylesheet">
+  </body>
+
+  <script>
+    setTimeout(
+      function() { document.getElementById("footer").classList.add("foo")}, 
+      8000);
+  </script>
+
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <title>My mission to (almost) eliminate code comments</title>
+
+    <meta charset="utf-8">
+    <meta name="author" content="Dave Saunders">
+    <meta name="description" content="How and why I'm trying to remove almost all comments from my code">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style type="text/css">
+      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}html,body{height:100%;color:#444;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}.content-section{padding:160px 20px 0 20px}@media all and (min-width: 660px){.content-section{padding:130px 20px 0 20px}}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header ul li{display:inline-block;list-style:none;border-right:1px solid #bbb9b9}header ul li:last-of-type{border:0}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}header a.active{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}
+    </style>
+
+    <style type="text/css">
+      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#bbb9b9;margin-bottom:40px}.post .back-link{text-align:center;margin-top:80px;margin-bottom:80px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:55px 0 25px 0;line-height:1.2em}.post content h1{font-size:1.8em}.post content h2{font-size:1.5em}.post content h3{font-size:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content .footer-text{color:#bbb9b9;margin-top:30px}.post content pre{font-size:1.5em}.post content blockquote,.post content ul,.post content ol{border-left:5px solid #f56e73;margin:10px 0}.post content blockquote{padding:5px 0 0px 15px}.post content ul,.post content ol{padding:5px 0 5px 35px}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content strong{font-weight:bold}.post content img{max-width:100%;display:block;margin:20px auto}.post content .spacer{height:20px;display:block}footer{padding:20px;width:100%;text-align:center;padding:25px 0;bottom:-80px;height:60px;color:white;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;flex-direction:column;background:#f56e73;position:fixed;-webkit-box-shadow:0px -1px 10px -2px #f56e73;-moz-box-shadow:0px -1px 10px -2px #f56e73;box-shadow:0px -1px 10px -2px #f56e73}footer.foo{bottom:0px;transition:all 1s}footer h2{display:inline-block;margin-bottom:10px;border-bottom:1px solid #fccdcf}footer .link{border-bottom:1px solid #fccdcf}footer a{color:white}footer a:visited,footer a:active,footer a:hover{color:white}@media all and (min-width: 660px){.content-section{padding-bottom:100px}}
+    </style>
+
+    <link rel="stylesheet" href="/css/syntax.css" />
+  </head>
+
+  <body class="blog-post">
+
+    <header>        
+      <h1><a href="/">Dave Saunders</a></h1>
+      <ul>        
+        <li><a  class="active"  href="/#blog">Blog</a></li>
+        <li><a  href="/#projects">Projects</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </header>   
+
+    <div class="post content-section">
+
+      <h1>My mission to (almost) eliminate code comments</h1>
+      <p class="meta">Originally posted in June 2020</p>
+
+      <content class="post-content" role="article">
+        <p>Recently I’ve started to notice that the majority of comments I write are either redundant, or are excuses for other failings in my code.</p>
+        
+        <p>Since that realisation, I’ve been making a conscious effort to eliminate the majority of comments from the code I write.</p>
+        
+        <p>I find that comments generally fall into a handful of common categories. Here’s how I’ve been dealing with each:</p>
+        
+        <h1 id="comments-that-should-be-methods">Comments that should be methods</h1>
+        
+        <p>I often find myself using a comment, when extracting code to a method would be better.</p>
+        
+        <p>For example:</p>
+        
+        <figure class="highlight">
+          <pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">if</span> <span class="p">(</span><span class="n">customersFirstOrder</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Apply free shipping</span>
+    <span class="n">orderCost</span> <span class="p">=</span> <span class="n">orderCost</span> <span class="p">-</span> <span class="n">shipping</span><span class="p">;</span>
+<span class="p">}</span></code></pre>
+        </figure>
+        
+        <p>I find this much easier to read:</p>
+        
+        <figure class="highlight">
+          <pre><code class="language-csharp" data-lang="csharp"><span></span><span class="k">if</span> <span class="p">(</span><span class="n">customersFirstOrder</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">ApplyFreeShipping</span><span class="p">();</span>
+<span class="p">}</span></code></pre>
+        </figure>
+        
+        <p>Now I don’t need to understand <em>how</em> free shipping is applied, only that it <em>is</em> applied when this condition is satisfied.</p>
+        
+        <h1 id="comments-that-explain-conditionals">Comments that explain conditionals</h1>
+        
+        <p>I write <code>if</code> statements like this a lot:</p>
+        
+        <figure class="highlight">
+          <pre><code class="language-csharp" data-lang="csharp"><span></span><span class="c1">// This order has an outstanding payment</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">order</span><span class="p">.</span><span class="n">invoiced</span> <span class="p">&amp;&amp;</span> <span class="p">!</span><span class="n">order</span><span class="p">.</span><span class="n">paid</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">SendReminderEmail</span><span class="p">();</span>
+<span class="p">}</span></code></pre>
+        </figure>
+        
+        <p>That first line conflates two concerns; whether a payment is due, and what to do when it is.</p>
+        
+        <p>Moving the predicate in to a new variable, with an appropriate name, makes the code easier to read and eliminates the need for the comment:</p>
+        
+        <figure class="highlight">
+          <pre><code class="language-csharp" data-lang="csharp"><span></span><span class="kt">var</span> <span class="n">orderPaymentDue</span> <span class="p">=</span> <span class="n">order</span><span class="p">.</span><span class="n">invoiced</span> <span class="p">&amp;&amp;</span> <span class="p">!</span><span class="n">order</span><span class="p">.</span><span class="n">paid</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">orderPaymentDue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">SendReminderEmail</span><span class="p">();</span>
+<span class="p">}</span></code></pre>
+        </figure>
+        
+        <p class="footer-text">Note: I might even go one step further here and encapsulate the predicate inside the Order object: <code>order.PaymentDue</code></p>
+        
+        <h1 id="comments-as-a-crutch-for-poor-naming">Comments as a crutch for poor naming</h1>
+        
+        <p>This most commonly occurs when I’m declaring a variable, then using it some time later.</p>
+        
+        <p>If that variable is poorly named, I’ll instinctively write a comment explaining what code that uses it is doing.</p>
+        
+        <figure class="highlight">
+          <pre><code class="language-csharp" data-lang="csharp"><span></span><span class="kt">var</span> <span class="n">outstanding</span> <span class="p">=</span> <span class="n">GetOutstandingOrders</span><span class="p">();</span>
+<span class="p">...</span>
+<span class="c1">// Process all oustanding orders</span>
+<span class="n">Process</span><span class="p">(</span><span class="n">outstanding</span><span class="p">);</span></code></pre>
+        </figure>
+        
+        <p>This is simply fixed by using more descriptive names in the first place:</p>
+        
+        <figure class="highlight">
+          <pre><code class="language-csharp" data-lang="csharp"><span></span><span class="kt">var</span> <span class="n">allOutstandingOrders</span> <span class="p">=</span> <span class="n">GetOutstandingOrders</span><span class="p">();</span>
+<span class="p">...</span>
+<span class="n">Process</span><span class="p">(</span><span class="n">allOutstandingOrders</span><span class="p">);</span></code></pre>
+        </figure>
+        
+        <p class="footer-text">Note: Shorter functions, where there isn’t a large gap between declaring and using a variable would also help, of course</p>
+        
+        <h1 id="comments-as-an-excuse-not-to-refactor">Comments as an excuse not to refactor</h1>
+        
+        <p>I usually add these comments when I’m writing code that isn’t fully-formed in my head yet.</p>
+        
+        <p>I have some idea what I need the code to do, so I write the first thing that does the job.</p>
+        
+        <p>This kind of code is often accompanied by a comment that explains <em>what the code does</em>, rather than 
+        <em>why it does it</em>.</p>
+        
+        <p>What I <em>should</em> do is go back and refactor the code to make it self-documenting, making the comment un-necessary.</p>
+        
+        <h1 id="comments-that-explain-why">Comments that explain why</h1>
+        
+        <p>These comments are probably the only ones I’m going to keep writing.</p>
+        
+        <p>Sometimes, I come to code I’ve written a while ago and have <em>no idea</em> why it is written in such a strange way.</p>
+        
+        <p>Often, it’s because I’ve profiled it and found it to be significantly faster, or because it catches an edge-case that a more intuitive method of doing the same thing might not:</p>
+        
+        <figure class="highlight">
+          <pre><code class="language-csharp" data-lang="csharp"><span></span><span class="c1">// When profiled, running two seperate queries and combining the results in </span>
+<span class="c1">// memory is 2x faster that doing the join in SQL</span>
+<span class="kt">var</span> <span class="n">users</span> <span class="p">=</span> <span class="n">sql</span><span class="p">.</span><span class="n">GetUsers</span><span class="p">();</span>
+<span class="kt">var</span> <span class="n">tasks</span> <span class="p">=</span> <span class="n">sql</span><span class="p">.</span><span class="n">GetAllTasks</span><span class="p">();</span>
+<span class="p">...</span> <span class="n">etc</span> <span class="p">...</span></code></pre>
+        </figure>
+        
+        <p>Comments like this get to stay.</p>
+        
+        <div class="spacer"></div>
+        
+        <h1 id="summary">Summary</h1>
+        
+        <p>The majority of comments I write are a born out of lazy coding, and can be eliminated by simply naming things better or adding more abstraction.</p>
+        
+        <p>I’m find that when I focus on removing the majority of comments from my code, it actually becomes <em>more</em> readable. 
+        The exception is comments that explain why, not how.</p>
+        
+        <p><a href="https://www.twitter.com/davejsaunders" target="_blank">Let me know</a> if you’ve found the same thing!</p>
+        
+      </content>
+
+      <div class="back-link">
+        <a href="/#blog">&#8592; Back to the blog</a>
+      </div>
+
+    </div>
+
+    <a  href="http://www.davejsaunders.com/write-better-code.html?utm_source=blog_post&utm_medium=footer_banner&utm_campaign=read_next">
+      <footer id="footer">     
+          <p>Read Next: <span class="link">"Write better code"</span></p>
+      </footer>
+    </a>
+
+    
+    <!-- Google Analytics -->
+    <script>
+      var _gaq = _gaq || [];
+      var _gaq = [['_setAccount', 'UA-40239142-1']];
+
+      // Track page view
+      _gaq.push(
+        ['_trackPageview']
+      );
+
+      (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>  
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Signika&display=swap" rel="stylesheet">
+  </body>
+
+  <script>
+    setTimeout(
+      function() { document.getElementById("footer").classList.add("foo")}, 
+      8000);
+  </script>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <title>Routing in Go with Vestigo</title>
+
+    <meta charset="utf-8">
+    <meta name="author" content="Dave Saunders">
+    <meta name="description" content="Easy routing with less overhead">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style type="text/css">
+      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}html,body{height:100%;color:#444;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}.content-section{padding:160px 20px 0 20px}@media all and (min-width: 660px){.content-section{padding:130px 20px 0 20px}}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header ul li{display:inline-block;list-style:none;border-right:1px solid #bbb9b9}header ul li:last-of-type{border:0}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}header a.active{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}
+    </style>
+
+    <style type="text/css">
+      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#bbb9b9;margin-bottom:40px}.post .back-link{text-align:center;margin-top:80px;margin-bottom:80px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:55px 0 25px 0;line-height:1.2em}.post content h1{font-size:1.8em}.post content h2{font-size:1.5em}.post content h3{font-size:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content .footer-text{color:#bbb9b9;margin-top:30px}.post content pre{font-size:1.5em}.post content blockquote,.post content ul,.post content ol{border-left:5px solid #f56e73;margin:10px 0}.post content blockquote{padding:5px 0 0px 15px}.post content ul,.post content ol{padding:5px 0 5px 35px}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content strong{font-weight:bold}.post content img{max-width:100%;display:block;margin:20px auto}.post content .spacer{height:20px;display:block}footer{padding:20px;width:100%;text-align:center;padding:25px 0;bottom:-80px;height:60px;color:white;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;flex-direction:column;background:#f56e73;position:fixed;-webkit-box-shadow:0px -1px 10px -2px #f56e73;-moz-box-shadow:0px -1px 10px -2px #f56e73;box-shadow:0px -1px 10px -2px #f56e73}footer.foo{bottom:0px;transition:all 1s}footer h2{display:inline-block;margin-bottom:10px;border-bottom:1px solid #fccdcf}footer .link{border-bottom:1px solid #fccdcf}footer a{color:white}footer a:visited,footer a:active,footer a:hover{color:white}@media all and (min-width: 660px){.content-section{padding-bottom:100px}}
+    </style>
+
+    <link rel="stylesheet" href="/css/syntax.css" />
+  </head>
+
+  <body class="blog-post">
+
+    <header>        
+      <h1><a href="/">Dave Saunders</a></h1>
+      <ul>        
+        <li><a  class="active"  href="/#blog">Blog</a></li>
+        <li><a  href="/#projects">Projects</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </header>   
+
+    <div class="post content-section">
+
+      <h1>Routing in Go with Vestigo</h1>
+      <p class="meta">Originally posted in November 2016</p>
+
+      <content class="post-content" role="article">
+        <p>I was recently looking for an easy way to do routing in Go.</p>
+        
+        <p>There are a few packages out there, but they all feel a little too heavy. I wanted something that just did simple routing, with little overhead.</p>
+        
+        <p>I stumbled across <a href="https://github.com/husobee/vestigo" target="_blank">Vestigo</a>. It’s really simple and looks a lot like the normal code you would write with Go’s <code>net/http</code> package, only with some routing goodness on top.</p>
+        
+        <h1 id="using-vestigo">Using Vestigo</h1>
+        <p>Firstly, grab the vestigo package:</p>
+        
+        <figure class="highlight">
+          <pre><code class="language-bash" data-lang="bash"><span></span>go get github.com/husobee/vestigo</code></pre>
+        </figure>
+        
+        <p>The Vestigo router implements <code>http.Handler</code>, so you can pass it straight into the <code>http.ListenAndServe</code> function.</p>
+        
+        <p>This is all you need to get a web app going:</p>
+        
+        <figure class="highlight">
+          <pre><code class="language-go" data-lang="go"><span></span><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&quot;net/http&quot;</span>
+    <span class="s">&quot;github.com/husobee/vestigo&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="c1">// Create the router</span>
+    <span class="nx">router</span> <span class="o">:=</span> <span class="nx">vestigo</span><span class="p">.</span><span class="nx">NewRouter</span><span class="p">()</span>
+
+    <span class="c1">// Define a route.</span>
+    <span class="c1">// This matches GET requests to routes such as &#39;/home/dave&#39;</span>
+    <span class="c1">// and redirects them to the homeHandler() function</span>
+    <span class="nx">router</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;/home/:name&quot;</span><span class="p">,</span> <span class="nx">homeHandler</span><span class="p">)</span>
+
+    <span class="c1">// Start the HTTP server, passing in the Vestigo router</span>
+    <span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;:1234&quot;</span><span class="p">,</span> <span class="nx">router</span><span class="p">)</span>
+<span class="p">}</span>
+
+
+<span class="kd">func</span> <span class="nx">homeHandler</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// This gets the &#39;name&#39; parameter from the route</span>
+    <span class="nx">name</span> <span class="o">:=</span> <span class="nx">vestigo</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span> <span class="s">&quot;name&quot;</span><span class="p">)</span>
+
+    <span class="nx">w</span><span class="p">.</span><span class="nx">Write</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;Hey there &quot;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">))</span>
+<span class="p">}</span></code></pre>
+        </figure>
+        
+        <p>That’s all there is to it!</p>
+        
+        <h1 id="further-reading">Further reading</h1>
+        
+        <p>If you want to find out more about Vestigo, check out these links:</p>
+        
+        <ul>
+            <li>The project's <a href="https://github.com/husobee/vestigo" target="_blank">Github repo</a></li>
+            <li>A <a href="https://husobee.github.io/golang/urlrouter/vestigo/2015/09/22/vesigo.html" target="_blank">blog post</a> by the author</li>
+        </ul>
+        
+        
+      </content>
+
+      <div class="back-link">
+        <a href="/#blog">&#8592; Back to the blog</a>
+      </div>
+
+    </div>
+
+    <a  href="http://www.davejsaunders.com/write-better-code.html?utm_source=blog_post&utm_medium=footer_banner&utm_campaign=read_next">
+      <footer id="footer">     
+          <p>Read Next: <span class="link">"Write better code"</span></p>
+      </footer>
+    </a>
+
+    
+    <!-- Google Analytics -->
+    <script>
+      var _gaq = _gaq || [];
+      var _gaq = [['_setAccount', 'UA-40239142-1']];
+
+      // Track page view
+      _gaq.push(
+        ['_trackPageview']
+      );
+
+      (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>  
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Signika&display=swap" rel="stylesheet">
+  </body>
+
+  <script>
+    setTimeout(
+      function() { document.getElementById("footer").classList.add("foo")}, 
+      8000);
+  </script>
+
+</html>

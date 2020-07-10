@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <title>Is your code easy to work on?</title>
+
+    <meta charset="utf-8">
+    <meta name="author" content="Dave Saunders">
+    <meta name="description" content="My equivalent of the Joel Test for code">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style type="text/css">
+      *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}html,body{height:100%;color:#444;font-family:'Open Sans', Arial, sans-serif}a{text-decoration:none;color:#f56e73}a:visited,a:active,a:hover{color:#f56e73}.content-section{padding:160px 20px 0 20px}@media all and (min-width: 660px){.content-section{padding:130px 20px 0 20px}}header{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;padding:20px;width:100%;position:fixed;background:white;font-family:'Signika', Arial, sans-serif;font-size:1.2em}header h1{flex:1 0 auto;width:100%;text-align:center;margin-bottom:20px}header ul li{display:inline-block;list-style:none;border-right:1px solid #bbb9b9}header ul li:last-of-type{border:0}header a{text-align:center;padding:0 10px;color:#444}header a:visited,header a:active{color:#444}header a:hover{color:#f56e73}header a.active{color:#f56e73}@media all and (min-width: 660px){header h1{width:auto;text-align:left;margin:0}}
+    </style>
+
+    <style type="text/css">
+      .post{width:100%;max-width:750px;margin:0 auto}.post>h1{font-size:3em;margin-bottom:10px;color:#f56e73}.post>p{font-size:1em;color:#bbb9b9;margin-bottom:40px}.post .back-link{text-align:center;margin-top:80px;margin-bottom:80px}.post content{line-height:1.6em}.post content h1,.post content h2,.post content h3{color:#f56e73;margin:55px 0 25px 0;line-height:1.2em}.post content h1{font-size:1.8em}.post content h2{font-size:1.5em}.post content h3{font-size:1.2em}.post content p{margin-bottom:15px}.post content p>code{background-color:whitesmoke;padding:2px 5px}.post content .footer-text{color:#bbb9b9;margin-top:30px}.post content pre{font-size:1.5em}.post content blockquote,.post content ul,.post content ol{border-left:5px solid #f56e73;margin:10px 0}.post content blockquote{padding:5px 0 0px 15px}.post content ul,.post content ol{padding:5px 0 5px 35px}.post content ul li,.post content ol li{margin-bottom:5px}.post content ul{list-style:circle}.post content strong{font-weight:bold}.post content img{max-width:100%;display:block;margin:20px auto}.post content .spacer{height:20px;display:block}footer{padding:20px;width:100%;text-align:center;padding:25px 0;bottom:-80px;height:60px;color:white;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;flex-direction:column;background:#f56e73;position:fixed;-webkit-box-shadow:0px -1px 10px -2px #f56e73;-moz-box-shadow:0px -1px 10px -2px #f56e73;box-shadow:0px -1px 10px -2px #f56e73}footer.foo{bottom:0px;transition:all 1s}footer h2{display:inline-block;margin-bottom:10px;border-bottom:1px solid #fccdcf}footer .link{border-bottom:1px solid #fccdcf}footer a{color:white}footer a:visited,footer a:active,footer a:hover{color:white}@media all and (min-width: 660px){.content-section{padding-bottom:100px}}
+    </style>
+
+    <link rel="stylesheet" href="/css/syntax.css" />
+  </head>
+
+  <body class="blog-post">
+
+    <header>        
+      <h1><a href="/">Dave Saunders</a></h1>
+      <ul>        
+        <li><a  class="active"  href="/#blog">Blog</a></li>
+        <li><a  href="/#projects">Projects</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </header>   
+
+    <div class="post content-section">
+
+      <h1>Is your code easy to work on?</h1>
+      <p class="meta">Originally posted in March 2014</p>
+
+      <content class="post-content" role="article">
+        <p>In August 2000, Joel Spolsky wrote The Joel Test, a checklist to judge the quality of a software team. This is just as valid today.</p>
+        
+        <p>The team is vitally important, but so is the code you spend 8+ hours a day working on. Here’s my equivalent of the Joel Test to measure how easy your code-base is to work on.</p>
+        
+        <p>Answer yes or no to each.</p>
+        
+        <ol>
+          <li>Could a new developer run the code on their machine within five minutes?</li>
+          <li>Could you look at any section of code and understand its purpose?</li>
+          <li>Could you locate the code for any feature within ten minutes?</li>
+          <li>Could you explain all of the code in a way that a junior developer could understand?</li>
+          <li>Could you re-factor the code without fear of breaking it?</li>
+          <li>Could you test a component without testing its dependencies?</li>
+          <li>If any library or technology becomes obsolete, could you replace it easily?</li>
+          <li>Could you take modules and re-use them in other projects with no modification?</li>
+          <li>Can you be certain that each line of code is actually being used?</li>
+          <li>If the code became open-source, would you be happy to be associated with it?</li>
+        </ol>
+        
+        <p>I’ve worked on projects that score a 2 or 3, and some that score all 10.</p>
+        
+        <p>It’s not difficult to achieve a full 10/10 on a new software project, but it’s a lot harder to bring legacy code-bases up to that standard. I think you will find a direct relationship between the score on the test and how much you enjoy working on a project.</p>
+        
+        <p>Where does your code rank?</p>
+        
+      </content>
+
+      <div class="back-link">
+        <a href="/#blog">&#8592; Back to the blog</a>
+      </div>
+
+    </div>
+
+    <a  href="http://www.davejsaunders.com/write-better-code.html?utm_source=blog_post&utm_medium=footer_banner&utm_campaign=read_next">
+      <footer id="footer">     
+          <p>Read Next: <span class="link">"Write better code"</span></p>
+      </footer>
+    </a>
+
+    
+    <!-- Google Analytics -->
+    <script>
+      var _gaq = _gaq || [];
+      var _gaq = [['_setAccount', 'UA-40239142-1']];
+
+      // Track page view
+      _gaq.push(
+        ['_trackPageview']
+      );
+
+      (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>  
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Signika&display=swap" rel="stylesheet">
+  </body>
+
+  <script>
+    setTimeout(
+      function() { document.getElementById("footer").classList.add("foo")}, 
+      8000);
+  </script>
+
+</html>
